@@ -111,5 +111,19 @@ namespace Imagine.BookManager.Application.Tests
             };
         }
 
+        public static Order GetFakeOrder()
+        {
+            return new Order
+            {
+                DeliveryCharge = 1000,
+                Discount = 1000,
+                OrderRef = "1234567",
+                Subtotal = 1000,
+                Timestamp = DateTime.Now,
+                Total = 10000,
+                TotalQuantity = 100
+            };
+        }
+
     }
 }

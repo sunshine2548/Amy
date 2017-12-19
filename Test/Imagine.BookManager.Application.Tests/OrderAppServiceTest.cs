@@ -18,57 +18,13 @@ namespace Imagine.BookManager.Application.Tests
         {
             _orderAppService = Resolve<IOrderAppService>();
         }
-
-        Institution GetFakeInstitution()
-        {
-            return new Institution
-            {
-                Address = "上海",
-                District = "上海市浦东新区",
-                Name = "testOrder",
-                Tel = "123456"
-            };
-        }
-
-        Admin GetFakeAdmin()
-        {
-            return new Admin
-            {
-                DateCreated = DateTime.Now,
-                Email = "brian2@imaginelearning.cn",
-                FullName = "brian",
-                Gender = true,
-                IsDelete = false,
-                Mobile = "18817617807",
-                Password = "123456",
-                UserName = "testOrder",
-                UserType = UserType.Teacher
-            };
-        }
-
-        Order GetFakeOrder()
-        {
-            return new Order
-            {
-                DeliveryCharge = 1000,
-                Discount = 1000,
-                OrderRef = "1234567",
-                Subtotal = 1000,
-                Timestamp = DateTime.Now,
-                Total = 10000,
-                TotalQuantity = 100
-            };
-        }
-
-
-
         #region CreateOrder
         [Fact]
         public void CreateOrder_Return_Ture_If_Success()
         {
 
-            var institution = UsingDbContext(ctx => ctx.Institution.Add(GetFakeInstitution()));
-            var adminEntity = GetFakeAdmin();
+            var institution = UsingDbContext(ctx => ctx.Institution.Add(InitFakeEntity.GetFakeInstitution()));
+            var adminEntity = InitFakeEntity.GetFakeAdmin();
             adminEntity.InstitutionId = institution.Id;
             var admin = UsingDbContext(ctx => ctx.Admin.Add(adminEntity));
             OrderDto order = new OrderDto()
@@ -92,11 +48,11 @@ namespace Imagine.BookManager.Application.Tests
         [Fact]
         public void CreateOrder_Throw_Exception_If_Orderref_Exists()
         {
-            var institution = UsingDbContext(ctx => ctx.Institution.Add(GetFakeInstitution()));
-            var adminEntity = GetFakeAdmin();
+            var institution = UsingDbContext(ctx => ctx.Institution.Add(InitFakeEntity.GetFakeInstitution()));
+            var adminEntity = InitFakeEntity.GetFakeAdmin();
             adminEntity.InstitutionId = institution.Id;
             var admin = UsingDbContext(ctx => ctx.Admin.Add(adminEntity));
-            Order order = GetFakeOrder();
+            Order order = InitFakeEntity.GetFakeOrder();
             order.UserId = admin.UserId;
             UsingDbContext(ctx => ctx.Order.Add(order));
             OrderDto createOrder = new OrderDto()
@@ -122,13 +78,13 @@ namespace Imagine.BookManager.Application.Tests
         [Fact]
         public void GetAll_Should_Should_Return_Correct_Number_Of_Records()
         {
-            var institution = UsingDbContext(ctx => ctx.Institution.Add(GetFakeInstitution()));
-            var adminEntity = GetFakeAdmin();
+            var institution = UsingDbContext(ctx => ctx.Institution.Add(InitFakeEntity.GetFakeInstitution()));
+            var adminEntity = InitFakeEntity.GetFakeAdmin();
             adminEntity.InstitutionId = institution.Id;
             var admin = UsingDbContext(ctx => ctx.Admin.Add(adminEntity));
             for (int i = 0; i < 10; i++)
             {
-                Order order = GetFakeOrder();
+                Order order = InitFakeEntity.GetFakeOrder();
                 order.UserId = admin.UserId;
                 order.OrderRef += i;
                 UsingDbContext(ctx => ctx.Order.Add(order));
