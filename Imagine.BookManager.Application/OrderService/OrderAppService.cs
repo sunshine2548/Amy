@@ -5,7 +5,6 @@ using Imagine.BookManager.Core.Entity;
 using Imagine.BookManager.Dto.Order;
 using System;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Imagine.BookManager.OrderService
 {

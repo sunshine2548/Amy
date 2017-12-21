@@ -2,16 +2,16 @@
 using System.Configuration;
 using System.IO;
 
-namespace Imagine.BookManager.PaymentService
+namespace Imagine.BookManager.Common
 {
-    public class PaymentConfig
+    public class ConfigHelper
     {
 
         public static readonly string PaymentBody;
 
         public static readonly string PaymentSubject;
 
-        static PaymentConfig()
+        static ConfigHelper()
         {
             PaymentBody = GetValue("PaymentBody");
             PaymentSubject = GetValue("PaymentSubject");
@@ -30,7 +30,7 @@ namespace Imagine.BookManager.PaymentService
             string path = GetValue(key);
             if (File.Exists(path) == false)
             {
-                throw new Exception("the file " + path + " not exists");
+                throw new FileNotFoundException("the file " + path + " not exists");
             }
             return File.ReadAllText(path);
         }

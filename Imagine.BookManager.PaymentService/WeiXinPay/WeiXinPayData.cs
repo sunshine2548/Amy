@@ -1,18 +1,20 @@
 ﻿using Imagine.BookManager.Common;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Xml;
+using System.Xml.Serialization;
 
 namespace Imagine.BookManager.PaymentService.WeiXinPay
 {
     public class WeiXinPayData
     {
-        private readonly SortedDictionary<string, object> _sortedDictionary = new SortedDictionary<string, object>();
+        public SortedDictionary<string, object> SortedDictionary { get; set; }
 
         public WeiXinPayData()
         {
-
+            SortedDictionary = new SortedDictionary<string, object>();
         }
 
         public WeiXinPayData(string xmlParamter)
@@ -20,34 +22,32 @@ namespace Imagine.BookManager.PaymentService.WeiXinPay
             this.FromXml(xmlParamter);
         }
 
-        public WeiXinPayData(string orderRef, decimal payMoney)
+        public WeiXinPayData(string orderRef, decimal amount)
         {
-            _sortedDictionary["out_trade_no"] = orderRef;
-            _sortedDictionary["total_fee"] = payMoney * 100;
-            _sortedDictionary["product_id"] = orderRef;
-            _sortedDictionary["time_start"] = DateTime.Now.ToString("yyyyMMddHHmmss");
-            _sortedDictionary["time_expire"] = DateTime.Now.AddMinutes(10).ToString("yyyyMMddHHmmss");
-            _sortedDictionary["trade_type"] = "NATIVE";
-            _sortedDictionary["notify_url"] = WeiXinPayInfo.WeiXinPayNodifyUrl;
-            _sortedDictionary["appid"] = WeiXinPayInfo.WeiXinPayAppId;
-            _sortedDictionary["mch_id"] = WeiXinPayInfo.WeiXinPayMchid;
-            _sortedDictionary["spbill_create_ip"] = WeiXinPayInfo.WeiXinPayLocalServerIp;
-            _sortedDictionary["nonce_str"] = DateTime.Now.Ticks;
-            _sortedDictionary["body"] = PaymentConfig.PaymentBody;
-            _sortedDictionary["attach"] = PaymentConfig.PaymentBody;
-            _sortedDictionary["goods_tag"] = PaymentConfig.PaymentSubject;
+            SortedDictionary[WeiXinPayInfo.OutTradeNo] = orderRef;
+            SortedDictionary[WeiXinPayInfo.TotalFee] = amount * 100;
+            SortedDictionary[WeiXinPayInfo.ProductId] = orderRef;
+            SortedDictionary[WeiXinPayInfo.TimeStart] = DateTime.Now.ToString("yyyyMMddHHmmss");
+            SortedDictionary[WeiXinPayInfo.TimeExpire] = DateTime.Now.AddMinutes(10).ToString("yyyyMMddHHmmss");
+            SortedDictionary[WeiXinPayInfo.TradeType] = "NATIVE";
+            SortedDictionary[WeiXinPayInfo.NotifyUrl] = WeiXinPayInfo.WeiXinPayNodifyUrl;
+            SortedDictionary[WeiXinPayInfo.Appid] = WeiXinPayInfo.WeiXinPayAppId;
+            SortedDictionary[WeiXinPayInfo.MchId] = WeiXinPayInfo.WeiXinPayMchid;
+            SortedDictionary[WeiXinPayInfo.SpbillCreateIp] = WeiXinPayInfo.WeiXinPayLocalServerIp;
+            SortedDictionary[WeiXinPayInfo.NonceStr] = DateTime.Now.Ticks;
+            SortedDictionary[WeiXinPayInfo.Body] = ConfigHelper.PaymentBody;
+            SortedDictionary[WeiXinPayInfo.Attach] = ConfigHelper.PaymentBody;
+            SortedDictionary[WeiXinPayInfo.GoodsTag] = ConfigHelper.PaymentSubject;
         }
-
-        public SortedDictionary<string, object> SortedDictionary { get; }
 
         public void SetDictionaryValue(string key, object value)
         {
-            _sortedDictionary[key] = value;
+            SortedDictionary[key] = value;
         }
 
         public Object GetDictionaryValue(string key)
         {
-            _sortedDictionary.TryGetValue(key, out object o);
+            SortedDictionary.TryGetValue(key, out object o);
             return o;
         }
 
@@ -57,17 +57,13 @@ namespace Imagine.BookManager.PaymentService.WeiXinPay
         /// <returns></returns>
         public string ToXml()
         {
-            if (_sortedDictionary.Count == 0)
+            if (SortedDictionary.Count == 0)
                 return string.Empty;
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
             sb.Append("<xml>");
-            foreach (KeyValuePair<string, object> item in _sortedDictionary)
+            foreach (KeyValuePair<string, object> item in SortedDictionary)
             {
-                if (item.Value == null)
-                {
-                    return "";
-                }
-                sb.AppendFormat("<{0}>{1}</{0}>", item.Key, item.Value);
+                sb.Append($"<{item.Key}>{item.Value}</{item.Key}");
             }
             sb.Append("</xml>");
             return sb.ToString();
@@ -75,79 +71,62 @@ namespace Imagine.BookManager.PaymentService.WeiXinPay
 
         public string ToUrlParamter()
         {
-            string buff = "";
-            foreach (KeyValuePair<string, object> pair in _sortedDictionary)
+            var sb = new StringBuilder();
+            foreach (KeyValuePair<string, object> pair in SortedDictionary)
             {
                 if (pair.Value == null)
                 {
                     return string.Empty;
                 }
-                if (pair.Key != "sign" && pair.Value.ToString() != "")
+                if (pair.Key != WeiXinPayInfo.Sign && pair.Value.ToString() != "")
                 {
-                    buff += pair.Key + "=" + pair.Value + "&";
+                    sb.Append($"{pair.Key}={pair.Value}&");
                 }
             }
-            buff = buff.Trim('&');
-            return buff;
+            return sb.ToString();
         }
 
         public void FromXml(string xml)
         {
             if (string.IsNullOrEmpty(xml))
-            {
-                _sortedDictionary.Clear();
-                return;
-            }
+                throw new Exception("weixin request or response is null");
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.LoadXml(xml);
             XmlNode xmlNode = xmlDoc.FirstChild;
             XmlNodeList nodes = xmlNode.ChildNodes;
+            SortedDictionary = new SortedDictionary<string, object>();
             foreach (XmlNode xn in nodes)
             {
                 XmlElement xe = (XmlElement)xn;
-                _sortedDictionary[xe.Name] = xe.InnerText;
+                SortedDictionary[xe.Name] = xe.InnerText;
             }
-            if (_sortedDictionary.ContainsKey("return_code") == false)
+            if (SortedDictionary[WeiXinPayInfo.ReturnCode].ToString() != "SUCCESS")
             {
-                _sortedDictionary.Clear();
-                return;
+                SortedDictionary = new SortedDictionary<string, object>();
             }
-            try
-            {
-                if (_sortedDictionary["return_code"].ToString() != "SUCCESS")
-                {
-                    _sortedDictionary.Clear();
-                    return;
-                }
-                if (CheckSign() == false)
-                    _sortedDictionary.Clear();
-            }
-            catch (Exception)
-            {
-                _sortedDictionary.Clear();
-            }
+            if (CheckSign() == false)
+                SortedDictionary = new SortedDictionary<string, object>();
         }
 
         public string MakeSign()
         {
             string str = ToUrlParamter();
-            str += "&key=" + WeiXinPayInfo.WeiXinPayKey;
+            str += "key=" + WeiXinPayInfo.WeiXinPayKey;
             var md5 = Util.CreateMd5(str);
             return md5.ToUpper();
         }
 
-
         public bool CheckSign()
         {
-            if (_sortedDictionary.ContainsKey("sign"))
+            if (SortedDictionary.ContainsKey(WeiXinPayInfo.Sign))
             {
                 return false;
             }
-            if (_sortedDictionary["sign"] == null || _sortedDictionary["sign"].ToString() == "")
+            if (SortedDictionary["sign"] == null || SortedDictionary[WeiXinPayInfo.Sign].ToString() == "")
             {
                 return false;
             }
-            string returnSign = _sortedDictionary["sign"].ToString();
+            string returnSign = SortedDictionary[WeiXinPayInfo.Sign].ToString();
 
             string newSign = MakeSign();
 
