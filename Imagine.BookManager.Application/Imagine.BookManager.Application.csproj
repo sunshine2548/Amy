@@ -186,6 +186,7 @@
     <Compile Include="ClassService\IClassAppService.cs" />
     <Compile Include="InstitutionService\IInstitutionAppService.cs" />
     <Compile Include="InstitutionService\InstitutionAppService.cs" />
+    <Compile Include="PayMentService\IPaymentAppService.cs" />
     <Compile Include="OrderService\IOrderAppService.cs" />
     <Compile Include="OrderService\OrderAppService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

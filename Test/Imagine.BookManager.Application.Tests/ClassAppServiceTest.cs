@@ -51,7 +51,8 @@ namespace Imagine.BookManager.Application.Tests
         [Fact]
         public void CreateClassInfo_Return_0_If_The_User_Not_Fount_Institution()
         {
-            Admin admin = UsingDbContext(ctx => ctx.Admin.First(x => x.UserName == "empty"));
+
+            Admin admin = UsingDbContext(ctx => ctx.Admin.Add(InitFakeEntity.GetFakeAdmin()));
             ClassInfoIn classInfo = new ClassInfoIn
             {
                 Name = "Brian",
