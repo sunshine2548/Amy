@@ -64,7 +64,8 @@ namespace Imagine.BookManager.OrderService
         {
             var queryable = _orderRepository
                 .GetAllIncluding(x => x.OrderItems)
-                .Where(x => x.UserId == userId);
+                .Where(x => x.UserId == userId)
+                .OrderByDescending(x => x.Id);
             return ObjectMapper
                 .Map<PaginationDataList<OrderDto>>(
                 queryable.ToPagination(pageIndex, singletonPageCount));
@@ -82,7 +83,8 @@ namespace Imagine.BookManager.OrderService
                 .SelectMany(x => x.Admins);
             var queryAble = from o in _orderRepository.GetAllIncluding(x => x.OrderItems)
                             join a in queryableAdmins on o.UserId equals a.UserId
-                            select new Order();
+                            orderby o.Id descending
+                            select o;
             return ObjectMapper
                 .Map<PaginationDataList<OrderDto>>(
                     queryAble.ToPagination(pageIndex, singletonPageCount)
