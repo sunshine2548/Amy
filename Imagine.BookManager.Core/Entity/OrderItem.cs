@@ -16,6 +16,12 @@ namespace Imagine.BookManager.Core.Entity
         public int Quantity { get; set; }
         public int RemainCredit { get; set; }
         public Guid UserId { get; set; }
+        public ICollection<TeacherAllocation> TeacherAllocations { get; set; }
+
+        public OrderItem()
+        {
+            TeacherAllocations = new List<TeacherAllocation>();
+        }
 
     }
 }
