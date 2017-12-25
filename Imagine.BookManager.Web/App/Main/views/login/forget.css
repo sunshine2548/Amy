@@ -1,0 +1,45 @@
+.forget h3 {
+    margin: 13px 0 10px;
+    font-size: 16px;
+    color: #000;
+}
+
+.nav_tab {
+    display: flex;
+    justify-content: space-between;
+    height: 30px;
+    background: #eff6fc;
+    font-size: 12px;
+    border: 1px solid #dcdcdc;
+}
+
+.nav_tab li a {
+    display: block;
+    width: 320px;
+    text-align: center;
+    line-height: 28px;
+    color: #666;
+}
+
+.nav_tab li.active a {
+    font-size: 12px;
+    font-weight: 700;
+    font-family: "微软雅黑";
+    color: #fff;
+    background: #51aef6;
+    position: relative;
+    width: 288px;
+}
+
+.nav_tab .active a::after{
+    content: "";
+    width: 0;
+    height: 0;
+    border-left:21px solid transparent;
+    border-right: 21px solid #51aef6;
+    border-top: 21px solid transparent;
+    transform: rotate(-45deg);
+    position: absolute;
+    top: 11px;
+    right: -13px;
+}
