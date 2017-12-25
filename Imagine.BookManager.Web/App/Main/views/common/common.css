@@ -1,0 +1,264 @@
+/* 头部导航部分 */
+.nav {
+    height: 60px;
+    background: #e00012;
+    text-align: center;
+    line-height: 60px;
+}
+
+.nav .logo {
+    width: 160px;
+    height: 60px;
+    background: url("../images/manager/img_logo_02.png") no-repeat center;
+    background-size: 140px 35px;
+}
+
+.nav .navlist li {
+    width: 120px;
+    height: 60px;
+}
+
+.nav .navlist li a {
+    display: block;
+    font-size: 16px;
+    color: rgba(255, 255, 255, .6);
+    position: relative;
+}
+
+.nav .navlist li.active a {
+    color: #fff;
+    text-decoration: none;
+}
+.nav .navlist li a:hover{
+    text-decoration: none;
+}
+.nav .navlist li.active a::after {
+    content: "";
+    width: 120px;
+    height: 6px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: #fff;
+}
+
+.nav .user {
+    padding-right: 20px;
+    position: relative;
+}
+.nav .user a {
+    color: #fff;
+}
+.nav .user a:hover{
+    text-decoration: none;
+}
+.nav .user .username {
+    position: relative;
+}
+.nav .user .quit{
+    position: absolute;
+    width: 56px;
+    height: 26px;
+    line-height: 26px;
+    text-align: center;
+    background: #fff;
+    color: #000;
+    font-size: 12px;
+    bottom: -10px;
+    left: 15px;
+    cursor: pointer;
+    display: none;    
+}
+.nav .user .quit:hover{
+    background: #f7f7f7;
+}
+.nav .user .username::after {
+    content: "";
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid #fff;
+    border-top: 6px solid transparent;
+    position: absolute;
+    bottom: 20px;
+    right: -10px;
+}
+
+.nav .user img {
+    vertical-align: middle;
+}
+
+.nav .user .line {
+    width: 1px;
+    height: 20px;
+    margin: 20px 18px 20px 28px;
+    background: #fff;
+}
+
+.nav .user p {
+    color: #fff;
+    font-size: 12px;
+    text-decoration: underline;
+}
+
+/* 侧边栏部分 */
+.side {
+    height: 1080px;
+    width: 158px;
+    border-left: 1px solid #dcdcdc;
+    border-right: 1px solid #dcdcdc;
+    margin-top: -10px;
+}
+.side li {
+    height: 60px;
+    line-height: 60px;
+    font-size: 14px;
+    position: relative;
+}
+.side ul{
+    margin-bottom: 0!important;
+}
+.side li.active a {
+    font-size: 14px;
+    color: #e00012;
+    font-weight: 700;
+    font-family: "微软雅黑";
+}
+
+.side .active::before {
+    content: "";
+    width: 4px;
+    height: 40px;
+    background: #e00012;
+    position: absolute;
+    left: 0;
+    top: 10px;
+}
+
+.side li a {
+    margin: 10px 0;
+    color: #666;
+}
+.side li img {
+    vertical-align: middle;
+    margin-left: 20px;
+    margin-right: 10px;
+}
+
+/* 头部标题部分开始*/
+.title .navbar-form {
+    margin: 0;
+    padding: 8px 0;
+}
+
+.title .form-item {
+    display: flex;
+    justify-content: space-around;
+    margin-right: 20px;
+}
+
+.title .navbar-form label {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 30px;
+    font-family: "微软雅黑";
+    margin-bottom: 0;
+}
+
+.title .dropdown {
+    position: relative;
+    /* margin-right: 20px; */
+    width: 160px;
+}
+
+.title .dropdown .dLabel,
+.title .dropdown input {
+    width: 160px;
+    height: 30px;
+    border: 1px solid #c8c8c8;
+    margin-left: 8px;
+    font-size: 12px;
+    position: relative;
+}
+
+.title .dropdown input {
+    padding-left: 10px;
+}
+
+.title .dropdown .caret {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 2;
+    border-top: 5px dashed;
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+}
+
+.title .dropdown .dropdown-menu {
+    width: 160px;
+    left: 8px;
+    border-radius: 0;
+    border-top: 0;
+}
+
+.title .navbar-form .btn {
+    width: 60px;
+    height: 30px;
+    background: #51aef6;
+    font-size: 12px;
+    font-family: "微软雅黑";
+    color: #fff;
+    position: relative;
+    right: -10px;
+    border-radius: 0;
+}
+/* 头部标题结束 */
+
+
+/* 分页部分 */
+.page {
+    height: 34px;
+    margin-top: 30px;
+  }
+  
+  .page .pagination {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 34px;
+    margin: 0;
+  }
+  
+  .page .pagination li {
+    float: left;
+    margin-right: 8px;
+  }
+  
+  .page .pagination li a.active {
+    background: #e00012;
+    color: #fff;
+  }
+  
+  .page .pagination li input {
+    border: 1px solid #dcdcdc;
+  }
+  
+  .page .pagination a {
+    color: #000;
+  }
+  
+  .page .pagination a:hover {
+    background: #fff;
+    color: #000;
+  }
+  
+  .page .pagination .more a {
+    border: none;
+    background-color: #fff;
+  }
+  
+  .page .glyphicon-option-horizontal {
+    line-height: 1.5;
+    font-size: 14px;
+  }
