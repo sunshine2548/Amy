@@ -40,6 +40,62 @@
     border-top: 21px solid transparent;
     transform: rotate(-45deg);
     position: absolute;
-    top: 11px;
+    top: 11px;                                                             
     right: -13px;
+}
+
+/* 步骤 */
+.content{
+    text-align: center;
+    padding-top: 90px;
+}
+.content .test input{
+    width: 240px;
+    height: 30px;
+    border: 1px solid #c8c8c8;
+    padding-left: 8px;
+}
+.content .vcerificationCode{
+    display: flex;
+    /* width: 240px; */
+    justify-content: center;
+    margin: 26px 0 106px 0;
+}
+.content .vcerificationCode input{
+    width: 120px;
+}
+.content .vcerificationCode .code_pic{
+    width: 80px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    margin-left: 40px;
+    background-color: #f7f7f7;
+    border: 1px solid transparent;
+}
+.content .test input[type="button"]{
+    font-size: 12px;
+    color: #999;
+    border-radius: 4px;
+    background-color: #f0f0f0;
+    border: 0;
+}
+.content .test p{
+    font-size: 12px;
+    color: #e00012;
+    margin-top: 6px;
+    margin-left: 360px;
+    text-align: left;
+    display: none;
+}
+.content .active p:last-child{
+    margin-top: 6px;
+    margin-bottom: 88px;
+}
+.content .active input[type="button"]{
+    background-color: #e00012;
+    color: #fff;
+}
+.content .active .vcerificationCode{
+    margin-top: 8px 0 0 0;
 }
