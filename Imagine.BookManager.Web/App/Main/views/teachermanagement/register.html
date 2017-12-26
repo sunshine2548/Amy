@@ -8,14 +8,57 @@
     <link rel="stylesheet" href="../../../../Content/bootstrap.css">
     <link rel="stylesheet" href="../common/common.css">
     <link rel="stylesheet" href="./register.css">
+    <script src="../../../../Scripts/others/html5shiv.js"></script>
     <title>Document</title>
 </head>
 <body>
    <header>
-       <div class="back"><span class="icon-back"></span>返回</div>
+       <div class="back"><i class="glyphicon glyphicon-menu-left"></i>返回</div>
        <div class="title">Penny邀请您注册</div>
-       <div class="more"><i class="iconfont icon-gengduo"></i></div>
+       <div class="more"><i class="glyphicon glyphicon-option-horizontal"></i></div>
    </header>
    <div class="logo"></div>
+   <section class="content">
+       <form action="">
+            <div class="form-group">
+                <label for="recipient-name" class="control-label">教师名称</label>
+                <input type="text" class="form-control" id="class-name" placeholder="请输入教师姓名">
+            </div>
+            <p class="text teacher_name">请输入教师名称</p>
+            <div class="form-group sex">
+                <label for="message-text" class="control-label">教师性别</label>
+                <div class="radio">
+                    <div class="male">
+                        <span class="circle"></span>
+                        <input type="radio" name="gender" id="">男
+                    </div>
+                    <div class="female">
+                        <span class="circle"></span>
+                        <input type="radio" name="gender" id="">女
+                    </div>
+                </div>   
+            </div>
+            <p class="text">请选择性别</p>
+            <div class="form-group">
+                <label for="message-text" class="control-label">手机号码</label>
+                <input type="text" class="form-control" id="" placeholder="请输入教师手机号码">
+            </div>
+            <p class="text teacher_tel">请输入教师手机号/该手机号已被注册</p>
+            <div class="form-group file">
+                <label for="message-text" class="control-label">教师头像<br><span>(选填项)</span></label>
+                <a href="#">
+                    <input type="file" class="form-control" id="">
+                    <img src="../../images/teachermanager/Android/img_head-portrait.png" alt="">
+                    点击上传头像
+                </a>
+            </div>
+       </form>
+       <p class="notice">
+           注：手机号码是你的智@绘本登录账号，以及密码找回验证<br>方式；请填写真实有效的手机号码。
+       </p>
+       <div class="register_btn">
+           <button>确认注册</button>
+       </div>
+   </section>
 </body>
 </html>

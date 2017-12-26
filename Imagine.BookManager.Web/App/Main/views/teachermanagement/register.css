@@ -1,39 +1,3 @@
-/* 引入字体文件 */
-@font-face {
-  font-family: "iconfont";
-  src: url("../../../../fonts/fontawesome-webfont.eot")
-      format("embedded-opentype"),
-    url("../../../../fonts/fontawesome-webfont.woff") format("woff"),
-    url("../../../../fonts/fontawesome-webfont.woff2") format("woff2"),
-    url("../../../../fonts/fontawesome-webfont.ttf") format("truetype"),
-    url("../../../../fonts/fontawesome-webfont.svg") format("svg");
-  font-weight: normal;
-  font-style: normal;
-}
-/* 定义通用图标样式 */
-[class*="icon-"] {
-  display: inline;
-  /* width: auto;
-  height: auto; */
-  line-height: inherit;
-  vertical-align: baseline;
-  background-image: none;
-  background-position: 0 0;
-  background-repeat: repeat;
-}
-[class*="icon-"]:before {
-  font-family: "iconfont";
-  font-weight: normal;
-  font-style: normal;
-  text-decoration: inherit;
-}
-/* 定义图标： */
-.icon-more:before {
-  content: "&#xf04a";
-}
-.icon-back:before {
-  content: "&#xf04a";
-}
 header {
   height: 64px;
   display: flex;
@@ -44,17 +8,119 @@ header {
   font-size: 20px;
   padding: 0 12px;
 }
-/* .back .icon-fanhui {
-    font-size: 20px;
-    color: #fff;
-  }
-.more .icon-gengduo {
-    font-size: 20px;
-    color: #fff;
-} */
+header i{
+  font-size: 20px;
+  color: #fff;
+  line-height: 64px;
+}
+header i.glyphicon{
+  top: 3px;
+}
 .logo {
-  height: 132px;
+  height: 66px;
   width: 100%;
   background: url("../../images/teachermanager/Android/img_logo.png") no-repeat;
-  background-size: contain;
+  background-size: cover;
+}
+/* 主体部分 */
+section.content{
+  padding: 0 12px;
+  margin-top: 14px;
+}
+section .form-group{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5px;
+}
+section .form-group label{
+  font-size: 15px;
+  color: #666;
+  margin-right: 15px;
+  line-height: 40px;
+  margin-bottom: 0;
+}
+section .form-group input[type="text"]{
+  width: 240px;
+  height: 40px;
+  border: 1px solid #c8c8c8;
+  padding-left: 10px;
+  border-radius: 0;
+}
+section .sex{
+  margin-left: -124px;
+}
+section p{
+  font-size: 13px;
+  color: #e00012;
+  margin-left: 112px;
+}
+section .circle{
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border: 1px solid #c8c8c8;
+  border-radius: 50%;
+  vertical-align: middle;
+  margin-top: -2px;
+}
+section .radio{
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+}
+section .radio .male{
+  margin-right: 50px;
+}
+/* 头像上传 */ 
+section .file label{
+  margin-left: -140px;
+  line-height: 18px;
+  text-align: center;
+}
+section .file label span{
+  margin-top: 6px;
+  font-size: 12px;
+  color: #999;
+}
+section .file a{
+  position: relative;
+  display: inline-block;
+  background: #f0f0f0;
+  border-radius: 0;
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  color: #c8c8c8;
+  text-decoration: none;
+  /* text-indent: 0; */
+  text-align: center;
+}
+section .file a img{
+  display: block;
+  width: 26px;
+  height: 23px;                                               
+  margin: 20px auto 10px;
+}
+section .file a input {
+  position: absolute;
+  font-size: 100px;
+  right: 0;
+  top: 0;
+  opacity: 0;
+}
+section p.notice{
+  font-size: 12px;
+  color: #999;
+  line-height: 20px;
+  margin: 40px 0 50px 30px;
+}
+section .register_btn button{
+  width: 313px;
+  height: 40px;
+
+  background: #e00012;
+  color: #fff;
+  font-size: 16px;
+  border: 0;
+  margin-left: 40px;
 }
