@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../common/base.css">
+    <link rel="stylesheet" href="../../../../Content/bootstrap.css">
+    <!-- <link rel="stylesheet" href="../../../node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.css"> -->
+    <link rel="stylesheet" href="../common/common.css">
+    <link rel="stylesheet" href="./teacherlist.css">
+    <title>Document</title>
+</head>
+<body ng-app="classmanager">
+    <div class="center" ng-controller="teacherlist">
+        <div class="nav">
+            <div class="logo f-left"></div>
+            <ul class="navlist f-left">
+                <li class="f-left">
+                    <a href="#">我的绘本</a>
+                </li>
+                <li class="f-left active">
+                    <a href="#">教师管理</a>
+                </li>
+                <li class="f-left">
+                    <a href="#">班级管理</a>
+                </li>
+                <li class="f-left">
+                    <a href="#">学生管理</a>
+                </li>
+            </ul>
+            <div class="user f-right">
+                <div class="username f-left">
+                    <img src="../../images/manager/img_user.png" alt="">
+                    <a href="#">Jenny</a>
+                </div>
+                <div class="line f-left"></div>
+                <p class="f-right">购买绘本</p>
+            </div>
+        </div>
+        <div class="side f-left">
+            <ul>
+                <li class="active">
+                    <img src="../../images/teachermanager/icon_teacher list_click.png" alt="">
+                    <a href="#">教师名单</a>
+                </li>
+            </ul>
+        </div>
+        <div class="title f-left">
+            <div class="addteacher" data-toggle="modal" data-target="#addteacher">
+                <a href="#"><img src="../../images/teachermanager/icon_add.png" alt="">添加教师</a>
+            </div>
+            <form class="navbar-form navbar-left clearfix" role="search">
+                <div class="form-item f-left">
+                    <label for="">教师名称</label>
+                    <div>   
+                        <input type="text">
+                    </div>
+                </div>
+                <div class="form-item f-left">
+                    <label for="">班级名称</label>
+                    <div class="dropdown">
+                        <div class="dLabel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caret"></span>
+                        </div>
+                        <ul class="dropdown-menu" aria-labelledby="dLabel">
+                            <li>11122</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="form-item f-left">
+                    <label for="">绘本合辑</label>
+                    <div class="dropdown">
+                        <div class="dLabel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caret"></span>
+                        </div>
+                        <ul class="dropdown-menu" aria-labelledby="dLabel">
+                            <li>11122</li>
+                        </ul>
+                    </div>
+                </div>
+            </form>
+            <div class="checkbox clearfix">
+                <h4 class="f-left">绘本状态</h4>
+                <ul class="status f-left">
+                    <li><img src="../../images/teachermanager/icon_tick.png" alt=""><span>全部</span></li>
+                    <li><img src="../../images/teachermanager/icon_untick.png" alt=""><span>已分配</span></li>
+                    <li><img src="../../images/teachermanager/icon_untick.png" alt=""><span>未分配</span></li>
+                    <li><img src="../../images/teachermanager/icon_untick.png" alt=""><span>额度不足</span></li>
+                </ul>
+                <button type="button" class="btn f-right">确定</button>
+            </div>
+        </div>
+        <div class="teacher_list">
+             <!-- 教师列表部分 -->
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th width="88px">教师姓名</th>
+                        <th width="40px">性别</th>
+                        <th width="68px">教师图像</th>
+                        <th width="90px">教师电话</th>
+                        <th width="70px">管理学生数</th>
+                        <th width="170px">管理班级</th>
+                        <th width="190px">绘本分配列表及剩余额度</th>
+                        <th width="76px">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="active">
+                        <td class="now"><a href="#" style="text-decoration: underline">Penny</a></td>
+                        <td><a href="#">女</a></td>
+                        <td>图像</td>
+                        <td>15236478525</td>
+                        <td>35</td>
+                        <td>
+                            一年级（1）班<br>
+                            想象力学院（2）班<br>
+                            南门幼儿园小（1）班
+                        </td>
+                        <td style="text-align:left;padding-left: 10px">
+                            <span>Read with Amanda——2/30</span>
+                            <span>Read with Lily——2/30</span>
+                        </td>
+                        <td class="operating now">
+                            <a href="#" style="text-decoration: underline" >管理教师</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><a href="#" style="text-decoration: underline">Penny</a></td>
+                        <td><a href="#">女</a></td>
+                        <td>图像</td>
+                        <td>15236478525</td>
+                        <td>35</td>
+                        <td>
+                            一年级（1）班<br>
+                            想象力学院（2）班<br>
+                            南门幼儿园小（1）班
+                        </td>
+                        <td style="text-align:left;padding-left: 10px">
+                                <span>Read with Amanda——2/30</span>
+                                <span>Read with Lily——2/30</span>
+                        </td>
+                        <td class="operating">
+                            <a href="#" style="text-decoration: underline">管理教师</a>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    
+                </tfoot>
+            </table>
+            <!-- 分页部分 -->
+            <div class="page aria-label=...">
+                <ul class="pagination pull-left">
+                    <li class="disabled"><span aria-label="Previous"><span class="glyphicon glyphicon-menu-left"></span></span></li>
+                    <li><a href="#" class="active">1 <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#">2 <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#">3 <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#">4 <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#">5 <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#">6 <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#">7 <span class="sr-only">(current)</span></a></li>
+                    <li class="more"><a href="#"><span class="glyphicon glyphicon-option-horizontal"></span></a></li>
+                    <li><a href="#">99 <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#">100<span class="sr-only">(current)</span></a></li>
+                    <li class="disabled"><span aria-label="next"><span class="glyphicon glyphicon-menu-right"></span></span></li>
+                    <li>到第&nbsp;&nbsp;&nbsp;<input type="text" name="" value="" style="width:50px;height:34px;padding-left:25px">&nbsp;&nbsp;&nbsp;页</li>
+                    <li class="conform"><a href="#">确定<span class="sr-only">(current)</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 添加教师模态框 -->
+    <div class="modal fade" id="addteacher" tabindex="-1">
+        <div class="modal-content">
+            <div class="modal-header">
+                <ul class="nav">
+                    <li role="presentation" class="manual active"><a href="#">手动添加</a></li>
+                    <li role="presentation"><a href="#">二维码添加</a></li>
+                </ul>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <img src="../../images/teachermanager/icon_close.png" alt="">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">*&nbsp;&nbsp;教师名称</label>
+                        <input type="text" class="form-control" id="class-name">
+                    </div>
+                    <p class="text teacher_name">请输入教师名称</p>
+                    <div class="form-group sex">
+                        <label for="message-text" class="control-label">*&nbsp;&nbsp;教师性别</label>
+                        <div class="radio">
+                            <label>
+                                <img src="../../images/teachermanager/icon_untick.png" alt="">
+                                <input name="gender" type="radio" value="" />男</label> 
+                            <label  class="female">
+                                <img src="../../images/teachermanager/icon_untick.png" alt="">
+                                <input name="gender" type="radio" value="" />女</label> 
+                        </div>
+                    </div>
+                    <p class="text">请选择性别</p>
+                    <div class="form-group">
+                        <label for="message-text" class="control-label">*&nbsp;&nbsp;手机号码</label>
+                        <input type="text" class="form-control" id="">
+                    </div>
+                    <p class="text teacher_tel">请输入教师手机号/该手机号已被注册</p>
+                    <div class="form-group file">
+                        <label for="file"> &nbsp;&nbsp;教师头像</label>  
+                        <div class="userdefined-file">
+                            <input type="text" name="userdefinedFile" id="userdefinedFile" value="">
+                            <button type="button">浏览...</button>
+                        </div>
+                        <input type="file" name="file" id="file">
+                    </div>
+                    <p class="notice">注：*为必填项；教师登录密码默认为手机号后六位。</p>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" data-toggle="modal" data-target="#confirm">确定添加</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 添加成功模态框 -->
+    <div class="modal" tabindex="-1" role="dialog" id="confirm">
+        <div class="modal-body">
+            <p><img src="../../images/teachermanager/icon_success.png" alt="">添加教师成功</p>
+        </div>    
+    </div>
+
+    <script src="../../../../Scripts/jquery-3.2.1.js"></script>
+    <script src="../../../../Scripts/bootstrap.js"></script>
+</body>
+</html>
+
+

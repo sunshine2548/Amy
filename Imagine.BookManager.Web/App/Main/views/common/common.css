@@ -9,7 +9,7 @@
 .nav .logo {
     width: 160px;
     height: 60px;
-    background: url("../images/manager/img_logo_02.png") no-repeat center;
+    background: url("../../images/manager/img_logo_02.png") no-repeat center;
     background-size: 140px 35px;
 }
 
@@ -242,6 +242,8 @@
   
   .page .pagination li input {
     border: 1px solid #dcdcdc;
+    padding-left: 0!important;
+    text-align: center;
   }
   
   .page .pagination a {
