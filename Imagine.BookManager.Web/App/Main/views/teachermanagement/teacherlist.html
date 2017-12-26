@@ -178,15 +178,15 @@
         <div class="modal-content">
             <div class="modal-header">
                 <ul class="nav">
-                    <li role="presentation" class="manual active"><a href="#">手动添加</a></li>
-                    <li role="presentation"><a href="#">二维码添加</a></li>
+                    <li role="presentation" class="manual"><a href="#">手动添加</a></li>
+                    <li role="presentation" class="active"><a href="#">二维码添加</a></li>
                 </ul>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <img src="../../images/teachermanager/icon_close.png" alt="">
                 </button>
             </div>
-            <div class="modal-body">
-                <form>
+            <div class="modal-body" style="display: none">
+                <form class="add_manual" >
                     <div class="form-group">
                         <label for="recipient-name" class="control-label">*&nbsp;&nbsp;教师名称</label>
                         <input type="text" class="form-control" id="class-name">
@@ -220,8 +220,26 @@
                     <p class="notice">注：*为必填项；教师登录密码默认为手机号后六位。</p>
                 </form>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer" style="display: none">
                 <button type="button" class="btn btn-default" data-dismiss="modal" data-toggle="modal" data-target="#confirm">确定添加</button>
+            </div>
+            <div class="add_code">
+                <div class="code f-left">
+                    <img src="../../images/teachermanager/icon_wechat.png" alt="">
+                </div>
+                <div class="info">
+                    <h5>二维码添加人数</h5>
+                    <div>
+                        <input type="text" placeholder="请输入添加人数"><br>
+                        <span>请输入添加人数</span>
+                    </div>
+                    <div class="share">
+                        <label for="">分享至:</label>
+                        <img src="../../images/teachermanager/icon_qq_disable.png" alt="" class="qqimg">
+                        <img src="../../images/teachermanager/icon_wechat_disable.png" alt="">
+                    </div>
+                </div>
+                <p class="notice">注：<br>1.30分钟内注册有效；<br>2.将该二维码分享给教师，待教师注册成功后，进入你的教师管理列表。</p>
             </div>
         </div>
     </div>
