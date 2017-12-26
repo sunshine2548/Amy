@@ -21,4 +21,20 @@ namespace Imagine.BookManager.Core.Entity
             TeacherAllocations = new List<TeacherAllocation>();
         }
     }
+
+    public enum SetAllotStatus
+    {
+        /// <summary>
+        /// 已分配
+        /// </summary>
+        Allocated = 1,
+        /// <summary>
+        /// 未分配
+        /// </summary>
+        UnAllocated = 2,
+        /// <summary>
+        /// 额度不足
+        /// </summary>
+        CreditInadequate = 3
+    }
 }

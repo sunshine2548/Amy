@@ -21,6 +21,9 @@ namespace Imagine.BookManager.Dto.Admin
         public string UserName { get; set; }
         public DateTime DateCreated { get; set; }
         public string Password { get; set; }
+        public int StudentCount { get; set; }
+        public string ClassName { get; set; }
+        public string SetName { get; set; }
 
         public void AddValidationErrors(CustomValidationContext context)
         {

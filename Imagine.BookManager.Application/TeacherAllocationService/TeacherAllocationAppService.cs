@@ -70,9 +70,9 @@ namespace Imagine.BookManager.TeacherAllocationService
             teacherAllocation.TeacherId = input.TeacherId;
             teacherAllocation.Credit = input.Credit;
             teacherAllocation.DateAllocated = DateTime.Now;
-            teacherAllocation.AdminObj = input.AdminObj;
-            teacherAllocation.OrderItemObj = input.OrderItemObj;
-            teacherAllocation.SetObj = input.SetObj;
+            //teacherAllocation.AdminObj = input.AdminObj;
+            //teacherAllocation.OrderItemObj = input.OrderItemObj;
+            //teacherAllocation.SetObj = input.SetObj;
 
             var result = _teacherAllocation.Update(teacherAllocation);
             orderItem.RemainCredit = orderItem.RemainCredit + teacherAllocation.Credit;

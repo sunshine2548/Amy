@@ -158,6 +158,7 @@
     <Compile Include="Entity\Set.cs" />
     <Compile Include="Entity\ShoppingCart.cs" />
     <Compile Include="Entity\Student.cs" />
+    <Compile Include="Entity\StudentAllocation.cs" />
     <Compile Include="Entity\TeacherAllocation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

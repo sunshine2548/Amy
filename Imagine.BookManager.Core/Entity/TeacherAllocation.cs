@@ -15,15 +15,13 @@ namespace Imagine.BookManager.Core.Entity
         public Guid TeacherId { get; set; }
         public int Credit { get; set; }
         public DateTime DateAllocated { get; set; }
-        public Set SetObj { get; set; }
-        public Admin AdminObj { get; set; }
-        public OrderItem OrderItemObj { get; set; }
+
+
+        public ICollection<StudentAllocation> StudentAllocations { get; set; }
         public TeacherAllocation()
         {
-            SetObj = new Set();
-            AdminObj = new Admin();
-            OrderItemObj = new OrderItem();
             DateAllocated = DateTime.Now;
+            StudentAllocations = new List<StudentAllocation>();
         }
     }
 }
