@@ -435,6 +435,7 @@
 
 #tranferclass .modal-content .modal-body {
   padding: 0px 60px 0;
+  margin-bottom: 18px;
 }
 
 #tranferclass .modal-content .form-group {
@@ -478,6 +479,11 @@
   color: #000;
   margin-left: 22px;
 }
+#tranferclass .modal-content p.info{
+  color: #e00012;
+  margin-left: -18px;
+  display: none;
+}
 
 #tranferclass .modal-footer {
   padding: 0;
@@ -486,4 +492,6 @@
 }
 
 /* 增加学生 */
-#addstudent 
+#addstudent {
+
+}
