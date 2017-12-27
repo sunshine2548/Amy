@@ -22,7 +22,6 @@ namespace Imagine.BookManager.Application.Tests
         [Fact]
         public void CreateOrder_Return_Ture_If_Success()
         {
-
             var institution = UsingDbContext(ctx => ctx.Institution.Add(InitFakeEntity.GetFakeInstitution()));
             var adminEntity = InitFakeEntity.GetFakeAdmin();
             adminEntity.InstitutionId = institution.Id;
@@ -95,7 +94,47 @@ namespace Imagine.BookManager.Application.Tests
             list.CurrentPage.ShouldBe(1);
             list.ListData.Count.ShouldBe(10);
             list.TotalPages.ShouldBe(1);
+        }
 
+        [Fact]
+        public void GetOrderByOrderRef_Should_Return_Correct_Number_Of_Records()
+        {
+            Admin admin = UsingDbContext(ctx => ctx.Admin.Add(InitFakeEntity.GetFakeAdmin()));
+            Order order = InitFakeEntity.GetFakeOrder();
+            order.OrderRef = Util.CreateOrderRef();
+            order.UserId = admin.UserId;
+            var reult = UsingDbContext(ctx => ctx.Order.Add(order));
+            OrderDto orderDto = _orderAppService.GetOrderByOrderRef(order.OrderRef);
+            orderDto.OrderRef.ShouldBe(order.OrderRef);
+        }
+
+        [Fact]
+        public void GetOrderByOrderRef_Should_Return_Null_If_OrderRef_Not_Exists()
+        {
+            OrderDto orderDto = _orderAppService.GetOrderByOrderRef("112222");
+            orderDto.ShouldBe(null);
+        }
+
+        [Fact]
+        public void UpdateOrderPaid_Return_Ture_If_Success()
+        {
+            Admin admin = UsingDbContext(ctx => ctx.Admin.Add(InitFakeEntity.GetFakeAdmin()));
+            Order order = InitFakeEntity.GetFakeOrder();
+            order.OrderRef = Util.CreateOrderRef();
+            order.UserId = admin.UserId;
+            UsingDbContext(ctx => ctx.Order.Add(order));
+            bool result = _orderAppService.UpdateOrderPaid(order.OrderRef, true);
+
+            Order orderResult = UsingDbContext(ctx => ctx.Order.FirstOrDefault(x => x.OrderRef == order.OrderRef));
+            Assert.True(result);
+            Assert.True(orderResult.Paid);
+        }
+
+        [Fact]
+        public void UpdateOrderPaid_Return_False_If_Order_Not_Found()
+        {
+            bool result = _orderAppService.UpdateOrderPaid("1231123", true);
+            Assert.False(result);
         }
 
     }

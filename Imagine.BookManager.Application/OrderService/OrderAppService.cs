@@ -41,14 +41,15 @@ namespace Imagine.BookManager.OrderService
 
         public OrderDto GetOrderByOrderRef(string orderRef)
         {
-            var result = _orderRepository.GetAllIncluding(x => x.OrderItems).FirstOrDefault(x => String.CompareOrdinal(orderRef, x.OrderRef) == 0);
+            var result = _orderRepository.GetAllIncluding(x => x.OrderItems).FirstOrDefault(x => orderRef == x.OrderRef);
             return ObjectMapper.Map<OrderDto>(result);
         }
 
 
+
         public bool UpdateOrderPaid(string orderRef, bool paid)
         {
-            var order = _orderRepository.FirstOrDefault(x => String.CompareOrdinal(orderRef, x.OrderRef) == 0);
+            var order = _orderRepository.FirstOrDefault(x => orderRef == x.OrderRef);
             if (order == null)
             {
                 return false;

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Abp.Application.Services.Dto;
+﻿using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
 using Imagine.BookManager.Core.Entity;
+using System;
+using System.Collections.Generic;
 
 namespace Imagine.BookManager.Dto.Order
 {

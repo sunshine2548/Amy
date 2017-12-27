@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7F30C338-0536-471A-92BA-DEEB7F99AE23}</ProjectGuid>
+    <ProjectGuid>{9244CBC4-0FBB-4010-82EC-40338FB715D4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Imagine.BookManager.Common</RootNamespace>
-    <AssemblyName>Imagine.BookManager.Common</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <RootNamespace>Imagine.BookManager.PaymentService</RootNamespace>
+    <AssemblyName>Imagine.BookManager.PaymentService</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AopSdk, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AopSdk.1.0.0\lib\net461\AopSdk.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -41,11 +45,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Util.cs" />
-    <Compile Include="PaginationCommon.cs" />
-    <Compile Include="PaginationDataList.cs" />
+    <Compile Include="AliPay\AliPayInfo.cs" />
+    <Compile Include="WeiXinPay\IWeiXinPayService.cs" />
+    <Compile Include="PaymentConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WebUtil.cs" />
+    <Compile Include="WeiXinPay\WeiXinPayData.cs" />
+    <Compile Include="WeiXinPay\WeiXinPayInfo.cs" />
+    <Compile Include="WeiXinPay\WeiXinPayService.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Imagine.BookManager.Common\Imagine.BookManager.Common.csproj">
+      <Project>{7f30c338-0536-471a-92ba-deeb7f99ae23}</Project>
+      <Name>Imagine.BookManager.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Imagine.BookManager.Dto\Imagine.BookManager.Dto.csproj">
+      <Project>{5d430749-9526-48bb-9038-ad71922db4af}</Project>
+      <Name>Imagine.BookManager.Dto</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
