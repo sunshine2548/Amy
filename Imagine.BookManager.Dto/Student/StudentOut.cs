@@ -1,6 +1,7 @@
 ﻿using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
 using System;
+using System.Collections.Generic;
 
 namespace Imagine.BookManager.Dto.Student
 {
@@ -19,5 +20,9 @@ namespace Imagine.BookManager.Dto.Student
         public int? ClassId { get; set; }
         public string ClassName { get; set; }
         public int IsDelete { get; set; }
+        public IList<string> SetNames { get; set; }
+        public IList<string> SetStatus { get; set; }
+        public IList<int> SetIds { get; set; }
+
     }
 }
