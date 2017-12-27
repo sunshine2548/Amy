@@ -151,7 +151,7 @@
                             <td>2/30</td>
                             <td>6个月</td>
                             <td class="operating">
-                                <a href="#" style="text-decoration: underline">绘本额度管理</a>
+                                <a href="#" style="text-decoration: underline" data-toggle="modal" data-target="#picbookModal">绘本额度管理</a>
                             </td>
                         </tr>
                     </tbody>
@@ -593,5 +593,24 @@
             </div>    
         </div>
     </div>
+
+    <!-- 绘本额度管理模态框 -->
+    <div class="modal fade" tabindex="-1" id="picbookModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>绘本额度管理</h4>
+                <button type="button" class="close" data-dismiss="modal">
+                    <img src="../../images/teachermanager/icon_close.png" alt="">
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>再删除该教师前，请将该教师账号下的<br>学生名单，班级名单，绘本管理的数据转移出去</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn" data-dismiss="modal">确定</button>
+            </div>    
+        </div>
+    </div>
+
 </body>
 </html>
