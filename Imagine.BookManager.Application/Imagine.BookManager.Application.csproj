@@ -189,6 +189,7 @@
     <Compile Include="PayMentService\IPaymentAppService.cs" />
     <Compile Include="OrderService\IOrderAppService.cs" />
     <Compile Include="OrderService\OrderAppService.cs" />
+    <Compile Include="PayMentService\PaymentAppService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SetService\ISetAppService.cs" />
     <Compile Include="SetService\SetAppService.cs" />
@@ -213,6 +214,10 @@
     <ProjectReference Include="..\Imagine.BookManager.Dto\Imagine.BookManager.Dto.csproj">
       <Project>{5d430749-9526-48bb-9038-ad71922db4af}</Project>
       <Name>Imagine.BookManager.Dto</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Imagine.BookManager.PaymentService\Imagine.BookManager.PaymentService.csproj">
+      <Project>{9244cbc4-0fbb-4010-82ec-40338fb715d4}</Project>
+      <Name>Imagine.BookManager.PaymentService</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

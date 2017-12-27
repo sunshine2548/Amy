@@ -137,5 +137,178 @@ namespace Imagine.BookManager.Application.Tests
             Assert.False(result);
         }
 
+        [Fact]
+        public void GetUserOrders_Should_Return_Correct_Number_Of_Records()
+        {
+            var institution = UsingDbContext(ctx => ctx.Institution.Add(InitFakeEntity.GetFakeInstitution()));
+            var adminEntity = InitFakeEntity.GetFakeAdmin();
+            adminEntity.InstitutionId = institution.Id;
+            var admin = UsingDbContext(ctx => ctx.Admin.Add(adminEntity));
+            for (int i = 0; i < 10; i++)
+            {
+                Order order = InitFakeEntity.GetFakeOrder();
+                order.UserId = admin.UserId;
+                order.OrderRef += i;
+                UsingDbContext(ctx => ctx.Order.Add(order));
+            }
+
+            var result = _orderAppService.GetUserOrders(admin.UserId, 1, null);
+
+            result.CurrentPage.ShouldBe(1);
+            result.TotalPages.ShouldBe(1);
+            result.ListData.Count.ShouldBe(10);
+        }
+
+
+        [Fact]
+        public void GetUserOrders_Should_Return_Correct_Number_Of_Records_Page_Not_Null()
+        {
+            var institution = UsingDbContext(ctx => ctx.Institution.Add(InitFakeEntity.GetFakeInstitution()));
+            var adminEntity = InitFakeEntity.GetFakeAdmin();
+            adminEntity.InstitutionId = institution.Id;
+            var admin = UsingDbContext(ctx => ctx.Admin.Add(adminEntity));
+            for (int i = 0; i < 10; i++)
+            {
+                Order order = InitFakeEntity.GetFakeOrder();
+                order.UserId = admin.UserId;
+                order.OrderRef += i;
+                UsingDbContext(ctx => ctx.Order.Add(order));
+            }
+            var result = _orderAppService.GetUserOrders(admin.UserId, 1, 10);
+            result.CurrentPage.ShouldBe(1);
+            result.TotalPages.ShouldBe(1);
+            result.ListData.Count.ShouldBe(10);
+        }
+
+        [Fact]
+        public void GetUserOrders_Should_Return_Correct_Number_Of_Records_Index_is_Null()
+        {
+            var institution = UsingDbContext(ctx => ctx.Institution.Add(InitFakeEntity.GetFakeInstitution()));
+            var adminEntity = InitFakeEntity.GetFakeAdmin();
+            adminEntity.InstitutionId = institution.Id;
+            var admin = UsingDbContext(ctx => ctx.Admin.Add(adminEntity));
+            for (int i = 0; i < 10; i++)
+            {
+                Order order = InitFakeEntity.GetFakeOrder();
+                order.UserId = admin.UserId;
+                order.OrderRef += i;
+                UsingDbContext(ctx => ctx.Order.Add(order));
+            }
+
+            var result = _orderAppService.GetUserOrders(admin.UserId, null, 10);
+
+            result.CurrentPage.ShouldBe(1);
+            result.TotalPages.ShouldBe(1);
+            result.ListData.Count.ShouldBe(10);
+        }
+
+        [Fact]
+        public void GetUserOrders_Should_Return_Correct_Number_Of_Records_Index_And_Page_is_Null()
+        {
+            var institution = UsingDbContext(ctx => ctx.Institution.Add(InitFakeEntity.GetFakeInstitution()));
+            var adminEntity = InitFakeEntity.GetFakeAdmin();
+            adminEntity.InstitutionId = institution.Id;
+            var admin = UsingDbContext(ctx => ctx.Admin.Add(adminEntity));
+            for (int i = 0; i < 10; i++)
+            {
+                Order order = InitFakeEntity.GetFakeOrder();
+                order.UserId = admin.UserId;
+                order.OrderRef += i;
+                UsingDbContext(ctx => ctx.Order.Add(order));
+            }
+
+            var result = _orderAppService.GetUserOrders(admin.UserId, null, null);
+
+            result.CurrentPage.ShouldBe(1);
+            result.TotalPages.ShouldBe(1);
+            result.ListData.Count.ShouldBe(10);
+        }
+
+        [Fact]
+        public void GetInstitutionOrderList_Should_Return_Correct_Number_Of_Records()
+        {
+            var institution = UsingDbContext(ctx => ctx.Institution.Add(InitFakeEntity.GetFakeInstitution()));
+            var adminEntity = InitFakeEntity.GetFakeAdmin();
+            adminEntity.InstitutionId = institution.Id;
+            var admin = UsingDbContext(ctx => ctx.Admin.Add(adminEntity));
+            for (int i = 0; i < 10; i++)
+            {
+                Order order = InitFakeEntity.GetFakeOrder();
+                order.UserId = admin.UserId;
+                order.OrderRef += i;
+                UsingDbContext(ctx => ctx.Order.Add(order));
+            }
+
+            var result = _orderAppService.GetInstitutionOrderList(institution.Id, 1, null);
+
+            result.CurrentPage.ShouldBe(1);
+            result.TotalPages.ShouldBe(1);
+            result.ListData.Count.ShouldBe(10);
+        }
+
+
+        [Fact]
+        public void GetInstitutionOrderList_Should_Return_Correct_Number_Of_Records_Page_Not_Null()
+        {
+            var institution = UsingDbContext(ctx => ctx.Institution.Add(InitFakeEntity.GetFakeInstitution()));
+            var adminEntity = InitFakeEntity.GetFakeAdmin();
+            adminEntity.InstitutionId = institution.Id;
+            var admin = UsingDbContext(ctx => ctx.Admin.Add(adminEntity));
+            for (int i = 0; i < 10; i++)
+            {
+                Order order = InitFakeEntity.GetFakeOrder();
+                order.UserId = admin.UserId;
+                order.OrderRef += i;
+                UsingDbContext(ctx => ctx.Order.Add(order));
+            }
+            var result = _orderAppService.GetInstitutionOrderList(institution.Id, 1, 10);
+            result.CurrentPage.ShouldBe(1);
+            result.TotalPages.ShouldBe(1);
+            result.ListData.Count.ShouldBe(10);
+        }
+
+        [Fact]
+        public void GetInstitutionOrderList_Should_Return_Correct_Number_Of_Records_Index_is_Null()
+        {
+            var institution = UsingDbContext(ctx => ctx.Institution.Add(InitFakeEntity.GetFakeInstitution()));
+            var adminEntity = InitFakeEntity.GetFakeAdmin();
+            adminEntity.InstitutionId = institution.Id;
+            var admin = UsingDbContext(ctx => ctx.Admin.Add(adminEntity));
+            for (int i = 0; i < 10; i++)
+            {
+                Order order = InitFakeEntity.GetFakeOrder();
+                order.UserId = admin.UserId;
+                order.OrderRef += i;
+                UsingDbContext(ctx => ctx.Order.Add(order));
+            }
+
+            var result = _orderAppService.GetInstitutionOrderList(institution.Id, null, 10);
+
+            result.CurrentPage.ShouldBe(1);
+            result.TotalPages.ShouldBe(1);
+            result.ListData.Count.ShouldBe(10);
+        }
+
+        [Fact]
+        public void GetInstitutionOrderList_Should_Return_Correct_Number_Of_Records_Index_And_Page_is_Null()
+        {
+            var institution = UsingDbContext(ctx => ctx.Institution.Add(InitFakeEntity.GetFakeInstitution()));
+            var adminEntity = InitFakeEntity.GetFakeAdmin();
+            adminEntity.InstitutionId = institution.Id;
+            var admin = UsingDbContext(ctx => ctx.Admin.Add(adminEntity));
+            for (int i = 0; i < 10; i++)
+            {
+                Order order = InitFakeEntity.GetFakeOrder();
+                order.UserId = admin.UserId;
+                order.OrderRef += i;
+                UsingDbContext(ctx => ctx.Order.Add(order));
+            }
+
+            var result = _orderAppService.GetInstitutionOrderList(institution.Id, null, null);
+
+            result.CurrentPage.ShouldBe(1);
+            result.TotalPages.ShouldBe(1);
+            result.ListData.Count.ShouldBe(10);
+        }
     }
 }
