@@ -31,9 +31,6 @@ namespace Imagine.BookManager.EntityFramework
             Property(a => a.Gender)
                 .IsRequired();
 
-            Property(a => a.Picture)
-                .HasMaxLength(200);
-
             HasMany(i => i.Orders)
                 .WithRequired()
                 .HasForeignKey(a => a.UserId)
@@ -50,11 +47,6 @@ namespace Imagine.BookManager.EntityFramework
                 m.MapRightKey("ClassId");
                 m.ToTable("TeachClass");
             });
-
-            HasMany(a => a.TeacherAllocations)
-                .WithOptional()
-                .HasForeignKey(a => a.TeacherId)
-                .WillCascadeOnDelete(false);
         }
     }
 }

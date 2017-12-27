@@ -11,14 +11,12 @@ namespace Imagine.BookManager.Core.Entity
         public ICollection<OrderItem> OrderItems { get; set; }
         public ICollection<CartItem> CartItems { get; set; }
         public ICollection<Book> Books { get; set; }
-        public ICollection<TeacherAllocation> TeacherAllocations { get; set; }
 
         public Set()
         {
             CartItems = new List<CartItem>();
             OrderItems = new List<OrderItem>();
             Books = new List<Book>();
-            TeacherAllocations = new List<TeacherAllocation>();
         }
     }
 }
