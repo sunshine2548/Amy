@@ -58,6 +58,7 @@ namespace Imagine.BookManager.EntityFramework
         public virtual IDbSet<Set> Sets { get; set; }
         public virtual IDbSet<Payment> Payment { get; set; }
         public virtual IDbSet<Student> Student { get; set; }
+        public virtual IDbSet<TeacherAllocation> TeacherAllocation { get; set; }
 
         public DbEntityEntry<T> GetDbEntity<T>(T t) where T: Entity
         {
@@ -75,6 +76,7 @@ namespace Imagine.BookManager.EntityFramework
             modelBuilder.Configurations.Add(new SetMap());
             modelBuilder.Configurations.Add(new PaymentMap());
             modelBuilder.Configurations.Add(new StudentMap());
+            modelBuilder.Configurations.Add(new TeacherAllocationMap());
             base.OnModelCreating(modelBuilder);
         }
     }

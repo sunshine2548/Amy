@@ -17,6 +17,7 @@ namespace Imagine.BookManager.Core.Entity
         public bool Gender { get; set; }
         public string Mobile { get; set; }
         public string Email { get; set; }
+        public string Picture { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
         public DateTime DateCreated { get; set; }
@@ -26,12 +27,14 @@ namespace Imagine.BookManager.Core.Entity
         public List<ClassInfo> Classes { get; set; }
         public ICollection<Order> Orders { get; set; }
         public ICollection<ShoppingCart> ShoppingCarts { get; set; }
+        public ICollection<TeacherAllocation> TeacherAllocations { get; set; }
         public Admin()
         {
             DateCreated = DateTime.Now;
             Classes = new List<ClassInfo>();
             Orders = new List<Order>();
             ShoppingCarts = new List<ShoppingCart>();
+            TeacherAllocations = new List<TeacherAllocation>();
         }
     }
 
