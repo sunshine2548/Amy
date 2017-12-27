@@ -6,6 +6,7 @@ using Aop.Api.Request;
 using Aop.Api.Response;
 using Aop.Api.Util;
 using Imagine.BookManager.Dto.PayMent;
+using Imagine.BookManager.Common;
 
 namespace Imagine.BookManager.PaymentService.AliPay
 {
@@ -44,15 +45,15 @@ namespace Imagine.BookManager.PaymentService.AliPay
             {
                 return result;
             }
-            if (aliPayResponse.ContainsKey(AliPayInfo.TradeNo) == false)
+            if (aliPayResponse.ContainsKey(Common.AliPayInfo.TradeNo) == false)
                 return result;
-            if (aliPayResponse.ContainsKey(AliPayInfo.OutTradeNo) == false)
+            if (aliPayResponse.ContainsKey(Common.AliPayInfo.OutTradeNo) == false)
                 return result;
-            bool isPaid = string.CompareOrdinal(aliPayResponse[AliPayInfo.TradeStatus], AliPayInfo.TradeSuccess) == 0 ||
-                         string.CompareOrdinal(aliPayResponse[AliPayInfo.TradeStatus], AliPayInfo.TradeFinished) == 0;
+            bool isPaid = string.CompareOrdinal(aliPayResponse[Common.AliPayInfo.TradeStatus], Common.AliPayInfo.TradeSuccess) == 0 ||
+                         string.CompareOrdinal(aliPayResponse[Common.AliPayInfo.TradeStatus], Common.AliPayInfo.TradeFinished) == 0;
             result.IsSuccess = isPaid;
-            result.OrderRef = aliPayResponse[AliPayInfo.OutTradeNo];
-            result.GatewayRef = aliPayResponse[AliPayInfo.TradeNo];
+            result.OrderRef = aliPayResponse[Common.AliPayInfo.OutTradeNo];
+            result.GatewayRef = aliPayResponse[Common.AliPayInfo.TradeNo];
             result.IsSuccess =
                 AlipaySignature.RSACheckV1(aliPayResponse, AliPayInfo.AliPayPublicKey, "utf-8", "RSA2", false);
             return result;

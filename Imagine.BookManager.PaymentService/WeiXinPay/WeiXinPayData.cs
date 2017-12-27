@@ -24,20 +24,20 @@ namespace Imagine.BookManager.PaymentService.WeiXinPay
 
         public WeiXinPayData(string orderRef, decimal amount)
         {
-            SortedDictionary[WeiXinPayInfo.OutTradeNo] = orderRef;
-            SortedDictionary[WeiXinPayInfo.TotalFee] = amount * 100;
-            SortedDictionary[WeiXinPayInfo.ProductId] = orderRef;
-            SortedDictionary[WeiXinPayInfo.TimeStart] = DateTime.Now.ToString("yyyyMMddHHmmss");
-            SortedDictionary[WeiXinPayInfo.TimeExpire] = DateTime.Now.AddMinutes(10).ToString("yyyyMMddHHmmss");
-            SortedDictionary[WeiXinPayInfo.TradeType] = "NATIVE";
-            SortedDictionary[WeiXinPayInfo.NotifyUrl] = WeiXinPayInfo.WeiXinPayNodifyUrl;
-            SortedDictionary[WeiXinPayInfo.Appid] = WeiXinPayInfo.WeiXinPayAppId;
-            SortedDictionary[WeiXinPayInfo.MchId] = WeiXinPayInfo.WeiXinPayMchid;
-            SortedDictionary[WeiXinPayInfo.SpbillCreateIp] = WeiXinPayInfo.WeiXinPayLocalServerIp;
-            SortedDictionary[WeiXinPayInfo.NonceStr] = DateTime.Now.Ticks;
-            SortedDictionary[WeiXinPayInfo.Body] = ConfigHelper.PaymentBody;
-            SortedDictionary[WeiXinPayInfo.Attach] = ConfigHelper.PaymentBody;
-            SortedDictionary[WeiXinPayInfo.GoodsTag] = ConfigHelper.PaymentSubject;
+            SortedDictionary[Common.WeiXinPayInfo.OutTradeNo] = orderRef;
+            SortedDictionary[Common.WeiXinPayInfo.TotalFee] = amount * 100;
+            SortedDictionary[Common.WeiXinPayInfo.ProductId] = orderRef;
+            SortedDictionary[Common.WeiXinPayInfo.TimeStart] = DateTime.Now.ToString("yyyyMMddHHmmss");
+            SortedDictionary[Common.WeiXinPayInfo.TimeExpire] = DateTime.Now.AddMinutes(10).ToString("yyyyMMddHHmmss");
+            SortedDictionary[Common.WeiXinPayInfo.TradeType] = "NATIVE";
+            SortedDictionary[Common.WeiXinPayInfo.NotifyUrl] = WeiXinPayInfo.WeiXinPayNodifyUrl;
+            SortedDictionary[Common.WeiXinPayInfo.Appid] = WeiXinPayInfo.WeiXinPayAppId;
+            SortedDictionary[Common.WeiXinPayInfo.MchId] = WeiXinPayInfo.WeiXinPayMchid;
+            SortedDictionary[Common.WeiXinPayInfo.SpbillCreateIp] = WeiXinPayInfo.WeiXinPayLocalServerIp;
+            SortedDictionary[Common.WeiXinPayInfo.NonceStr] = DateTime.Now.Ticks;
+            SortedDictionary[Common.WeiXinPayInfo.Body] = ConfigHelper.PaymentBody;
+            SortedDictionary[Common.WeiXinPayInfo.Attach] = ConfigHelper.PaymentBody;
+            SortedDictionary[Common.WeiXinPayInfo.GoodsTag] = ConfigHelper.PaymentSubject;
         }
 
         public void SetDictionaryValue(string key, object value)
@@ -78,7 +78,7 @@ namespace Imagine.BookManager.PaymentService.WeiXinPay
                 {
                     return string.Empty;
                 }
-                if (pair.Key != WeiXinPayInfo.Sign && pair.Value.ToString() != "")
+                if (pair.Key != Common.WeiXinPayInfo.Sign && pair.Value.ToString() != "")
                 {
                     sb.Append($"{pair.Key}={pair.Value}&");
                 }
@@ -100,7 +100,7 @@ namespace Imagine.BookManager.PaymentService.WeiXinPay
                 XmlElement xe = (XmlElement)xn;
                 SortedDictionary[xe.Name] = xe.InnerText;
             }
-            if (SortedDictionary[WeiXinPayInfo.ReturnCode].ToString() != "SUCCESS")
+            if (SortedDictionary[Common.WeiXinPayInfo.ReturnCode].ToString() != "SUCCESS")
             {
                 SortedDictionary = new SortedDictionary<string, object>();
             }
@@ -118,15 +118,15 @@ namespace Imagine.BookManager.PaymentService.WeiXinPay
 
         public bool CheckSign()
         {
-            if (SortedDictionary.ContainsKey(WeiXinPayInfo.Sign))
+            if (SortedDictionary.ContainsKey(Common.WeiXinPayInfo.Sign))
             {
                 return false;
             }
-            if (SortedDictionary["sign"] == null || SortedDictionary[WeiXinPayInfo.Sign].ToString() == "")
+            if (SortedDictionary["sign"] == null || SortedDictionary[Common.WeiXinPayInfo.Sign].ToString() == "")
             {
                 return false;
             }
-            string returnSign = SortedDictionary[WeiXinPayInfo.Sign].ToString();
+            string returnSign = SortedDictionary[Common.WeiXinPayInfo.Sign].ToString();
 
             string newSign = MakeSign();
 
