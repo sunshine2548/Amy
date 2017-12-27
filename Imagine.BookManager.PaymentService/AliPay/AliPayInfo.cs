@@ -1,6 +1,7 @@
 ﻿using Aop.Api;
+using Imagine.BookManager.Common;
 
-namespace Imagine.BookManager.PaymentService
+namespace Imagine.BookManager.PaymentService.AliPay
 {
     public class AliPayInfo
     {
@@ -18,14 +19,24 @@ namespace Imagine.BookManager.PaymentService
 
         public static readonly IAopClient AopClient;
 
+        public const string TradeNo = "trade_no";
+
+        public const string OutTradeNo = "out_trade_no";
+
+        public const string TradeStatus = "trade_status";
+
+        public const string TradeSuccess = "TRADE_SUCCESS";
+
+        public const string TradeFinished = "TRADE_FINISHED";
+
         static AliPayInfo()
         {
-            AliPayNotifyUrl = PaymentConfig.GetValue("AliPayNotifyUrl");
-            AliPayReturnUrl = PaymentConfig.GetValue("AliPayReturnUrl");
-            AliPayAppId = PaymentConfig.GetValue("AliPayAppId");
-            AliPayServerUrl = PaymentConfig.GetValue("AliPayServerUrl");
-            AliPayPublicKey = PaymentConfig.GetFileContent("ApliPayPublicKey_Path");
-            AliPayOuerKey = PaymentConfig.GetFileContent("ApliPayOuerKey_Path");
+            AliPayNotifyUrl = ConfigHelper.GetValue("AliPayNotifyUrl");
+            AliPayReturnUrl = ConfigHelper.GetValue("AliPayReturnUrl");
+            AliPayAppId = ConfigHelper.GetValue("AliPayAppId");
+            AliPayServerUrl = ConfigHelper.GetValue("AliPayServerUrl");
+            AliPayPublicKey = ConfigHelper.GetFileContent("ApliPayPublicKey_Path");
+            AliPayOuerKey = ConfigHelper.GetFileContent("ApliPayOuerKey_Path");
             AopClient = new DefaultAopClient(AliPayServerUrl, AliPayAppId, AliPayOuerKey, "json", "1.0", "RSA2", AliPayPublicKey, "utf-8", false);
         }
     }

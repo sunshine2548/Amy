@@ -1,7 +1,7 @@
 ﻿namespace Imagine.BookManager.PaymentService.AliPay
 {
-    public interface IAliPayService
+    public interface IAliPayService: IPaymentService
     {
-        string GetAliPayTradeOrderResponse(string orderRef, decimal payMoney);
+        string GetAliPayTradeOrderResponse(string orderRef, decimal amount);
     }
 }

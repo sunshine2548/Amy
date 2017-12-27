@@ -32,6 +32,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imagine.BookManager.Dto", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imagine.BookManager.PaymentService", "Imagine.BookManager.PaymentService\Imagine.BookManager.PaymentService.csproj", "{9244CBC4-0FBB-4010-82EC-40338FB715D4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imagine.BookManager.PaymentService.Tests", "Test\Imagine.BookManager.PaymentService.Tests\Imagine.BookManager.PaymentService.Tests.csproj", "{2E0E2556-A817-4E92-BE8B-0D50EBC0B9DA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -78,6 +80,10 @@ Global
 		{9244CBC4-0FBB-4010-82EC-40338FB715D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9244CBC4-0FBB-4010-82EC-40338FB715D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9244CBC4-0FBB-4010-82EC-40338FB715D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E0E2556-A817-4E92-BE8B-0D50EBC0B9DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E0E2556-A817-4E92-BE8B-0D50EBC0B9DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E0E2556-A817-4E92-BE8B-0D50EBC0B9DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E0E2556-A817-4E92-BE8B-0D50EBC0B9DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -85,6 +91,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{A16ED72D-A6F7-464D-A7F6-98635C53394F} = {F477B88B-815E-484B-B329-58FC29FAD0B0}
 		{92FB12E9-36DA-4A82-84D7-9501E309D9AB} = {F477B88B-815E-484B-B329-58FC29FAD0B0}
+		{2E0E2556-A817-4E92-BE8B-0D50EBC0B9DA} = {F477B88B-815E-484B-B329-58FC29FAD0B0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C0907D4C-33E9-4C31-8423-8CA2D8F844C0}

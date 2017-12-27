@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace Imagine.BookManager.Common
 {
@@ -15,8 +16,7 @@ namespace Imagine.BookManager.Common
         public static string CreateMd5(string value)
         {
             MD5 md5 = new MD5CryptoServiceProvider();
-            byte[] bytes = File.ReadAllBytes(value);
-            File.OpenRead(value);
+            byte[] bytes = Encoding.UTF8.GetBytes(value);
             bytes = md5.ComputeHash(bytes);
             md5.Clear();
             string ret = "";

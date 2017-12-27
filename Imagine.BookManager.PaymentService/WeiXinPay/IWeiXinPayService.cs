@@ -2,10 +2,8 @@
 
 namespace Imagine.BookManager.PaymentService.WeiXinPay
 {
-    public interface IWeiXinPayService
+    public interface IWeiXinPayService: IPaymentService
     {
-        WeiXinOrderResult GetWeiXinPayQrCode(string orderRef, decimal payMoney);
-
-        PayResult GetOrderPaidStatus(string xmlParamter);
+        WeiXinOrderResult GetWeiXinPayQrCode(string orderRef, decimal amount);
     }
 }
