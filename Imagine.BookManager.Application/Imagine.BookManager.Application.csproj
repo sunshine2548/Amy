@@ -197,8 +197,6 @@
     <Compile Include="ShoppingCartService\ShoppingCartAppService.cs" />
     <Compile Include="StudentService\IStudentAppService.cs" />
     <Compile Include="StudentService\StudentAppService.cs" />
-    <Compile Include="TeacherAllocationService\ITeacherAllocationAppService.cs" />
-    <Compile Include="TeacherAllocationService\TeacherAllocationAppService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
