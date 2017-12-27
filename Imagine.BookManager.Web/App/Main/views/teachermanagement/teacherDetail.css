@@ -244,7 +244,7 @@
   margin-bottom: 10px;
 }
 .picbook{
-  /* display: none; */
+  display: none;
 }
 /* 学生列表 */
 .stumanagent{
@@ -258,7 +258,7 @@
 }
 /* 学生列表 */
 .classmanagent{
-  display: none;
+  /* display: none; */
 }
 .classmanagent table td .spellstory {
   width: 148px;
@@ -350,6 +350,7 @@
   width: 80px;
   height: 30px;
   border: 0;
+  padding: 0;
   color: #fff;
   background: #51aef6;
   border-radius: 0;
@@ -370,3 +371,119 @@
 }
 
 /* 绘本额度管理 */
+#picbookModal .modal-header{
+  margin-top: 10px;
+  margin-bottom: 36px;
+}
+#picbookModal .modal-body{
+  margin-top: 0;
+  margin-bottom: 26px;
+}
+#picbookModal .modal-body .number{
+  margin-bottom: 38px;
+}
+#picbookModal .modal-body input{
+  width: 90px;
+  height: 24px;
+  border: 1px solid #c8c8c8;
+  text-align: center;
+}
+#picbookModal .modal-body button{
+  width: 24px;
+  height: 24px;
+  border-style: none;
+  background-color: #ebebeb;
+  border-radius: 0;
+  border: 1px solid #c8c8c8;
+  position: absolute;
+  top: 0;
+}
+#picbookModal .modal-body button.minus{
+  left: 134px;
+}
+#picbookModal .modal-body button.add{
+  right: 134px;
+}
+#picbookModal .modal-body p{
+  font-size: 12px;
+  color: #999;
+  text-align: left;
+  margin: 0;
+  margin-left: 48px;
+}
+#picbookModal .modal-footer{
+  margin-bottom: 30px;
+}
+
+/* 转移班级 */
+#tranferclass .modal-header {
+  border: none;
+  text-align: center;
+  margin-top: 10px;
+  padding: 0;
+}
+#tranferclass h4.modal-title {
+  font-size: 14px;
+  color: #000;
+  font-weight: 700;
+  font-family: "微软雅黑";
+}
+
+#tranferclass .modal-header .close {
+  margin-top: -16px;
+}
+
+#tranferclass .modal-content .modal-body {
+  padding: 0px 60px 0;
+}
+
+#tranferclass .modal-content .form-group {
+  display: flex;
+  height: 30px;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+}
+
+#tranferclass .modal-content .form-group:nth-child(2) {
+  margin-bottom: 0;
+}
+
+#tranferclass .modal-content input {
+  width: 160px;
+  height: 30px;
+  border: 1px solid #c8c8c8;
+  font-family: "微软雅黑";
+  font-size: 12px;
+  color: #000;
+  margin-left: 8px;
+  padding-left: 8px;
+  border-radius: 0;
+  outline: none;
+}
+
+#tranferclass .modal-content label {
+  line-height: 30px;
+  font-size: 12px;
+  font-family: "微软雅黑";
+  font-weight: 700;
+  color: #000; 
+  margin-left: 6px;
+}
+
+#tranferclass .modal-content p {
+  line-height: 30px;
+  font-size: 12px;
+  font-family: "微软雅黑";
+  font-weight: 700;
+  color: #000;
+  margin-left: 22px;
+}
+
+#tranferclass .modal-footer {
+  padding: 0;
+  margin-bottom: 30px;
+  margin-top: -8px;
+}
+
+/* 增加学生 */
+#addstudent 
