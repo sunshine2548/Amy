@@ -1,5 +1,6 @@
 ﻿using Abp.UI;
 using Imagine.BookManager.AdminService;
+using Imagine.BookManager.Application.Tests.Setup;
 using Imagine.BookManager.Core.Entity;
 using Imagine.BookManager.Dto.Admin;
 using Shouldly;
@@ -18,6 +19,7 @@ namespace Imagine.BookManager.Application.Tests
         public AdminAppServiceTest()
         {
             _iAdminAppSerice = Resolve<IAdminAppService>();
+            _testDataSeeder = Resolve<TestDataSeeder>();
         }
 
         #region CreateAdmin sync
@@ -740,153 +742,104 @@ namespace Imagine.BookManager.Application.Tests
         #endregion
 
         #region SearchTeacherPaination
+        private Guid SetData()
+        {
+            var institution = UsingDbContext(e => e.Institution.Add(InitFakeEntity.GetFakeInstitution()));
+            var adminDto = InitFakeEntity.GetFakeAdmin();
+            adminDto.UserId = Guid.NewGuid();
+            adminDto.UserType = UserType.Admin;
+            adminDto.InstitutionId = institution.Id;
+
+            var classDto = InitFakeEntity.GetFakeClassInfo();
+            classDto.Admins.Add(adminDto);
+            classDto.InstitutionId = institution.Id;
+
+            for (int i = 0; i < 3; i++)
+            {
+                var studentDto = InitFakeEntity.GetFakeStudent();
+                studentDto.StudentId = Guid.NewGuid();
+                studentDto.UserName = studentDto.UserName + i;
+                classDto.Students.Add(studentDto);
+            }
+            var classInfo = UsingDbContext(e => e.ClassInfo.Add(classDto));
+
+            for (int i = 0; i < 3; i++)
+            {
+                var orderDto = InitFakeEntity.GetFakeOrder();
+                orderDto.UserId = classInfo.Admins.First().UserId;
+                orderDto.OrderRef = orderDto.OrderRef + i;
+                orderDto.Paid = true;
+                var order = UsingDbContext(e => e.Order.Add(orderDto));
+
+                var setDto = InitFakeEntity.GetFakeSet();
+                setDto.SetName = setDto.SetName + i;
+                var set = UsingDbContext(e => e.Sets.Add(setDto));
+
+                var orderItemDto = InitFakeEntity.GetFakeOrderItem();
+                orderItemDto.SetId = set.Id;
+                orderItemDto.OrderRef = order.OrderRef;
+                orderItemDto.UserId = order.UserId;
+                var orderItem = UsingDbContext(e => e.OrderItem.Add(orderItemDto));
+
+                var adminDto2 = InitFakeEntity.GetFakeAdmin();
+                adminDto2.UserName = adminDto2.UserName + i;
+                adminDto2.UserId = Guid.NewGuid();
+                adminDto2.InstitutionId = institution.Id;
+
+                var classDto2 = InitFakeEntity.GetFakeClassInfo();
+                classDto2.Admins.Add(adminDto2);
+                classDto2.InstitutionId = institution.Id;
+                classDto2.Name = classDto2.Name + i;
+
+                for (int k = 0; k < 3; k++)
+                {
+                    var studentDto = InitFakeEntity.GetFakeStudent();
+                    studentDto.StudentId = Guid.NewGuid();
+                    studentDto.UserName = studentDto.UserName + i + k;
+                    classDto2.Students.Add(studentDto);
+                }
+                var classInfo2 = UsingDbContext(e => e.ClassInfo.Add(classDto2));
+
+                var teacherAllocationDto = InitFakeEntity.GetFakeTeacherAllocation();
+                teacherAllocationDto.OrderItemId = orderItem.Id;
+                teacherAllocationDto.SetId = set.Id;
+                teacherAllocationDto.TeacherId = classInfo2.Admins.First().UserId;
+                var teacherAllocation = UsingDbContext(e => e.TeacherAllocation.Add(teacherAllocationDto));
+
+
+                UsingDbContext(e =>
+                {
+                    foreach (var item in classInfo2.Students)
+                    {
+                        var studentAllocationDto = new StudentAllocation
+                        {
+                            TeacherAllocationId = teacherAllocation.Id,
+                            StudentId = item.StudentId
+                        };
+                        e.StudentAllocation.Add(studentAllocationDto);
+                    }
+
+                });
+
+            }
+            return classInfo.Admins.First().UserId;
+        }
+        
         [Fact]
         public void SearchTeacherPaination_Return_If_NoConditions()
         {
-            var userName = "search";
-            var institution = UsingDbContext(e => e.Institution.Add(InitFakeEntity.GetFakeInstitution()));
-            var orderObj = InitFakeEntity.GetFakeOrder();
-            orderObj.Paid = true;
-
-            Admin adminObj = InitFakeEntity.GetFakeAdmin();
-            adminObj.UserName = userName;
-            adminObj.UserType = UserType.Teacher;
-            adminObj.InstitutionId = institution.Id;
-            adminObj.Orders.Add(orderObj);
-
-            Admin adminInfo = InitFakeEntity.GetFakeAdmin();
-            adminInfo.UserName = userName + "12222";
-            adminInfo.UserType = UserType.Teacher;
-            adminInfo.InstitutionId = institution.Id;
-
-            var classInfo = new ClassInfo()
-            {
-                Name = "Learning",
-                ReminderInterva = 1,
-                InstitutionId = institution.Id,
-            };
-
-            var studentObj = InitFakeEntity.GetFakeStudent();
-            studentObj.UserName = "lucas";
-            studentObj.GuardianName = "Lucas";
-            studentObj.StudentId = Guid.NewGuid();
-            classInfo.Students.Add(studentObj);
-            classInfo.Admins.Add(adminObj);
-            classInfo.Admins.Add(adminInfo);
-            var classes = UsingDbContext(e => e.ClassInfo.Add(classInfo));
-
-            var setObj = InitFakeEntity.GetFakeSet();
-            var set = UsingDbContext(e => e.Sets.Add(setObj));
-
-            var admin = classes.Admins.First();
-            var adminI = classes.Admins.Last();
-
-            var orderItemObj = InitFakeEntity.GetFakeOrderItem();
-            orderItemObj.SetId = set.Id;
-            orderItemObj.UserId = admin.UserId;
-            orderItemObj.OrderRef = admin.Orders.FirstOrDefault().OrderRef;
-            var orderItem = UsingDbContext(e => e.OrderItem.Add(orderItemObj));
-
-            var teacherAllocationObj = InitFakeEntity.GetFakeTeacherAllocation();
-            teacherAllocationObj.OrderItemId = orderItem.Id;
-            teacherAllocationObj.SetId = set.Id;
-            teacherAllocationObj.TeacherId = adminI.UserId;
-            var teacherAllocation = UsingDbContext(e => e.TeacherAllocation.Add(teacherAllocationObj));
-
-            for (int i = 0; i < 8; i++)
-            {
-                var studentInfo = InitFakeEntity.GetFakeStudent();
-                studentInfo.UserName = studentInfo.UserName + i;
-                studentInfo.GuardianName = studentInfo.GuardianName + i;
-                studentInfo.ClassId = classes.Id;
-                studentInfo.StudentId = Guid.NewGuid();
-                var student = UsingDbContext(e => e.Student.Add(studentInfo));
-
-                var studentAllocationInfo = new StudentAllocation
-                {
-                    StudentId = student.StudentId,
-                    TeacherAllocationId = teacherAllocation.Id,
-                };
-
-                var studentAllocation = UsingDbContext(e => e.StudentAllocation.Add(studentAllocationInfo));
-            }
+            var userId = SetData();
             var list = _iAdminAppSerice.SearchTeacherPaination(1, 10, "", 0, 0, 0, Guid.NewGuid());
             list.CurrentPage.ShouldBe(1);
-            list.ListData.Count.ShouldBe(2);
+            list.ListData.Count.ShouldBe(3);
             list.TotalPages.ShouldBe(1);
         }
 
         [Fact]
         public void SearchTeacherPaination_Return_If_Conditions_All()
         {
-            var userName = "search";
-            var institution = UsingDbContext(e => e.Institution.Add(InitFakeEntity.GetFakeInstitution()));
-            var orderObj = InitFakeEntity.GetFakeOrder();
-            orderObj.Paid = true;
-
-            Admin adminObj = InitFakeEntity.GetFakeAdmin();
-            adminObj.UserName = userName;
-            adminObj.UserType = UserType.Teacher;
-            adminObj.InstitutionId = institution.Id;
-            adminObj.Orders.Add(orderObj);
-
-            Admin adminInfo = InitFakeEntity.GetFakeAdmin();
-            adminInfo.UserName = userName + "12222";
-            adminInfo.UserType = UserType.Teacher;
-            adminInfo.InstitutionId = institution.Id;
-
-            var classInfo = new ClassInfo()
-            {
-                Name = "Learning",
-                ReminderInterva = 1,
-                InstitutionId = institution.Id,
-            };
-
-            var studentObj = InitFakeEntity.GetFakeStudent();
-            studentObj.UserName = "lucas";
-            studentObj.GuardianName = "Lucas";
-            studentObj.StudentId = Guid.NewGuid();
-            classInfo.Students.Add(studentObj);
-            classInfo.Admins.Add(adminObj);
-            classInfo.Admins.Add(adminInfo);
-            var classes = UsingDbContext(e => e.ClassInfo.Add(classInfo));
-
-            var setObj = InitFakeEntity.GetFakeSet();
-            var set = UsingDbContext(e => e.Sets.Add(setObj));
-
-            var admin = classes.Admins.First();
-            var adminI = classes.Admins.Last();
-
-            var orderItemObj = InitFakeEntity.GetFakeOrderItem();
-            orderItemObj.SetId = set.Id;
-            orderItemObj.UserId = admin.UserId;
-            orderItemObj.OrderRef = admin.Orders.FirstOrDefault().OrderRef;
-            var orderItem = UsingDbContext(e => e.OrderItem.Add(orderItemObj));
-
-            var teacherAllocationObj = InitFakeEntity.GetFakeTeacherAllocation();
-            teacherAllocationObj.OrderItemId = orderItem.Id;
-            teacherAllocationObj.SetId = set.Id;
-            teacherAllocationObj.TeacherId = adminI.UserId;
-            var teacherAllocation = UsingDbContext(e => e.TeacherAllocation.Add(teacherAllocationObj));
-
-            for (int i = 0; i < 8; i++)
-            {
-                var studentInfo = InitFakeEntity.GetFakeStudent();
-                studentInfo.UserName = studentInfo.UserName + i;
-                studentInfo.GuardianName = studentInfo.GuardianName + i;
-                studentInfo.ClassId = classes.Id;
-                studentInfo.StudentId = Guid.NewGuid();
-                var student = UsingDbContext(e => e.Student.Add(studentInfo));
-
-                var studentAllocationInfo = new StudentAllocation
-                {
-                    StudentId = student.StudentId,
-                    TeacherAllocationId = teacherAllocation.Id,
-                };
-
-                var studentAllocation = UsingDbContext(e => e.StudentAllocation.Add(studentAllocationInfo));
-            }
-            var list = _iAdminAppSerice.SearchTeacherPaination(1, 10, "122", classes.Id, set.Id, 1, admin.UserId);
+            var userId = SetData();
+            var list = _iAdminAppSerice.SearchTeacherPaination(1, 10, "2", 5, 3, 1, userId);
             list.CurrentPage.ShouldBe(1);
             list.ListData.Count.ShouldBe(1);
             list.TotalPages.ShouldBe(1);
@@ -895,75 +848,9 @@ namespace Imagine.BookManager.Application.Tests
         [Fact]
         public void SearchTeacherPaination_Return_If_Conditions_UnAllocated()
         {
-            var userName = "search";
-            var institution = UsingDbContext(e => e.Institution.Add(InitFakeEntity.GetFakeInstitution()));
-            var orderObj = InitFakeEntity.GetFakeOrder();
-            orderObj.Paid = true;
-
-            Admin adminObj = InitFakeEntity.GetFakeAdmin();
-            adminObj.UserName = userName;
-            adminObj.UserType = UserType.Teacher;
-            adminObj.InstitutionId = institution.Id;
-            adminObj.Orders.Add(orderObj);
-
-            Admin adminInfo = InitFakeEntity.GetFakeAdmin();
-            adminInfo.UserName = userName + "12222";
-            adminInfo.UserType = UserType.Teacher;
-            adminInfo.InstitutionId = institution.Id;
-
-            var classInfo = new ClassInfo()
-            {
-                Name = "Learning",
-                ReminderInterva = 1,
-                InstitutionId = institution.Id,
-            };
-
-            var studentObj = InitFakeEntity.GetFakeStudent();
-            studentObj.UserName = "lucas";
-            studentObj.GuardianName = "Lucas";
-            studentObj.StudentId = Guid.NewGuid();
-            classInfo.Students.Add(studentObj);
-            classInfo.Admins.Add(adminObj);
-            classInfo.Admins.Add(adminInfo);
-            var classes = UsingDbContext(e => e.ClassInfo.Add(classInfo));
-
-            var setObj = InitFakeEntity.GetFakeSet();
-            var set = UsingDbContext(e => e.Sets.Add(setObj));
-
-            var admin = classes.Admins.First();
-            var adminI = classes.Admins.Last();
-
-            var orderItemObj = InitFakeEntity.GetFakeOrderItem();
-            orderItemObj.SetId = set.Id;
-            orderItemObj.UserId = admin.UserId;
-            orderItemObj.OrderRef = admin.Orders.FirstOrDefault().OrderRef;
-            var orderItem = UsingDbContext(e => e.OrderItem.Add(orderItemObj));
-
-            var teacherAllocationObj = InitFakeEntity.GetFakeTeacherAllocation();
-            teacherAllocationObj.OrderItemId = orderItem.Id;
-            teacherAllocationObj.SetId = set.Id;
-            teacherAllocationObj.TeacherId = adminI.UserId;
-            var teacherAllocation = UsingDbContext(e => e.TeacherAllocation.Add(teacherAllocationObj));
-
-            for (int i = 0; i < 8; i++)
-            {
-                var studentInfo = InitFakeEntity.GetFakeStudent();
-                studentInfo.UserName = studentInfo.UserName + i;
-                studentInfo.GuardianName = studentInfo.GuardianName + i;
-                studentInfo.ClassId = classes.Id;
-                studentInfo.StudentId = Guid.NewGuid();
-                var student = UsingDbContext(e => e.Student.Add(studentInfo));
-
-                var studentAllocationInfo = new StudentAllocation
-                {
-                    StudentId = student.StudentId,
-                    TeacherAllocationId = teacherAllocation.Id,
-                };
-
-                var studentAllocation = UsingDbContext(e => e.StudentAllocation.Add(studentAllocationInfo));
-            }
-            var list = _iAdminAppSerice.SearchTeacherPaination(1, 10, "122", null, null, 2, admin.UserId);
-            list.CurrentPage.ShouldBe(1);
+            var userId = SetData();
+            var list = _iAdminAppSerice.SearchTeacherPaination(1, 10, "", null, null, 2, userId);
+            list.CurrentPage.ShouldBe(0);
             list.ListData.Count.ShouldBe(0);
             list.TotalPages.ShouldBe(0);
         }
@@ -971,75 +858,9 @@ namespace Imagine.BookManager.Application.Tests
         [Fact]
         public void SearchTeacherPaination_Return_If_Conditions_CreditInadequate()
         {
-            var userName = "search";
-            var institution = UsingDbContext(e => e.Institution.Add(InitFakeEntity.GetFakeInstitution()));
-            var orderObj = InitFakeEntity.GetFakeOrder();
-            orderObj.Paid = true;
-
-            Admin adminObj = InitFakeEntity.GetFakeAdmin();
-            adminObj.UserName = userName;
-            adminObj.UserType = UserType.Teacher;
-            adminObj.InstitutionId = institution.Id;
-            adminObj.Orders.Add(orderObj);
-
-            Admin adminInfo = InitFakeEntity.GetFakeAdmin();
-            adminInfo.UserName = userName + "12222";
-            adminInfo.UserType = UserType.Teacher;
-            adminInfo.InstitutionId = institution.Id;
-
-            var classInfo = new ClassInfo()
-            {
-                Name = "Learning",
-                ReminderInterva = 1,
-                InstitutionId = institution.Id,
-            };
-
-            var studentObj = InitFakeEntity.GetFakeStudent();
-            studentObj.UserName = "lucas";
-            studentObj.GuardianName = "Lucas";
-            studentObj.StudentId = Guid.NewGuid();
-            classInfo.Students.Add(studentObj);
-            classInfo.Admins.Add(adminObj);
-            classInfo.Admins.Add(adminInfo);
-            var classes = UsingDbContext(e => e.ClassInfo.Add(classInfo));
-
-            var setObj = InitFakeEntity.GetFakeSet();
-            var set = UsingDbContext(e => e.Sets.Add(setObj));
-
-            var admin = classes.Admins.First();
-            var adminI = classes.Admins.Last();
-
-            var orderItemObj = InitFakeEntity.GetFakeOrderItem();
-            orderItemObj.SetId = set.Id;
-            orderItemObj.UserId = admin.UserId;
-            orderItemObj.OrderRef = admin.Orders.FirstOrDefault().OrderRef;
-            var orderItem = UsingDbContext(e => e.OrderItem.Add(orderItemObj));
-
-            var teacherAllocationObj = InitFakeEntity.GetFakeTeacherAllocation();
-            teacherAllocationObj.OrderItemId = orderItem.Id;
-            teacherAllocationObj.SetId = set.Id;
-            teacherAllocationObj.TeacherId = adminI.UserId;
-            var teacherAllocation = UsingDbContext(e => e.TeacherAllocation.Add(teacherAllocationObj));
-
-            for (int i = 0; i < 8; i++)
-            {
-                var studentInfo = InitFakeEntity.GetFakeStudent();
-                studentInfo.UserName = studentInfo.UserName + i;
-                studentInfo.GuardianName = studentInfo.GuardianName + i;
-                studentInfo.ClassId = classes.Id;
-                studentInfo.StudentId = Guid.NewGuid();
-                var student = UsingDbContext(e => e.Student.Add(studentInfo));
-
-                var studentAllocationInfo = new StudentAllocation
-                {
-                    StudentId = student.StudentId,
-                    TeacherAllocationId = teacherAllocation.Id,
-                };
-
-                var studentAllocation = UsingDbContext(e => e.StudentAllocation.Add(studentAllocationInfo));
-            }
-            var list = _iAdminAppSerice.SearchTeacherPaination(1, 10, "122", null, null, 3, admin.UserId);
-            list.CurrentPage.ShouldBe(1);
+            var userId = SetData();
+            var list = _iAdminAppSerice.SearchTeacherPaination(1, 10, "", null, null, 3, userId);
+            list.CurrentPage.ShouldBe(0);
             list.ListData.Count.ShouldBe(0);
             list.TotalPages.ShouldBe(0);
         }
@@ -1047,75 +868,9 @@ namespace Imagine.BookManager.Application.Tests
         [Fact]
         public void SearchTeacherPaination_Return_If_Conditions_ClassId_NoExists()
         {
-            var userName = "search";
-            var institution = UsingDbContext(e => e.Institution.Add(InitFakeEntity.GetFakeInstitution()));
-            var orderObj = InitFakeEntity.GetFakeOrder();
-            orderObj.Paid = true;
-
-            Admin adminObj = InitFakeEntity.GetFakeAdmin();
-            adminObj.UserName = userName;
-            adminObj.UserType = UserType.Teacher;
-            adminObj.InstitutionId = institution.Id;
-            adminObj.Orders.Add(orderObj);
-
-            Admin adminInfo = InitFakeEntity.GetFakeAdmin();
-            adminInfo.UserName = userName + "12222";
-            adminInfo.UserType = UserType.Teacher;
-            adminInfo.InstitutionId = institution.Id;
-
-            var classInfo = new ClassInfo()
-            {
-                Name = "Learning",
-                ReminderInterva = 1,
-                InstitutionId = institution.Id,
-            };
-
-            var studentObj = InitFakeEntity.GetFakeStudent();
-            studentObj.UserName = "lucas";
-            studentObj.GuardianName = "Lucas";
-            studentObj.StudentId = Guid.NewGuid();
-            classInfo.Students.Add(studentObj);
-            classInfo.Admins.Add(adminObj);
-            classInfo.Admins.Add(adminInfo);
-            var classes = UsingDbContext(e => e.ClassInfo.Add(classInfo));
-
-            var setObj = InitFakeEntity.GetFakeSet();
-            var set = UsingDbContext(e => e.Sets.Add(setObj));
-
-            var admin = classes.Admins.First();
-            var adminI = classes.Admins.Last();
-
-            var orderItemObj = InitFakeEntity.GetFakeOrderItem();
-            orderItemObj.SetId = set.Id;
-            orderItemObj.UserId = admin.UserId;
-            orderItemObj.OrderRef = admin.Orders.FirstOrDefault().OrderRef;
-            var orderItem = UsingDbContext(e => e.OrderItem.Add(orderItemObj));
-
-            var teacherAllocationObj = InitFakeEntity.GetFakeTeacherAllocation();
-            teacherAllocationObj.OrderItemId = orderItem.Id;
-            teacherAllocationObj.SetId = set.Id;
-            teacherAllocationObj.TeacherId = adminI.UserId;
-            var teacherAllocation = UsingDbContext(e => e.TeacherAllocation.Add(teacherAllocationObj));
-
-            for (int i = 0; i < 8; i++)
-            {
-                var studentInfo = InitFakeEntity.GetFakeStudent();
-                studentInfo.UserName = studentInfo.UserName + i;
-                studentInfo.GuardianName = studentInfo.GuardianName + i;
-                studentInfo.ClassId = classes.Id;
-                studentInfo.StudentId = Guid.NewGuid();
-                var student = UsingDbContext(e => e.Student.Add(studentInfo));
-
-                var studentAllocationInfo = new StudentAllocation
-                {
-                    StudentId = student.StudentId,
-                    TeacherAllocationId = teacherAllocation.Id,
-                };
-
-                var studentAllocation = UsingDbContext(e => e.StudentAllocation.Add(studentAllocationInfo));
-            }
-            var list = _iAdminAppSerice.SearchTeacherPaination(1, 10, "122", 5, null, 3, admin.UserId);
-            list.CurrentPage.ShouldBe(1);
+            var userId = SetData();
+            var list = _iAdminAppSerice.SearchTeacherPaination(1, 10, "", 55, null, 0, userId);
+            list.CurrentPage.ShouldBe(0);
             list.ListData.Count.ShouldBe(0);
             list.TotalPages.ShouldBe(0);
         }
@@ -1123,75 +878,9 @@ namespace Imagine.BookManager.Application.Tests
         [Fact]
         public void SearchTeacherPaination_Return_If_Conditions_SetId_NoExists()
         {
-            var userName = "search";
-            var institution = UsingDbContext(e => e.Institution.Add(InitFakeEntity.GetFakeInstitution()));
-            var orderObj = InitFakeEntity.GetFakeOrder();
-            orderObj.Paid = true;
-
-            Admin adminObj = InitFakeEntity.GetFakeAdmin();
-            adminObj.UserName = userName;
-            adminObj.UserType = UserType.Teacher;
-            adminObj.InstitutionId = institution.Id;
-            adminObj.Orders.Add(orderObj);
-
-            Admin adminInfo = InitFakeEntity.GetFakeAdmin();
-            adminInfo.UserName = userName + "12222";
-            adminInfo.UserType = UserType.Teacher;
-            adminInfo.InstitutionId = institution.Id;
-
-            var classInfo = new ClassInfo()
-            {
-                Name = "Learning",
-                ReminderInterva = 1,
-                InstitutionId = institution.Id,
-            };
-
-            var studentObj = InitFakeEntity.GetFakeStudent();
-            studentObj.UserName = "lucas";
-            studentObj.GuardianName = "Lucas";
-            studentObj.StudentId = Guid.NewGuid();
-            classInfo.Students.Add(studentObj);
-            classInfo.Admins.Add(adminObj);
-            classInfo.Admins.Add(adminInfo);
-            var classes = UsingDbContext(e => e.ClassInfo.Add(classInfo));
-
-            var setObj = InitFakeEntity.GetFakeSet();
-            var set = UsingDbContext(e => e.Sets.Add(setObj));
-
-            var admin = classes.Admins.First();
-            var adminI = classes.Admins.Last();
-
-            var orderItemObj = InitFakeEntity.GetFakeOrderItem();
-            orderItemObj.SetId = set.Id;
-            orderItemObj.UserId = admin.UserId;
-            orderItemObj.OrderRef = admin.Orders.FirstOrDefault().OrderRef;
-            var orderItem = UsingDbContext(e => e.OrderItem.Add(orderItemObj));
-
-            var teacherAllocationObj = InitFakeEntity.GetFakeTeacherAllocation();
-            teacherAllocationObj.OrderItemId = orderItem.Id;
-            teacherAllocationObj.SetId = set.Id;
-            teacherAllocationObj.TeacherId = adminI.UserId;
-            var teacherAllocation = UsingDbContext(e => e.TeacherAllocation.Add(teacherAllocationObj));
-
-            for (int i = 0; i < 8; i++)
-            {
-                var studentInfo = InitFakeEntity.GetFakeStudent();
-                studentInfo.UserName = studentInfo.UserName + i;
-                studentInfo.GuardianName = studentInfo.GuardianName + i;
-                studentInfo.ClassId = classes.Id;
-                studentInfo.StudentId = Guid.NewGuid();
-                var student = UsingDbContext(e => e.Student.Add(studentInfo));
-
-                var studentAllocationInfo = new StudentAllocation
-                {
-                    StudentId = student.StudentId,
-                    TeacherAllocationId = teacherAllocation.Id,
-                };
-
-                var studentAllocation = UsingDbContext(e => e.StudentAllocation.Add(studentAllocationInfo));
-            }
-            var list = _iAdminAppSerice.SearchTeacherPaination(1, 10, "122", null, 10, 3, admin.UserId);
-            list.CurrentPage.ShouldBe(1);
+            var userId = SetData();
+            var list = _iAdminAppSerice.SearchTeacherPaination(1, 10, "", null, 10, 0, userId);
+            list.CurrentPage.ShouldBe(0);
             list.ListData.Count.ShouldBe(0);
             list.TotalPages.ShouldBe(0);
         }
