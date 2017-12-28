@@ -27,6 +27,11 @@ namespace Imagine.BookManager.EntityFramework
                 .WithRequired()
                 .HasForeignKey(b => b.SetId)
                 .WillCascadeOnDelete(false);
+
+            HasMany(s => s.TeacherAllocations)
+                .WithOptional()
+                .HasForeignKey(s => s.SetId)
+                .WillCascadeOnDelete(false);
         }
     }
 }

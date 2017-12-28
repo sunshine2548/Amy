@@ -99,7 +99,7 @@ namespace Imagine.BookManager.Application.Tests
             };
         }
 
-        public static CartItem GetFakeCartItem(int setId=0,int quantity=1,decimal price=100,decimal discount=90)
+        public static CartItem GetFakeCartItem(int setId = 0, int quantity = 1, decimal price = 100, decimal discount = 90)
         {
             return new CartItem()
             {
@@ -125,5 +125,23 @@ namespace Imagine.BookManager.Application.Tests
             };
         }
 
+        public static OrderItem GetFakeOrderItem()
+        {
+            return new OrderItem()
+            {
+                Price = 1000,
+                Discount = 9,
+                Quantity = 1000,
+                RemainCredit = 200
+            };
+        }
+
+        public static TeacherAllocation GetFakeTeacherAllocation()
+        {
+            return new TeacherAllocation()
+            {
+                Credit = 100
+            };
+        }
     }
 }

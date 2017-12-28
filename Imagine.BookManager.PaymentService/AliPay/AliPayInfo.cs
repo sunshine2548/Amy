@@ -1,4 +1,4 @@
-﻿using Aop.Api;
+using Aop.Api;
 using Imagine.BookManager.Common;
 
 namespace Imagine.BookManager.PaymentService.AliPay
@@ -18,16 +18,6 @@ namespace Imagine.BookManager.PaymentService.AliPay
         public static readonly string AliPayServerUrl;
 
         public static readonly IAopClient AopClient;
-
-        public const string TradeNo = "trade_no";
-
-        public const string OutTradeNo = "out_trade_no";
-
-        public const string TradeStatus = "trade_status";
-
-        public const string TradeSuccess = "TRADE_SUCCESS";
-
-        public const string TradeFinished = "TRADE_FINISHED";
 
         static AliPayInfo()
         {
