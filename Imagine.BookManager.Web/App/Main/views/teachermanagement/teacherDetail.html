@@ -670,12 +670,11 @@
         </div>
     </div>
         
-
     <!-- 转移删除学生模态框 -->
-    <!-- <div class="modal fade" id="deletestudent" tabindex="-1">
+    <div class="modal fade" id="deletestudent" tabindex="-1">
         <div class="modal-content">
             <div class="modal-header">
-                    <span class="close" data-dismiss="modal" aria-label="Close" aria-hidden="true"><img src="../../assets/images/classmanager/icon_close.png" alt=""></span>
+                    <span class="close" data-dismiss="modal" aria-label="Close" aria-hidden="true"><img src="../../images/teachermanager/icon_close.png" alt=""></span>
                 <ul class="modal-title" id="deleteLabel">
                     <li class="active">转移学生</li>
                     <li class="deleteStudent">删除学生</li>
@@ -683,25 +682,32 @@
             </div>
             <div class="modal-body">
                 <form>
-                <div class="form-group">
-                    <label for="recipient-name" class="control-label">选择学生</label>
-                    <select class="form-control">
-                        <option value="" selected>王小明 男 9岁</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="message-text" class="control-label">转移至</label>
-                    <select class="form-control class">
-                        <option value="" selected>上海想象力学院（2）班</option>
-                    </select>
-                </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">选择学生</label>
+                        <select class="form-control">
+                            <option value="" selected>王小明 男 9岁</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="control-label">转移至</label>
+                        <select class="form-control class">
+                            <option value="" selected>上海想象力学院（2）班</option>
+                        </select>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" data-toggle="modal" data-target="#confirm">确定转移</button>
             </div>
         </div>
-    </div> -->
+    </div>
+
+    <!-- 删除成功模态框 -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="confirm">
+        <div class="modal-body">
+            <p><img src="../../images/teachermanager/icon_success.png" alt="">删除学生成功</p>
+        </div>    
+    </div>
 
     <!-- 删除权限 -->
     
