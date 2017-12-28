@@ -1,0 +1,60 @@
+/* 引入字体文件 */
+@font-face {
+  font-family: "iconfont";
+  src: url("../../../../fonts/fontawesome-webfont.eot")
+      format("embedded-opentype"),
+    url("../../../../fonts/fontawesome-webfont.woff") format("woff"),
+    url("../../../../fonts/fontawesome-webfont.woff2") format("woff2"),
+    url("../../../../fonts/fontawesome-webfont.ttf") format("truetype"),
+    url("../../../../fonts/fontawesome-webfont.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+/* 定义通用图标样式 */
+[class*="icon-"] {
+  display: inline;
+  /* width: auto;
+  height: auto; */
+  line-height: inherit;
+  vertical-align: baseline;
+  background-image: none;
+  background-position: 0 0;
+  background-repeat: repeat;
+}
+[class*="icon-"]:before {
+  font-family: "iconfont";
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+}
+/* 定义图标： */
+.icon-more:before {
+  content: "&#xf04a";
+}
+.icon-back:before {
+  content: "&#xf04a";
+}
+header {
+  height: 64px;
+  display: flex;
+  justify-content: space-between;
+  background: #000;
+  color: #fff;
+  line-height: 64px;
+  font-size: 20px;
+  padding: 0 12px;
+}
+/* .back .icon-fanhui {
+    font-size: 20px;
+    color: #fff;
+  }
+.more .icon-gengduo {
+    font-size: 20px;
+    color: #fff;
+} */
+.logo {
+  height: 132px;
+  width: 100%;
+  background: url("../../images/teachermanager/Android/img_logo.png") no-repeat;
+  background-size: contain;
+}

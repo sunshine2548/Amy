@@ -1,0 +1,395 @@
+.title {
+  width: 802px;
+  margin-top: -10px;
+  padding-left: 10px;
+  position: relative;
+  border-right: 1px solid #dcdcdc;
+  border-bottom: 1px solid #dcdcdc;
+}
+.title .addteacher {
+  position: absolute;
+  right: 20px;
+  top: 8px;
+}
+.title .addteacher a {
+  display: block;
+  font-size: 14px;
+  color: #e00012;
+  font-weight: 700;
+  font-family: "微软雅黑";
+}
+.title .addteacher a:hover {
+  text-decoration: none;
+}
+.title .addteacher a img {
+  margin-right: 10px;
+}
+.title .navbar-form {
+  margin-top: 30px;
+}
+.title .form-item {
+  margin-right: 34px;
+}
+.title .form-item input {
+  border: 1px solid #dcdcdc;
+  margin-left: 8px;
+  padding-left: 8px;
+  height: 30px;
+}
+.title .checkbox {
+  z-index: -1;
+}
+.title .checkbox h4 {
+  font-size: 14px;
+  color: #000;
+  font-weight: 700;
+  margin: 0;
+  margin-right: 18px;
+  margin-top: 10px;
+}
+.title .status {
+  margin: 0;
+  margin-top: 6px;
+}
+.title .status li {
+  float: left;
+  height: 20px;
+}
+.title .status li span {
+  display: inline-block;
+  margin-left: 8px;
+  margin-right: 32px;
+}
+.title .btn {
+  width: 60px;
+  height: 30px;
+  background: #51aef6;
+  font-size: 12px;
+  font-family: "微软雅黑";
+  color: #fff;
+  position: relative;
+  right: 40px;
+  border-radius: 0;
+}
+/* 教师列表部分 */
+.teacher_list {
+  /* background: #fbfbfb; */
+  margin-left: 158px;
+  height: 1000px;
+  padding-top: 10px;
+  padding-left: 10px;
+  overflow: hidden;
+  height: 1000px;
+}
+.teacher_list .table {
+  border: 1px solid #dcdcdc;
+}
+.teacher_list .table th,
+.teacher_list .table td {
+  font-size: 12px;
+  border: 1px solid #dcdcdc;
+  border-collapse: collapse;
+  text-align: center;
+  padding: 0;
+}
+.teacher_list .table th {
+  color: #000;
+  font-weight: 700;
+  background: linear-gradient(#fff, #f0f0f0);
+  height: 40px;
+  line-height: 40px;
+}
+.teacher_list .table td {
+  height: 100px;
+  vertical-align: middle;
+}
+.teacher_list .table td span {
+  margin-bottom: 7px;
+}
+.teacher_list .table tr:hover {
+  background: #fff4e8;
+}
+.teacher_list .table a {
+  color: #000;
+}
+.teacher_list .table td.now a {
+  color: #51aef6;
+}
+
+/* 添加教师 */
+#addteacher .modal-content {
+  top: 130px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 440px;
+  height: 400px;
+  border-radius: 0;
+  padding: 10px;
+}
+
+/* 添加教师的头部 */
+#addteacher .modal-header {
+  padding: 0 70px;
+  border-bottom: 0;
+  position: relative;
+}
+#addteacher .close {
+  position: absolute;
+  top: -6px;
+  right: -68px;
+}
+#addteacher .modal-header .nav {
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  height: 28px;
+}
+#addteacher .nav .manual {
+  margin-right: 80px;
+}
+#addteacher .modal-header a {
+  display: block;
+  font-size: 14px;
+  color: #000;
+  line-height: 28px;
+  padding: 0;
+}
+#addteacher li.active a {
+  color: #e00012;
+  font-weight: 700;
+  font-family: "微软雅黑";
+  position: relative;
+}
+#addteacher li.active a::after {
+  content: "";
+  width: 50px;
+  height: 4px;
+  background-color: #e00012;
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+#addteacher .modal-header a:hover {
+  background-color: #fff;
+}
+
+/* 手动添加教师的内容部分 */
+#addteacher .modal-body {
+  padding: 0;
+  margin-top: 28px;
+}
+#addteacher form {
+  padding: 0 70px;
+}
+#addteacher .form-group {
+  display: flex;
+  margin: 0;
+  margin-bottom: 6px;
+}
+#addteacher .text {
+  font-size: 12px;
+  color: #e00012;
+  margin-bottom: 12px;
+  margin-left: 68px;
+}
+#addteacher .teacher_name {
+  margin-bottom: 10px;
+}
+#addteacher .teacher_tel {
+  margin-bottom: 8px;
+}
+#addteacher .form-group label {
+  font-size: 12px;
+  color: #000;
+  font-family: "微软雅黑";
+  margin-right: 8px;
+  line-height: 30px;
+  margin-bottom: 0;
+}
+#addteacher input.form-control {
+  display: block;
+  width: 200px;
+  height: 30px;
+  border-radius: 0;
+  border: 1px solid #c8c8c8;
+  box-shadow: 0 0 0 #fff;
+  padding: 0;
+  padding-left: 8px;
+  font-size: 12px;
+  color: #000;
+}
+#addteacher .sex {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 0;
+}
+#addteacher .radio {
+  margin: 0;
+}
+#addteacher .radio label {
+  padding-left: 0;
+}
+#addteacher .radio img {
+  margin-right: 8px;
+  vertical-align: middle;
+}
+#addteacher .radio input[type="radio"] {
+  vertical-align: middle;
+}
+#addteacher .radio .female {
+  margin-left: 38px;
+}
+#addteacher .notice {
+  font-size: 12px;
+  color: #999;
+  margin: 14px 0 28px;
+  white-space: nowrap;
+}
+#addteacher .modal-footer {
+  border-top: 0;
+  padding: 0 70px;
+  margin-bottom: 34px;
+  text-align: center;
+}
+#addteacher .modal-footer button {
+  width: 80px;
+  height: 30px;
+  font-size: 12px;
+  color: #999;
+  background-color: #f0f0f0;
+  border: 0;
+  border-radius: 0;
+}
+#addteacher .active .modal-footer button {
+  background-color: #51aef6;
+  color: #fff;
+}
+/* 头像上传 */
+#addteacher .file {
+  position: relative;
+  height: 30px;
+  line-height: 30px;
+  margin-top: 8px;
+}
+#addteacher .file label {
+  display: inline-block;
+  margin-left: 5px;
+}
+#addteacher .userdefined-file {
+  position: absolute;
+  top: 0;
+  left: 68px;
+  z-index: 2;
+  width: 200px;
+  height: 30px;
+  line-height: 30px;
+  font-size: 0;
+  /*应对子元素为 inline-block 引起的外边距*/
+}
+.userdefined-file input[type="text"] {
+  display: inline-block;
+  vertical-align: middle;
+  padding-right: 14px;
+  padding-left: 14px;
+  width: 150px;
+  box-sizing: border-box;
+  border: 1px solid #dcdcdc;
+  height: 30px;
+  line-height: 30px;
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.userdefined-file button {
+  display: inline-block;
+  vertical-align: middle;
+  width: 50px;
+  text-align: center;
+  height: 30px;
+  line-height: 30px;
+  font-size: 12px;
+  background-color: #f0f0f0;
+  border: none;
+  color: #000;
+  cursor: pointer;
+  border: 1px solid #dcdcdc;
+}
+.file input[type="file"] {
+  position: absolute;
+  top: 0;
+  left: 60px;
+  z-index: 3;
+  opacity: 0;
+  width: 300px;
+  height: 30px;
+  line-height: 30px;
+  cursor: pointer;
+}
+/* 二维码添加教师 */
+#addteacher .add_code {
+  padding-left: 20px;
+  margin-top: 32px;
+}
+#addteacher .add_code .code {
+  width: 160px;
+  height: 160px;
+  border: 1px solid #c8c8c8;
+  margin-right: 24px;
+}
+#addteacher .add_code .info {
+  overflow: hidden;
+}
+#addteacher .add_code h5 {
+  font-size: 12px;
+  font-weight: 700;
+  font-family: "微软雅黑";
+  color: #000;
+  margin-bottom: 10px;
+  margin-top: 0;
+}
+#addteacher .add_code input[type="text"] {
+  width: 160px;
+  height: 30px;
+  border: 1px solid #c8c8c8;
+  padding-left: 8px;
+  margin-bottom: 6px;
+}
+#addteacher .add_code span{
+  font-size: 12px;
+  color: #e00012;
+}
+#addteacher .add_code .share{
+  margin-top: 48px;
+}
+#addteacher .add_code .qqimg{
+  margin-left: 20px;
+  margin-right: 30px;
+}
+#addteacher .add_code .notice{
+  margin-top: 40px;
+  font-size: 12px;
+  color: #999;
+  line-height: 18px;
+}
+/* 添加成功提示框 */
+#confirm {
+  padding: 0;
+  position: fixed;
+  width: 240px;
+  height: 120px;
+  top: 190px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  background: #fff;
+  text-align: center;
+  line-height: 120px;
+}
+#confirm .modal-body {
+  padding: 0;
+}
+#confirm img {
+  margin-right: 10px;
+}
