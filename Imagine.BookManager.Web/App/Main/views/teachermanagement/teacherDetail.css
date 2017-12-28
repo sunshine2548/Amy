@@ -244,7 +244,7 @@
   margin-bottom: 10px;
 }
 .picbook {
-  display: none;
+  /* display: none; */
 }
 /* 学生列表 */
 .stumanagent {
@@ -258,7 +258,7 @@
 }
 /* 学生列表 */
 .classmanagent {
-  /* display: none; */
+  display: none;
 }
 .classmanagent table td .spellstory {
   width: 148px;
@@ -496,13 +496,13 @@
 }
 
 /* 增加学生 */
-#addstudent .modal-header{
+#addstudent .modal-header {
   margin-top: 10px;
 }
-#addstudent .modal-header .close{
+#addstudent .modal-header .close {
   margin-top: -16px;
 }
-#addstudent .modal-body{
+#addstudent .modal-body {
   margin-top: 38px;
   margin-bottom: 27px;
 }
@@ -512,7 +512,7 @@
   display: flex;
   justify-content: center;
 }
-#addstudent .modal-body #dropdownMenu1{
+#addstudent .modal-body #dropdownMenu1 {
   margin-left: 8px;
   width: 160px;
   height: 30px;
@@ -520,7 +520,7 @@
   border-radius: 0;
   border: 1px solid #c8c8c8;
 }
-#addstudent label{
+#addstudent label {
   line-height: 30px;
 }
 #addstudent .select .caret {
@@ -565,12 +565,12 @@
   font-size: 12px;
   padding: 0 8px;
 }
-#addstudent .notice{
+#addstudent .notice {
   margin-top: 30px;
   text-align: left;
   margin-left: 20px;
 }
-#addteacher .modal-footer{
+#addteacher .modal-footer {
   margin-bottom: 30px;
 }
 
@@ -602,7 +602,7 @@
 #deletestudent .modal-title .deleteStudent {
   margin-left: 80px;
 }
-#deletestudent .modal-title .active{
+#deletestudent .modal-title .active {
   position: relative;
 }
 #deletestudent .modal-title .active::after {
@@ -672,17 +672,6 @@
   margin-bottom: 30px;
   margin-top: 38px;
 }
-
-#deletestudent .modal-footer button {
-  width: 80px;
-  height: 30px;
-  background: #51aef6;
-  color: #fff;
-  font-size: 12px;
-  border: 0;
-  border-radius: 0;
-}
-
 /* 删除成功 */
 #confirm {
   padding: 0;
@@ -705,6 +694,95 @@
 #confirm img {
   margin-right: 10px;
 }
-.modal-backdrop.in{
+.modal-backdrop.in {
   opacity: 0;
+}
+
+/* 删除权限 */
+#deleteLimit .modal-header {
+  /* padding: 0 74px; */
+  border: none;
+  text-align: center;
+  font-size: 14px;
+  color: #000;
+  font-weight: 700;
+  font-family: "微软雅黑";
+  margin: 20px 0 0;
+  padding: 0;
+}
+
+#deleteLimit .modal-header .close {
+  margin-top: -30px;
+}
+
+#deleteLimit .modal-header .modal-title {
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  padding-bottom: 6px;
+}
+
+#deleteLimit .modal-title .deleteStudent {
+  margin-left: 80px;
+}
+#deleteLimit .modal-title .active {
+  position: relative;
+}
+#deleteLimit .modal-title .active::after {
+  content: "";
+  width: 50px;
+  height: 4px;
+  background: #e00012;
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#deleteLimit .modal-body {
+  margin: 38px 70px;
+}
+
+#deleteLimit .modal-content .form-group {
+  display: flex;
+  height: 30px;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
+
+#deleteLimit .modal-content .form-group:nth-child(2) {
+  margin-bottom: 0;
+}
+
+#deleteLimit .modal-content .form-control {
+  width: 160px;
+  height: 30px;
+  border: 1px solid #c8c8c8;
+  font-family: "微软雅黑";
+  font-size: 12px;
+  color: #000;
+  margin-left: 8px;
+  padding-left: 8px;
+  border-radius: 0;
+}
+
+#deleteLimit .modal-content .class {
+  margin-left: 22px;
+}
+
+#deleteLimit .modal-content label {
+  line-height: 30px;
+  font-size: 12px;
+  font-family: "微软雅黑";
+  font-weight: 700;
+  color: #000;
+}
+
+#deleteLimit .modal-footer {
+  border: 0;
+  padding: 0;
+  text-align: center;
+  margin-bottom: 30px;
+  margin-top: 82px;
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,6 +14,7 @@
     <script src="../../../../Scripts/bootstrap.js"></script>
     <title>Document</title>
 </head>
+
 <body>
     <div class="center">
         <div class="nav">
@@ -92,7 +94,7 @@
                     <form class="navbar-form navbar-left clearfix" role="search">
                         <div class="form-item f-left">
                             <label for="">学生名称</label>
-                            <div>   
+                            <div>
                                 <input type="text">
                             </div>
                         </div>
@@ -111,10 +113,22 @@
                     <div class="checkbox clearfix">
                         <h4 class="f-left">绘本状态</h4>
                         <ul class="status f-left">
-                            <li><img src="../../images/teachermanager/icon_tick.png" alt=""><span>全部</span></li>
-                            <li><img src="../../images/teachermanager/icon_untick.png" alt=""><span>已分配</span></li>
-                            <li><img src="../../images/teachermanager/icon_untick.png" alt=""><span>未分配</span></li>
-                            <li><img src="../../images/teachermanager/icon_untick.png" alt=""><span>额度不足</span></li>
+                            <li>
+                                <img src="../../images/teachermanager/icon_tick.png" alt="">
+                                <span>全部</span>
+                            </li>
+                            <li>
+                                <img src="../../images/teachermanager/icon_untick.png" alt="">
+                                <span>已分配</span>
+                            </li>
+                            <li>
+                                <img src="../../images/teachermanager/icon_untick.png" alt="">
+                                <span>未分配</span>
+                            </li>
+                            <li>
+                                <img src="../../images/teachermanager/icon_untick.png" alt="">
+                                <span>额度不足</span>
+                            </li>
                         </ul>
                         <button type="button" class="btn f-right">确定</button>
                     </div>
@@ -229,160 +243,174 @@
                 </div>
             </div>
             <div class="stumanagent list">
-                 <!-- 列表部分 -->
-                 <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th width="64px">学生姓名</th>
-                                <th width="30px">性别</th>
-                                <th width="30px">年龄</th>
-                                <th width="60px">学生头像</th>
-                                <th width="90px">联系电话</th>
-                                <th width="64px">学生家长</th>
-                                <th width="100px">学生班级</th>
-                                <th width="128px">使用绘本合辑</th>
-                                <th width="84px">账号注册时间</th>
-                                <th width="84px">操作</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><a href="#">王小明</a></td>
-                                <td>男</td>
-                                <td>9</td>
-                                <td><img src="../../images/teachermanager/icon_qq.png" alt=""></td>
-                                <td>15236874592</td>
-                                <td>欧阳紫薇</td>
-                                <td>一年级（1）班</td>
-                                <td style="text-align:left;padding-left:5px">
-                                    <span>Read With Amanda</span><br>
-                                    <span>Read With Pete</span><br>
-                                    <span>Read With Mel</span>
-                                </td>
-                                <td>2017.12.12</td>
-                                <td class="operating">
-                                    <a href="#" style="text-decoration: underline">学生功能管理</a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <!-- 分页部分 -->
-                    <div class="page aria-label=...">
-                        <ul class="pagination pull-left">
-                            <li class="disabled">
-                                <span aria-label="Previous">
-                                    <span class="glyphicon glyphicon-menu-left"></span>
-                                </span>
-                            </li>
-                            <li>
-                                <a href="#" class="active">1
-                                    <span class="sr-only">(current)</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">2
-                                    <span class="sr-only">(current)</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">3
-                                    <span class="sr-only">(current)</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">4
-                                    <span class="sr-only">(current)</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">5
-                                    <span class="sr-only">(current)</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">6
-                                    <span class="sr-only">(current)</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">7
-                                    <span class="sr-only">(current)</span>
-                                </a>
-                            </li>
-                            <li class="more">
-                                <a href="#">
-                                    <span class="glyphicon glyphicon-option-horizontal"></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">99
-                                    <span class="sr-only">(current)</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">100
-                                    <span class="sr-only">(current)</span>
-                                </a>
-                            </li>
-                            <li class="disabled">
-                                <span aria-label="next">
-                                    <span class="glyphicon glyphicon-menu-right"></span>
-                                </span>
-                            </li>
-                            <li>到第&nbsp;&nbsp;&nbsp;
-                                <input type="text" name="" value="" style="width:50px;height:34px;padding-left:25px">&nbsp;&nbsp;&nbsp;页</li>
-                            <li class="conform">
-                                <a href="#">确定
-                                    <span class="sr-only">(current)</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                <!-- 列表部分 -->
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th width="64px">学生姓名</th>
+                            <th width="30px">性别</th>
+                            <th width="30px">年龄</th>
+                            <th width="60px">学生头像</th>
+                            <th width="90px">联系电话</th>
+                            <th width="64px">学生家长</th>
+                            <th width="100px">学生班级</th>
+                            <th width="128px">使用绘本合辑</th>
+                            <th width="84px">账号注册时间</th>
+                            <th width="84px">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <a href="#">王小明</a>
+                            </td>
+                            <td>男</td>
+                            <td>9</td>
+                            <td>
+                                <img src="../../images/teachermanager/icon_qq.png" alt="">
+                            </td>
+                            <td>15236874592</td>
+                            <td>欧阳紫薇</td>
+                            <td>一年级（1）班</td>
+                            <td style="text-align:left;padding-left:5px">
+                                <span>Read With Amanda</span>
+                                <br>
+                                <span>Read With Pete</span>
+                                <br>
+                                <span>Read With Mel</span>
+                            </td>
+                            <td>2017.12.12</td>
+                            <td class="operating">
+                                <a href="#" style="text-decoration: underline">学生功能管理</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- 分页部分 -->
+                <div class="page aria-label=...">
+                    <ul class="pagination pull-left">
+                        <li class="disabled">
+                            <span aria-label="Previous">
+                                <span class="glyphicon glyphicon-menu-left"></span>
+                            </span>
+                        </li>
+                        <li>
+                            <a href="#" class="active">1
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">2
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">3
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">4
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">5
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">6
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">7
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="more">
+                            <a href="#">
+                                <span class="glyphicon glyphicon-option-horizontal"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">99
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">100
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="disabled">
+                            <span aria-label="next">
+                                <span class="glyphicon glyphicon-menu-right"></span>
+                            </span>
+                        </li>
+                        <li>到第&nbsp;&nbsp;&nbsp;
+                            <input type="text" name="" value="" style="width:50px;height:34px;padding-left:25px">&nbsp;&nbsp;&nbsp;页</li>
+                        <li class="conform">
+                            <a href="#">确定
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
             <div class="classmanagent list">
                 <!-- 列表部分 -->
                 <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th width="100px">班级名称</th>
-                                <th width="50px">学生数</th>
-                                <th width="80px">班级有效时间</th>
-                                <th width="68px">绘本类型</th>
-                                <th width="350px">故事名称</th>
-                                <th width="94px">操作</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>一年级（1）班</td>
-                                <td>23</td>
-                                <td>2017.12.12-2018.12.12</td>
-                                <td>Read With Mel</td>
-                                <td>
-                                    <ul class="f-left spellstory">
-                                        <li>Where Am I?</li>
-                                        <li>Sam and Dad</li>
-                                        <li>Do Not Tap</li>
-                                        <li>Too Hot</li>
-                                        <li>What Is That?</li>
-                                    </ul>
-                                    <ul class="f-left readstory">
-                                        <li>Moving</li>
-                                        <li>New Baby!</li>
-                                        <li>What Do I Like?</li>
-                                    </ul>
-                                </td>
-                                <td class="operating">
-                                    <ul>
-                                        <li><a href="#" style="text-decoration: underline" data-toggle="modal" data-target="#tranferclass">转移班级</a></li>
-                                        <li><a href="#" style="text-decoration: underline" data-toggle="modal" data-target="#addstudent">增加学生</a></li>
-                                        <li><a href="#" style="text-decoration: underline" data-toggle="modal" data-target="#deletestudent">转移/删除学生</a></li>
-                                        <li><a href="#" style="text-decoration: underline">查看学生名单</a></li>
-                                    </ul>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <thead>
+                        <tr>
+                            <th width="100px">班级名称</th>
+                            <th width="50px">学生数</th>
+                            <th width="80px">班级有效时间</th>
+                            <th width="68px">绘本类型</th>
+                            <th width="350px">故事名称</th>
+                            <th width="94px">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>一年级（1）班</td>
+                            <td>23</td>
+                            <td>2017.12.12-2018.12.12</td>
+                            <td>Read With Mel</td>
+                            <td>
+                                <ul class="f-left spellstory">
+                                    <li>Where Am I?</li>
+                                    <li>Sam and Dad</li>
+                                    <li>Do Not Tap</li>
+                                    <li>Too Hot</li>
+                                    <li>What Is That?</li>
+                                </ul>
+                                <ul class="f-left readstory">
+                                    <li>Moving</li>
+                                    <li>New Baby!</li>
+                                    <li>What Do I Like?</li>
+                                </ul>
+                            </td>
+                            <td class="operating">
+                                <ul>
+                                    <li>
+                                        <a href="#" style="text-decoration: underline" data-toggle="modal" data-target="#tranferclass">转移班级</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" style="text-decoration: underline" data-toggle="modal" data-target="#addstudent">增加学生</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" style="text-decoration: underline" data-toggle="modal" data-target="#deletestudent">转移/删除学生</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" style="text-decoration: underline">查看学生名单</a>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
                 <!-- 分页部分 -->
                 <div class="page aria-label=...">
                     <ul class="pagination pull-left">
@@ -471,11 +499,12 @@
                         <tr>
                             <td>绘本管理</td>
                             <td>
-                                <span>给教师分配绘本</span><br>
+                                <span>给教师分配绘本</span>
+                                <br>
                                 <span>绘本删除</span>
                             </td>
                             <td>
-                                <a href="#" class="delete">删除权限</a>
+                                <a href="#" class="delete" data-toggle="modal" data-target="#deleteLimit">删除权限</a>
                                 <a href="#">增加权限</a>
                             </td>
                         </tr>
@@ -571,7 +600,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn" data-dismiss="modal">确定重置</button>
-            </div>     
+            </div>
         </div>
     </div>
 
@@ -585,11 +614,12 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>再删除该教师前，请将该教师账号下的<br>学生名单，班级名单，绘本管理的数据转移出去</p>
+                <p>再删除该教师前，请将该教师账号下的<br>
+                学生名单，班级名单，绘本管理的数据转移出去</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn" data-dismiss="modal">确定</button>
-            </div>    
+            </div>
         </div>
     </div>
 
@@ -608,37 +638,40 @@
                     <input type="text">
                     <button class="add">+</button>
                 </div>
-               <p>注：绘本额度减少，减少的绘本额度返回至分配人<br>的绘本管理中。</p>
+                <p>注：绘本额度减少，减少的绘本额度返回至分配人<br>
+                的绘本管理中。</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn" data-dismiss="modal">确定额度</button>
-            </div>    
+            </div>
         </div>
     </div>
 
-      <!-- 转移班级模态框 -->
+    <!-- 转移班级模态框 -->
     <div class="modal fade" id="tranferclass" tabindex="-1">
         <div class="modal-content">
-        <div class="modal-header">
-            <span class="close" data-dismiss="modal" aria-label="Close" aria-hidden="true"><img src="../../images/teachermanager/icon_close.png" alt=""></span>
-            <h4 class="modal-title" id="tranferLabel">转移班级</h4>
-        </div>
-        <div class="modal-body">
-            <form>
-                <div class="form-group">
-                    <label for="recipient-name" class="control-label">当前教师</label>
-                    <p>上海想象力学院（2）班</p>
-                </div>
-                <div class="form-group">
-                    <label for="message-text" class="control-label">转移班级至</label>
-                    <input type="text" class="form-control" placeholder="请输入教师姓名">
-                </div>
-                <p class="info">该教师不存在</p>
-            </form>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal" data-toggle="modal" data-target="#confirm">确定转移</button>
-        </div>
+            <div class="modal-header">
+                <span class="close" data-dismiss="modal" aria-label="Close" aria-hidden="true">
+                    <img src="../../images/teachermanager/icon_close.png" alt="">
+                </span>
+                <h4 class="modal-title" id="tranferLabel">转移班级</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">当前教师</label>
+                        <p>上海想象力学院（2）班</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="control-label">转移班级至</label>
+                        <input type="text" class="form-control" placeholder="请输入教师姓名">
+                    </div>
+                    <p class="info">该教师不存在</p>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" data-toggle="modal" data-target="#confirm">确定转移</button>
+            </div>
         </div>
     </div>
 
@@ -646,7 +679,9 @@
     <div class="modal fade" id="addstudent" tabindex="-1">
         <div class="modal-content">
             <div class="modal-header">
-                    <span class="close" data-dismiss="modal" aria-label="Close" aria-hidden="true"><img src="../../images/teachermanager/icon_close.png" alt=""></span>
+                <span class="close" data-dismiss="modal" aria-label="Close" aria-hidden="true">
+                    <img src="../../images/teachermanager/icon_close.png" alt="">
+                </span>
                 <h4 class="modal-title" id="createLabel">增加学生</h4>
             </div>
             <div class="modal-body">
@@ -657,24 +692,29 @@
                             <span class="caret"></span>
                         </div>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                            <li><a href="#">王小明 男 9岁</a></li>
+                            <li>
+                                <a href="#">王小明 男 9岁</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
                 <p class="notice">注：进显示没有班级归属的学生。<br>
-                如需增加已有班级归属的学生，请至该学生功能管理页转移。</p>
+                如需增加已有班级归属的学生，请至该学生功能管理页转移。
+                </p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">确定增加</button>
             </div>
         </div>
     </div>
-        
+
     <!-- 转移删除学生模态框 -->
     <div class="modal fade" id="deletestudent" tabindex="-1">
         <div class="modal-content">
             <div class="modal-header">
-                    <span class="close" data-dismiss="modal" aria-label="Close" aria-hidden="true"><img src="../../images/teachermanager/icon_close.png" alt=""></span>
+                <span class="close" data-dismiss="modal" aria-label="Close" aria-hidden="true">
+                    <img src="../../images/teachermanager/icon_close.png" alt="">
+                </span>
                 <ul class="modal-title" id="deleteLabel">
                     <li class="active">转移学生</li>
                     <li class="deleteStudent">删除学生</li>
@@ -705,11 +745,33 @@
     <!-- 删除成功模态框 -->
     <div class="modal fade" tabindex="-1" role="dialog" id="confirm">
         <div class="modal-body">
-            <p><img src="../../images/teachermanager/icon_success.png" alt="">删除学生成功</p>
-        </div>    
+            <p>
+                <img src="../../images/teachermanager/icon_success.png" alt="">删除学生成功</p>
+        </div>
     </div>
 
-    <!-- 删除权限 -->
-    
+    <!-- 删除权限模态框 -->
+    <div class="modal fade" id="deleteLimit" tabindex="-1">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" data-dismiss="modal" aria-label="Close" aria-hidden="true">
+                    <img src="../../images/teachermanager/icon_close.png" alt="">
+                </span>
+                <h4 class="modal-title" id="delete">删除权限</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="recipient-name" class="control-label">选择权限</label>
+                    <select class="form-control">
+                        <option value="" selected>绘本分配</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">确定删除</button>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>
