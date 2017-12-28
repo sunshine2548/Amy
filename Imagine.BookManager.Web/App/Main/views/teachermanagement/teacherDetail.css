@@ -1,4 +1,4 @@
-.aside {
+﻿.aside {
   width: 208px;
   height: 1000px;
   padding-left: 20px;
@@ -256,7 +256,7 @@
 .stumanagent.list .table tbody td {
   height: 80px;
 }
-/* 学生列表 */
+/* 班级列表 */
 .classmanagent {
   display: none;
 }
