@@ -116,9 +116,13 @@
     <Compile Include="Class\ClassInfoOut.cs" />
     <Compile Include="Institution\InstitutionOut.cs" />
     <Compile Include="Order\OrderDto.cs" />
+    <Compile Include="PayMent\PayResult.cs" />
+    <Compile Include="PayMent\WeiXinOrderResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Set\SetDto.cs" />
     <Compile Include="Student\StudentOut.cs" />
+    <Compile Include="TeacherAllocation\CreateTeacherAllocationInput.cs" />
+    <Compile Include="TeacherAllocation\UpdateTeacherAllocationInput.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -129,5 +133,6 @@
       <Name>Imagine.BookManager.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -10,6 +10,7 @@ namespace Imagine.BookManager.EntityFramework
             ToTable("Payment");
             Property(p => p.GatewayRef).HasMaxLength(64);
             Property(p => p.Amount).HasPrecision(18, 2);
+
         }
     }
 }

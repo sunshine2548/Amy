@@ -5,7 +5,6 @@ using Imagine.BookManager.Core.Entity;
 using Imagine.BookManager.Dto.Order;
 using System;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Imagine.BookManager.OrderService
 {
@@ -41,14 +40,15 @@ namespace Imagine.BookManager.OrderService
 
         public OrderDto GetOrderByOrderRef(string orderRef)
         {
-            var result = _orderRepository.GetAllIncluding(x => x.OrderItems).FirstOrDefault(x => String.CompareOrdinal(orderRef, x.OrderRef) == 0);
+            var result = _orderRepository.GetAllIncluding(x => x.OrderItems).FirstOrDefault(x => orderRef == x.OrderRef);
             return ObjectMapper.Map<OrderDto>(result);
         }
 
 
+
         public bool UpdateOrderPaid(string orderRef, bool paid)
         {
-            var order = _orderRepository.FirstOrDefault(x => String.CompareOrdinal(orderRef, x.OrderRef) == 0);
+            var order = _orderRepository.FirstOrDefault(x => orderRef == x.OrderRef);
             if (order == null)
             {
                 return false;
@@ -64,7 +64,8 @@ namespace Imagine.BookManager.OrderService
         {
             var queryable = _orderRepository
                 .GetAllIncluding(x => x.OrderItems)
-                .Where(x => x.UserId == userId);
+                .Where(x => x.UserId == userId)
+                .OrderByDescending(x => x.Id);
             return ObjectMapper
                 .Map<PaginationDataList<OrderDto>>(
                 queryable.ToPagination(pageIndex, singletonPageCount));
@@ -82,7 +83,8 @@ namespace Imagine.BookManager.OrderService
                 .SelectMany(x => x.Admins);
             var queryAble = from o in _orderRepository.GetAllIncluding(x => x.OrderItems)
                             join a in queryableAdmins on o.UserId equals a.UserId
-                            select new Order();
+                            orderby o.Id descending
+                            select o;
             return ObjectMapper
                 .Map<PaginationDataList<OrderDto>>(
                     queryAble.ToPagination(pageIndex, singletonPageCount)
