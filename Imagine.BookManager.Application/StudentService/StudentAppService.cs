@@ -7,6 +7,7 @@ using System;
 using System.Linq;
 using Abp.AutoMapper;
 using System.Collections.Generic;
+using System.Data.Entity;
 
 namespace Imagine.BookManager.StudentService
 {
@@ -79,32 +80,24 @@ namespace Imagine.BookManager.StudentService
         {
             var admin = AdminRepository.FirstOrDefault(e => e.UserId == userId);
             if (admin == null)
-                return new PaginationDataList<StudentOut>() { CurrentPage = pageSize ?? 0, ListData = new List<StudentOut>(), TotalPages = 0 };
-            var classList = ClassRepository.GetAllList(e => e.InstitutionId == admin.InstitutionId);
+                return new PaginationDataList<StudentOut>() { CurrentPage = 0, ListData = new List<StudentOut>(), TotalPages = 0 };
+            var classList = ClassRepository.GetAllIncluding(x => x.Students).Where(e => e.InstitutionId == admin.InstitutionId);
             if (classId.HasValue && classId.Value != 0)
-                classList = classList.Where(e => e.Id == classId.Value).ToList();
-            List<Student> studentList = new List<Student>();
-            foreach (var item in classList)
-            {
-                var list = _studentRepository.GetAllList(e => e.ClassId == item.Id);
-                if (list.Count == 0)
-                    continue;
-                studentList.AddRange(list);
-            }
-            studentList = studentList.Where(e => e.UserName.Contains(name) && e.Mobile.Contains(mobile)).ToList();
+                classList = classList.Where(e => e.Id == classId.Value);
+            var studentList = classList.SelectMany(x => x.Students);
+            studentList = studentList.Where(e => e.UserName.Contains(name) && e.Mobile.Contains(mobile));
             if (startTime.HasValue)
-                studentList = studentList.Where(e => e.DateCreated.Date == startTime.Value.Date).OrderByDescending(e => e.DateCreated).ToList();
-            List<StudentOut> studentOutList = ObjectMapper.Map<List<StudentOut>>(studentList);
+                studentList = studentList.Where(e => DbFunctions.DiffDays(e.DateCreated, startTime.Value) == 0).OrderByDescending(e => e.DateCreated);
+            var studenAllocationList = studentList.SelectMany(e => e.StudentAllocations);
+
+            IQueryable<StudentOut> studentOutList = ObjectMapper.Map<List<StudentOut>>(studentList).AsQueryable();
             foreach (var item in studentOutList)
             {
-                item.SetStatus = new List<string>();
-                item.SetNames = new List<string>();
-                item.SetIds = new List<int>();
-                var list = StudentAllocationRepository.GetAllList(e => e.StudentId == item.StudentId);
-                if (list.Count == 0)
+                var list = studenAllocationList.Where(e => e.StudentId == item.StudentId);
+                if (list.Count() == 0)
                 {
                     item.SetNames.Add(string.Empty);
-                    item.SetStatus.Add("未分配");
+                    item.SetStatus.Add(HintInfo.UnAllocated);
                     continue;
                 }
                 foreach (var item2 in list)
@@ -112,29 +105,31 @@ namespace Imagine.BookManager.StudentService
                     var teacherAllocation = TeacherAllocationRepository.FirstOrDefault(e => e.Id == item2.TeacherAllocationId);
                     if (teacherAllocation == null)
                         continue;
-                    var setInfo = SetRepository.FirstOrDefault(e => e.Id == setId);
+                    var setInfo = SetRepository.FirstOrDefault(e => e.Id == teacherAllocation.SetId);
                     if (setInfo == null)
                         continue;
 
                     item.SetNames.Add(setInfo.SetName);
-                    if (item2.ExpiryDate.Date > DateTime.Now.Date)
-                        item.SetStatus.Add("绘本过期");
+                    if (DateTime.Now.Date > item2.ExpiryDate.Date)
+                        item.SetStatus.Add(HintInfo.SetExpire);
                     else
-                        item.SetStatus.Add("已分配");
+                        item.SetStatus.Add(HintInfo.Allocated);
                     item.SetIds.Add(setInfo.Id);
                 }
             }
             if (setId.HasValue && setId.Value != 0)
-                studentOutList = studentOutList.Where(e => e.SetIds.Contains(setId.Value)).ToList();
+                studentOutList = studentOutList.Where(e => e.SetIds.Contains(setId.Value));
 
             if (setStatus == 1)
-                studentOutList = studentOutList.Where(e => e.SetStatus.Contains("已分配")).ToList();
+                studentOutList = studentOutList.Where(e => e.SetStatus.Contains(HintInfo.Allocated));
             else if (setStatus == 2)
-                studentOutList = studentOutList.Where(e => e.SetStatus.Contains("未分配")).ToList();
+                studentOutList = studentOutList.Where(e => e.SetStatus.Contains(HintInfo.UnAllocated));
             else if (setStatus == 3)
-                studentOutList = studentOutList.Where(e => e.SetStatus.Contains("绘本过期")).ToList();
+                studentOutList = studentOutList.Where(e => e.SetStatus.Contains(HintInfo.SetExpire));
 
-            return studentOutList.AsQueryable().ToPagination(pageSize, pageRows);
+            var list2 = studentOutList.ToPagination(pageSize, pageRows);
+
+            return list2;
         }
     }
 }
