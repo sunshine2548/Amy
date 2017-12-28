@@ -24,8 +24,6 @@ namespace Imagine.BookManager.StudentService
 
         public IRepository<ClassInfo> ClassRepository { get; set; }
 
-        public IRepository<StudentAllocation, Int64> StudentAllocationRepository { get; set; }
-
         public IRepository<TeacherAllocation, Int64> TeacherAllocationRepository { get; set; }
 
         public IRepository<Set> SetRepository { get; set; }
@@ -82,14 +80,25 @@ namespace Imagine.BookManager.StudentService
             if (admin == null)
                 return new PaginationDataList<StudentOut>() { CurrentPage = 0, ListData = new List<StudentOut>(), TotalPages = 0 };
             var classList = ClassRepository.GetAllIncluding(x => x.Students).Where(e => e.InstitutionId == admin.InstitutionId);
-            if (classId.HasValue && classId.Value != 0)
-                classList = classList.Where(e => e.Id == classId.Value);
+
+            classList = SearchStudentByClassId(classId, classList);
+
             var studentList = classList.SelectMany(x => x.Students);
             studentList = studentList.Where(e => e.UserName.Contains(name) && e.Mobile.Contains(mobile));
-            if (startTime.HasValue)
-                studentList = studentList.Where(e => DbFunctions.DiffDays(e.DateCreated, startTime.Value) == 0).OrderByDescending(e => e.DateCreated);
+            studentList = SearchStudentByStartTime(startTime, studentList);
+
             var studenAllocationList = studentList.SelectMany(e => e.StudentAllocations);
 
+            IQueryable<StudentOut> studentOutList = FillData(studentList, studenAllocationList);
+
+            studentOutList = SearchStudentBySetId(studentOutList, setId);
+            studentOutList = SearchStudentBySetStatus(studentOutList, setStatus);
+
+            return studentOutList.ToPagination(pageSize, pageRows);
+        }
+
+        private IQueryable<StudentOut> FillData(IQueryable<Student> studentList, IQueryable<StudentAllocation> studenAllocationList)
+        {
             IQueryable<StudentOut> studentOutList = ObjectMapper.Map<List<StudentOut>>(studentList).AsQueryable();
             foreach (var item in studentOutList)
             {
@@ -117,19 +126,39 @@ namespace Imagine.BookManager.StudentService
                     item.SetIds.Add(setInfo.Id);
                 }
             }
+            return studentOutList;
+        }
+
+        private static IQueryable<Student> SearchStudentByStartTime(DateTime? startTime, IQueryable<Student> studentList)
+        {
+            if (startTime.HasValue)
+                studentList = studentList.Where(e => DbFunctions.DiffDays(e.DateCreated, startTime.Value) == 0).OrderByDescending(e => e.DateCreated);
+            return studentList;
+        }
+
+        private static IQueryable<ClassInfo> SearchStudentByClassId(int? classId, IQueryable<ClassInfo> classList)
+        {
+            if (classId.HasValue && classId.Value != 0)
+                classList = classList.Where(e => e.Id == classId.Value);
+            return classList;
+        }
+
+        private IQueryable<StudentOut> SearchStudentBySetId(IQueryable<StudentOut> studentOutList, int? setId)
+        {
             if (setId.HasValue && setId.Value != 0)
                 studentOutList = studentOutList.Where(e => e.SetIds.Contains(setId.Value));
+            return studentOutList;
+        }
 
+        private IQueryable<StudentOut> SearchStudentBySetStatus(IQueryable<StudentOut> studentOutList, int setStatus)
+        {
             if (setStatus == 1)
                 studentOutList = studentOutList.Where(e => e.SetStatus.Contains(HintInfo.Allocated));
             else if (setStatus == 2)
                 studentOutList = studentOutList.Where(e => e.SetStatus.Contains(HintInfo.UnAllocated));
             else if (setStatus == 3)
                 studentOutList = studentOutList.Where(e => e.SetStatus.Contains(HintInfo.SetExpire));
-
-            var list2 = studentOutList.ToPagination(pageSize, pageRows);
-
-            return list2;
+            return studentOutList;
         }
     }
 }
