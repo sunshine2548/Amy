@@ -15,4 +15,3 @@
     "semi": ["error", "always"],
     "eslint eqeqeq": ["error", "always", { "null": "ignore" }]
   }
-}

@@ -124,3 +124,9 @@ section .register_btn button{
   border: 0;
   margin-left: 40px;
 }
+.logo {
+  height: 132px;
+  width: 100%;
+  background: url("../../images/teachermanager/Android/img_logo.png") no-repeat;
+  background-size: contain;
+}

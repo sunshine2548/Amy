@@ -1,4 +1,4 @@
-﻿using Aop.Api;
+using Aop.Api;
 using Imagine.BookManager.Common;
 
 namespace Imagine.BookManager.PaymentService.AliPay
