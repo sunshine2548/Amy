@@ -35,7 +35,7 @@ namespace Imagine.BookManager.ShoppingCartService
             if (shoppingCart.CartItems.Count == 0)
                 return null;
             Order order = ObjectMapper.Map<Order>(shoppingCart);
-            var orderRef = CreateOrderRef.Create();
+            var orderRef = Util.CreateOrderRef();
             order.OrderRef = orderRef;
             shoppingCart.OrderRef = orderRef;
             order.OrderItems = ObjectMapper.Map<ICollection<OrderItem>>(shoppingCart.CartItems);
@@ -71,10 +71,7 @@ namespace Imagine.BookManager.ShoppingCartService
         {
             ShoppingCart shoppingCart = GetShoppingCartByUserId(userId) ?? new ShoppingCart
             {
-                UserId = userId,
-                TotalQuantity = cartItem.Quantity,
-                Total = cartItem.Price,
-                Discount = cartItem.Discount
+                UserId = userId
             };
             var cartItemTemp = shoppingCart.CartItems.FirstOrDefault(x => x.SetId == cartItem.SetId);
             if (cartItemTemp != null && cartItemTemp.Id > 0)
@@ -101,6 +98,9 @@ namespace Imagine.BookManager.ShoppingCartService
             else
             {
                 shoppingCart.CartItems.Add(cartItem);
+                shoppingCart.Total += cartItem.Price;
+                shoppingCart.Discount += cartItem.Discount;
+                shoppingCart.TotalQuantity += cartItem.Quantity;
             }
             return _shoppingCartRepository.InsertOrUpdate(shoppingCart) != null;
         }

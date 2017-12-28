@@ -11,6 +11,10 @@ namespace Imagine.BookManager.EntityFramework
             Property(o => o.Price).IsRequired().HasPrecision(18, 2);
             Property(o => o.Quantity).IsRequired();
             Property(o => o.RemainCredit).IsRequired();
+            HasMany(o => o.TeacherAllocations)
+                .WithOptional()
+                .HasForeignKey(o => o.OrderItemId)
+                .WillCascadeOnDelete(false);
         }
     }
 }

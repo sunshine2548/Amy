@@ -159,6 +159,7 @@
     <Compile Include="Setup\InitFakeEntity.cs" />
     <Compile Include="ShoppingCartAppServiceTest.cs" />
     <Compile Include="StudentAppServiceTest.cs" />
+    <Compile Include="TeacherAllocationAppServiceTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
