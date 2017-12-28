@@ -1,4 +1,4 @@
-﻿using Imagine.BookManager.Common;
+using Imagine.BookManager.Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
