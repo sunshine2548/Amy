@@ -96,6 +96,6 @@ textarea {
     visibility: hidden;
     clear: both;
 }
-button,input{
+button,input,select{
     outline:none;
 }

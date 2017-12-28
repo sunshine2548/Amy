@@ -643,36 +643,32 @@
     </div>
 
     <!-- 增加学生模态框 -->
-    <!-- <div class="modal fade" id="addstudent" tabindex="-1">
+    <div class="modal fade" id="addstudent" tabindex="-1">
         <div class="modal-content">
             <div class="modal-header">
-                    <span class="close" data-dismiss="modal" aria-label="Close" aria-hidden="true"><img src="../../assets/images/classmanager/icon_close.png" alt=""></span>
+                    <span class="close" data-dismiss="modal" aria-label="Close" aria-hidden="true"><img src="../../images/teachermanager/icon_close.png" alt=""></span>
                 <h4 class="modal-title" id="createLabel">增加学生</h4>
             </div>
             <div class="modal-body">
-                <form>
-                    <div class="form-group">
-                        <label for="recipient-name" class="control-label">班级名称</label>
-                        <input type="text" class="form-control" placeholder="请输入班级名称" id="class-name">
+                <div class="form-group">
+                    <label for="recipient-name" class="control-label">选择学生</label>
+                    <div class="dropdown select">
+                        <div class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            <span class="caret"></span>
+                        </div>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li><a href="#">王小明 男 9岁</a></li>
+                        </ul>
                     </div>
-                    <div class="form-group">
-                        <label for="message-text" class="control-label">教师名称</label>
-                        <input type="text" class="form-control" placeholder="请输入教师名称" id="teacher-name">
-                    </div>
-                    <div class="form-group date">
-                        <label for="message-text" class="control-label">到期时间</label>
-                        <input type="text" class="form-control" placeholder="2017-12-5" id="expire-date">
-                        <img src="../../assets/images/classmanager/icon_calendar.png" alt="">
-                    </div>
-                    <p class="notice">注：班级命名建议采用统一格式，方便管理。<br>
-                    例：“一年级（1）班”。</p>
-                </form>
+                </div>
+                <p class="notice">注：进显示没有班级归属的学生。<br>
+                如需增加已有班级归属的学生，请至该学生功能管理页转移。</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">确定添加</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">确定增加</button>
             </div>
         </div>
-    </div> -->
+    </div>
         
 
     <!-- 转移删除学生模态框 -->

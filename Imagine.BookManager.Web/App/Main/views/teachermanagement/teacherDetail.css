@@ -166,7 +166,7 @@
   margin-right: 18px;
   margin-top: 10px;
 }
-.title .checkbox .status{
+.title .checkbox .status {
   height: 30px;
 }
 .title .status li {
@@ -243,21 +243,21 @@
 .list .operating li {
   margin-bottom: 10px;
 }
-.picbook{
+.picbook {
   display: none;
 }
 /* 学生列表 */
-.stumanagent{
+.stumanagent {
   display: none;
 }
-.stumanagent.list tbody tr{
+.stumanagent.list tbody tr {
   height: 80px;
 }
-.stumanagent.list .table tbody td{
+.stumanagent.list .table tbody td {
   height: 80px;
 }
 /* 学生列表 */
-.classmanagent{
+.classmanagent {
   /* display: none; */
 }
 .classmanagent table td .spellstory {
@@ -269,32 +269,32 @@
   text-align: left;
 }
 /* 权限管理 */
-.limits{
+.limits {
   display: none;
 }
-.limits h5{
+.limits h5 {
   font-size: 12px;
   color: #999;
   margin: 0;
   height: 20px;
   line-height: 20px;
 }
-.limits.list tbody tr{
+.limits.list tbody tr {
   height: 60px;
 }
-.limits.list .table tbody td{
+.limits.list .table tbody td {
   height: 60px;
 }
-.limits.list .table tbody a{
+.limits.list .table tbody a {
   display: inline-block;
   text-decoration: underline;
 }
-.limits.list .table a.delete{
+.limits.list .table a.delete {
   margin-right: 20px;
 }
 
 /* 重置密码 */
-.modal-content{
+.modal-content {
   width: 380px;
   height: 260px;
   border-radius: 0;
@@ -304,49 +304,49 @@
   transform: translateX(-50%);
   padding: 10px;
 }
-.modal-content .modal-header{
+.modal-content .modal-header {
   border-bottom: 0;
   padding: 0;
   height: 10px;
   position: relative;
 }
-.modal-header h4{
+.modal-header h4 {
   text-align: center;
   margin: 0;
   font-size: 14px;
   color: #000;
   font-weight: 700;
-  font-family: '微软雅黑';
+  font-family: "微软雅黑";
 }
-.modal-content .modal-header button{
+.modal-content .modal-header button {
   position: absolute;
   top: -6px;
   right: -2px;
 }
-.modal-content .modal-body{
+.modal-content .modal-body {
   text-align: center;
   padding: 0;
   margin-top: 50px;
   margin-bottom: 46px;
 }
-.modal-content .modal-body h4{
+.modal-content .modal-body h4 {
   font-size: 14px;
   color: #000;
   font-weight: 700;
   margin: 0;
   margin-bottom: 20px;
 }
-.modal-content .modal-body p{
+.modal-content .modal-body p {
   font-size: 12px;
   color: #999;
 }
-.modal-content .modal-footer{
+.modal-content .modal-footer {
   border-top: 0;
   text-align: center;
   padding: 0;
   margin-bottom: 50px;
 }
-.modal-content .modal-footer button{
+.modal-content .modal-footer button {
   width: 80px;
   height: 30px;
   border: 0;
@@ -357,38 +357,38 @@
 }
 
 /* 删除该教师 */
-#deleteTeacher .modal-header{
+#deleteTeacher .modal-header {
   margin-top: 10px;
   margin-bottom: 40px;
 }
-#deleteTeacher .modal-header button{
+#deleteTeacher .modal-header button {
   top: -18px;
 }
-#deleteTeacher .modal-body p{
+#deleteTeacher .modal-body p {
   font-size: 14px;
   color: #000;
   line-height: 20px;
 }
 
 /* 绘本额度管理 */
-#picbookModal .modal-header{
+#picbookModal .modal-header {
   margin-top: 10px;
   margin-bottom: 36px;
 }
-#picbookModal .modal-body{
+#picbookModal .modal-body {
   margin-top: 0;
   margin-bottom: 26px;
 }
-#picbookModal .modal-body .number{
+#picbookModal .modal-body .number {
   margin-bottom: 38px;
 }
-#picbookModal .modal-body input{
+#picbookModal .modal-body input {
   width: 90px;
   height: 24px;
   border: 1px solid #c8c8c8;
   text-align: center;
 }
-#picbookModal .modal-body button{
+#picbookModal .modal-body button {
   width: 24px;
   height: 24px;
   border-style: none;
@@ -398,20 +398,20 @@
   position: absolute;
   top: 0;
 }
-#picbookModal .modal-body button.minus{
+#picbookModal .modal-body button.minus {
   left: 134px;
 }
-#picbookModal .modal-body button.add{
+#picbookModal .modal-body button.add {
   right: 134px;
 }
-#picbookModal .modal-body p{
+#picbookModal .modal-body p {
   font-size: 12px;
   color: #999;
   text-align: left;
   margin: 0;
   margin-left: 48px;
 }
-#picbookModal .modal-footer{
+#picbookModal .modal-footer {
   margin-bottom: 30px;
 }
 
@@ -428,7 +428,6 @@
   font-weight: 700;
   font-family: "微软雅黑";
 }
-
 #tranferclass .modal-header .close {
   margin-top: -16px;
 }
@@ -467,7 +466,7 @@
   font-size: 12px;
   font-family: "微软雅黑";
   font-weight: 700;
-  color: #000; 
+  color: #000;
   margin-left: 6px;
 }
 
@@ -479,19 +478,97 @@
   color: #000;
   margin-left: 22px;
 }
-#tranferclass .modal-content p.info{
+#tranferclass .modal-content form {
+  position: relative;
+}
+#tranferclass .modal-content p.info {
+  position: absolute;
   color: #e00012;
-  margin-left: -18px;
+  top: 68px;
+  left: 52px;
   display: none;
 }
 
 #tranferclass .modal-footer {
   padding: 0;
   margin-bottom: 30px;
-  margin-top: -8px;
+  margin-top: 40px;
 }
 
 /* 增加学生 */
-#addstudent {
-
+#addstudent .modal-header{
+  margin-top: 10px;
 }
+#addstudent .modal-body{
+  margin-top: 38px;
+  margin-bottom: 27px;
+}
+#addstudent .modal-body .form-group {
+  height: 30px;
+  margin-bottom: 0;
+  display: flex;
+  justify-content: center;
+}
+#addstudent .modal-body #dropdownMenu1{
+  margin-left: 8px;
+  width: 160px;
+  height: 30px;
+  padding-left: 8px;
+  border-radius: 0;
+  border: 1px solid #c8c8c8;
+}
+#addstudent label{
+  line-height: 30px;
+}
+#addstudent .select .caret {
+  border-top: 6px dashed #000;
+  border-right: 5px solid transparent;
+  border-left: 5px solid transparent;
+  margin-left: 142px;
+  position: absolute;
+  right: 10px;
+  top: 12px;
+}
+
+#addstudent .open > .dropdown-menu {
+  top: 30px;
+  left: 8px;
+  min-width: 160px;
+  padding: 0;
+  margin: 0;
+  font-size: 12px;
+  border: 1px solid #c8c8c8;
+  border-radius: 0;
+  box-shadow: 0 0 0 #fff;
+  font-size: 12px;
+  background-color: #eff6fc;
+  border-top: 0;
+}
+
+#addstudent .open > .dropdown-menu li {
+  width: 156px;
+  height: 28px;
+  line-height: 28px;
+  background: #eff6fc;
+}
+
+#addstudent .open > .dropdown-menu li:hover {
+  background: #ddeefc;
+}
+
+#addstudent .dropdown-menu > li > a {
+  height: 30px;
+  line-height: 30px;
+  color: #000;
+  font-size: 12px;
+  padding: 0 8px;
+}
+#addstudent .notice{
+  margin-top: 30px;
+  text-align: left;
+  margin-left: 20px;
+}
+#addteacher .modal-footer{
+  margin-bottom: 30px;
+}
+
