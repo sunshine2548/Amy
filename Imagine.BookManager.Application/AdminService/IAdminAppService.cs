@@ -46,5 +46,7 @@ namespace Imagine.BookManager.AdminService
             int? userType,
             string userName,
             int? singletonPageCount=null);
+
+        PaginationDataList<AdminDto> SearchTeacherPaination(int? pageSize, int? pageRows, string teacherName, int? classId, int? setId, int setStatus, Guid userId);
     }
 }

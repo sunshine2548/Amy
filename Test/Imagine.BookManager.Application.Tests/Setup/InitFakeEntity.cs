@@ -143,5 +143,14 @@ namespace Imagine.BookManager.Application.Tests
                 Credit = 100
             };
         }
+
+        public static ClassInfo GetFakeClassInfo()
+        {
+            return new ClassInfo()
+            {
+                Name = "想象力班级",
+                ReminderInterva = 10
+            };
+        }
     }
 }

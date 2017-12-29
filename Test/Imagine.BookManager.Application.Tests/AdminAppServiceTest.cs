@@ -4,6 +4,7 @@ using Imagine.BookManager.Core.Entity;
 using Imagine.BookManager.Dto.Admin;
 using Shouldly;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Xunit;
@@ -18,7 +19,7 @@ namespace Imagine.BookManager.Application.Tests
         {
             _iAdminAppSerice = Resolve<IAdminAppService>();
         }
-        
+
         #region CreateAdmin sync
         [Fact]
         public void CreateAdmin_Return_True_If_Success_Without_InstitutionId()
@@ -640,7 +641,7 @@ namespace Imagine.BookManager.Application.Tests
             {
                 UserType userType = i > 9 ? UserType.Admin : UserType.Teacher;
                 Admin admin = InitFakeEntity.GetFakeAdmin();
-                admin.UserName = userName+ i;
+                admin.UserName = userName + i;
                 admin.UserType = userType;
                 UsingDbContext(ctx => ctx.Admin.Add(admin));
             }
@@ -735,6 +736,151 @@ namespace Imagine.BookManager.Application.Tests
             result.CurrentPage.ShouldBe(1);
             result.ListData.Count.ShouldBe(10);
             result.TotalPages.ShouldBe(1);
+        }
+        #endregion
+
+        #region SearchTeacherPaination
+        private Guid SetData()
+        {
+            var institution = UsingDbContext(e => e.Institution.Add(InitFakeEntity.GetFakeInstitution()));
+            var adminDto = InitFakeEntity.GetFakeAdmin();
+            adminDto.UserId = Guid.NewGuid();
+            adminDto.UserType = UserType.Admin;
+            adminDto.InstitutionId = institution.Id;
+
+            var classDto = InitFakeEntity.GetFakeClassInfo();
+            classDto.Admins.Add(adminDto);
+            classDto.InstitutionId = institution.Id;
+
+            for (int i = 0; i < 3; i++)
+            {
+                var studentDto = InitFakeEntity.GetFakeStudent();
+                studentDto.StudentId = Guid.NewGuid();
+                studentDto.UserName = studentDto.UserName + i;
+                classDto.Students.Add(studentDto);
+            }
+            var classInfo = UsingDbContext(e => e.ClassInfo.Add(classDto));
+
+            for (int i = 0; i < 3; i++)
+            {
+                var orderDto = InitFakeEntity.GetFakeOrder();
+                orderDto.UserId = classInfo.Admins.First().UserId;
+                orderDto.OrderRef = orderDto.OrderRef + i;
+                orderDto.Paid = true;
+                var order = UsingDbContext(e => e.Order.Add(orderDto));
+
+                var setDto = InitFakeEntity.GetFakeSet();
+                setDto.SetName = setDto.SetName + i;
+                var set = UsingDbContext(e => e.Sets.Add(setDto));
+
+                var orderItemDto = InitFakeEntity.GetFakeOrderItem();
+                orderItemDto.SetId = set.Id;
+                orderItemDto.OrderRef = order.OrderRef;
+                orderItemDto.UserId = order.UserId;
+                var orderItem = UsingDbContext(e => e.OrderItem.Add(orderItemDto));
+
+                var adminDto2 = InitFakeEntity.GetFakeAdmin();
+                adminDto2.UserName = adminDto2.UserName + i;
+                adminDto2.UserId = Guid.NewGuid();
+                adminDto2.InstitutionId = institution.Id;
+
+                var classDto2 = InitFakeEntity.GetFakeClassInfo();
+                classDto2.Admins.Add(adminDto2);
+                classDto2.InstitutionId = institution.Id;
+                classDto2.Name = classDto2.Name + i;
+
+                for (int k = 0; k < 3; k++)
+                {
+                    var studentDto = InitFakeEntity.GetFakeStudent();
+                    studentDto.StudentId = Guid.NewGuid();
+                    studentDto.UserName = studentDto.UserName + i + k;
+                    classDto2.Students.Add(studentDto);
+                }
+                var classInfo2 = UsingDbContext(e => e.ClassInfo.Add(classDto2));
+
+                var teacherAllocationDto = InitFakeEntity.GetFakeTeacherAllocation();
+                teacherAllocationDto.OrderItemId = orderItem.Id;
+                teacherAllocationDto.SetId = set.Id;
+                teacherAllocationDto.TeacherId = classInfo2.Admins.First().UserId;
+                var teacherAllocation = UsingDbContext(e => e.TeacherAllocation.Add(teacherAllocationDto));
+
+
+                UsingDbContext(e =>
+                {
+                    foreach (var item in classInfo2.Students)
+                    {
+                        var studentAllocationDto = new StudentAllocation
+                        {
+                            TeacherAllocationId = teacherAllocation.Id,
+                            StudentId = item.StudentId
+                        };
+                        e.StudentAllocation.Add(studentAllocationDto);
+                    }
+
+                });
+
+            }
+            return classInfo.Admins.First().UserId;
+        }
+        
+        [Fact]
+        public void SearchTeacherPaination_Return_If_NoConditions()
+        {
+            var userId = SetData();
+            var list = _iAdminAppSerice.SearchTeacherPaination(1, 10, "", 0, 0, 0, Guid.NewGuid());
+            list.CurrentPage.ShouldBe(1);
+            list.ListData.Count.ShouldBe(3);
+            list.TotalPages.ShouldBe(1);
+        }
+
+        [Fact]
+        public void SearchTeacherPaination_Return_If_Conditions_All()
+        {
+            var userId = SetData();
+            var list = _iAdminAppSerice.SearchTeacherPaination(1, 10, "2", 5, 3, 1, userId);
+            list.CurrentPage.ShouldBe(1);
+            list.ListData.Count.ShouldBe(1);
+            list.TotalPages.ShouldBe(1);
+        }
+
+        [Fact]
+        public void SearchTeacherPaination_Return_If_Conditions_UnAllocated()
+        {
+            var userId = SetData();
+            var list = _iAdminAppSerice.SearchTeacherPaination(1, 10, "", null, null, 2, userId);
+            list.CurrentPage.ShouldBe(0);
+            list.ListData.Count.ShouldBe(0);
+            list.TotalPages.ShouldBe(0);
+        }
+
+        [Fact]
+        public void SearchTeacherPaination_Return_If_Conditions_CreditInadequate()
+        {
+            var userId = SetData();
+            var list = _iAdminAppSerice.SearchTeacherPaination(1, 10, "", null, null, 3, userId);
+            list.CurrentPage.ShouldBe(0);
+            list.ListData.Count.ShouldBe(0);
+            list.TotalPages.ShouldBe(0);
+        }
+
+        [Fact]
+        public void SearchTeacherPaination_Return_If_Conditions_ClassId_NoExists()
+        {
+            var userId = SetData();
+            var list = _iAdminAppSerice.SearchTeacherPaination(1, 10, "", 55, null, 0, userId);
+            list.CurrentPage.ShouldBe(0);
+            list.ListData.Count.ShouldBe(0);
+            list.TotalPages.ShouldBe(0);
+        }
+
+        [Fact]
+        public void SearchTeacherPaination_Return_If_Conditions_SetId_NoExists()
+        {
+            var userId = SetData();
+            var list = _iAdminAppSerice.SearchTeacherPaination(1, 10, "", null, 10, 0, userId);
+            list.CurrentPage.ShouldBe(0);
+            list.ListData.Count.ShouldBe(0);
+            list.TotalPages.ShouldBe(0);
         }
         #endregion
     }

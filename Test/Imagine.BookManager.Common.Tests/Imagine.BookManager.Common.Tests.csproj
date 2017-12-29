@@ -60,6 +60,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GuardTest.cs" />
     <Compile Include="PaginnationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UtilTest.cs" />

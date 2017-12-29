@@ -21,10 +21,12 @@ namespace Imagine.BookManager.Core.Entity
         public int? ClassId { get; set; }
         public bool IsDelete { get; set; }
 
+        public ICollection<StudentAllocation> StudentAllocations { get; set; }
         public Student()
         {
             DateCreated = DateTime.Now;
             IsDelete = false;
+            StudentAllocations = new List<StudentAllocation>();
         }
     }
 }

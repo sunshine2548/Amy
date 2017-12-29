@@ -215,9 +215,6 @@ namespace Imagine.BookManager.Application.Tests
             teacherAllocationEntity.OrderItemId = orderItem.Id;
             teacherAllocationEntity.SetId = set.Id;
             teacherAllocationEntity.TeacherId = admin.UserId;
-            teacherAllocationEntity.OrderItemObj = orderItem;
-            teacherAllocationEntity.SetObj = set;
-            teacherAllocationEntity.AdminObj = admin;
             var teacherAllocation = UsingDbContext(e => e.TeacherAllocation.Add(teacherAllocationEntity));
 
             var input = new UpdateTeacherAllocationInput()
@@ -255,9 +252,6 @@ namespace Imagine.BookManager.Application.Tests
             teacherAllocationEntity.OrderItemId = orderItem.Id;
             teacherAllocationEntity.SetId = set.Id;
             teacherAllocationEntity.TeacherId = admin.UserId;
-            teacherAllocationEntity.OrderItemObj = orderItem;
-            teacherAllocationEntity.SetObj = set;
-            teacherAllocationEntity.AdminObj = admin;
             var teacherAllocation = UsingDbContext(e => e.TeacherAllocation.Add(teacherAllocationEntity));
 
             var input = new UpdateTeacherAllocationInput()
@@ -298,9 +292,6 @@ namespace Imagine.BookManager.Application.Tests
             teacherAllocationEntity.OrderItemId = orderItem.Id;
             teacherAllocationEntity.SetId = set.Id;
             teacherAllocationEntity.TeacherId = admin.UserId;
-            teacherAllocationEntity.OrderItemObj = orderItem;
-            teacherAllocationEntity.SetObj = set;
-            teacherAllocationEntity.AdminObj = admin;
             var teacherAllocation = UsingDbContext(e => e.TeacherAllocation.Add(teacherAllocationEntity));
 
             var input = new UpdateTeacherAllocationInput()
@@ -341,9 +332,6 @@ namespace Imagine.BookManager.Application.Tests
             teacherAllocationEntity.OrderItemId = orderItem.Id;
             teacherAllocationEntity.SetId = set.Id;
             teacherAllocationEntity.TeacherId = admin.UserId;
-            teacherAllocationEntity.OrderItemObj = orderItem;
-            teacherAllocationEntity.SetObj = set;
-            teacherAllocationEntity.AdminObj = admin;
             var teacherAllocation = UsingDbContext(e => e.TeacherAllocation.Add(teacherAllocationEntity));
 
             var input = new UpdateTeacherAllocationInput()
@@ -384,9 +372,6 @@ namespace Imagine.BookManager.Application.Tests
             teacherAllocationEntity.OrderItemId = orderItem.Id;
             teacherAllocationEntity.SetId = set.Id;
             teacherAllocationEntity.TeacherId = admin.UserId;
-            teacherAllocationEntity.OrderItemObj = orderItem;
-            teacherAllocationEntity.SetObj = set;
-            teacherAllocationEntity.AdminObj = admin;
             var teacherAllocation = UsingDbContext(e => e.TeacherAllocation.Add(teacherAllocationEntity));
 
             var input = new UpdateTeacherAllocationInput()
@@ -424,12 +409,9 @@ namespace Imagine.BookManager.Application.Tests
             var orderItem = UsingDbContext(e => e.OrderItem.Add(orderItemEntity));
 
             var teacherAllocationEntity = InitFakeEntity.GetFakeTeacherAllocation();
-            teacherAllocationEntity.OrderItemId = 0;
+            teacherAllocationEntity.OrderItemId = orderItem.Id;
             teacherAllocationEntity.SetId = set.Id;
             teacherAllocationEntity.TeacherId = admin.UserId;
-            teacherAllocationEntity.OrderItemObj = orderItem;
-            teacherAllocationEntity.SetObj = set;
-            teacherAllocationEntity.AdminObj = admin;
             var teacherAllocation = UsingDbContext(e => e.TeacherAllocation.Add(teacherAllocationEntity));
 
             var input = new UpdateTeacherAllocationInput()
@@ -473,9 +455,6 @@ namespace Imagine.BookManager.Application.Tests
             teacherAllocationEntity.OrderItemId = orderItem.Id;
             teacherAllocationEntity.SetId = set.Id;
             teacherAllocationEntity.TeacherId = admin.UserId;
-            teacherAllocationEntity.OrderItemObj = orderItem;
-            teacherAllocationEntity.SetObj = set;
-            teacherAllocationEntity.AdminObj = admin;
             var teacherAllocation = UsingDbContext(e => e.TeacherAllocation.Add(teacherAllocationEntity));
 
             UserFriendlyException ex = Assert.Throws<UserFriendlyException>(() =>

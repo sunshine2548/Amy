@@ -157,20 +157,17 @@
     <Compile Include="EntityFramework\EntityMap\PaymentMap.cs" />
     <Compile Include="EntityFramework\EntityMap\SetMap.cs" />
     <Compile Include="EntityFramework\EntityMap\ShoppingCartMap.cs" />
+    <Compile Include="EntityFramework\EntityMap\StudentAllocationMap.cs" />
     <Compile Include="EntityFramework\EntityMap\StudentMap.cs" />
     <Compile Include="EntityFramework\EntityMap\TeacherAllocationMap.cs" />
     <Compile Include="EntityFramework\Repositories\BookManagerRepositoryBase.cs" />
-    <Compile Include="Migrations\201712111146463_brian.cs" />
-    <Compile Include="Migrations\201712111146463_brian.Designer.cs">
-      <DependentUpon>201712111146463_brian.cs</DependentUpon>
+    <Compile Include="Migrations\201712260710475_Add_StudentAllocation_Lucas.cs" />
+    <Compile Include="Migrations\201712260710475_Add_StudentAllocation_Lucas.Designer.cs">
+      <DependentUpon>201712260710475_Add_StudentAllocation_Lucas.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201712111150056_brian1.cs" />
-    <Compile Include="Migrations\201712111150056_brian1.Designer.cs">
-      <DependentUpon>201712111150056_brian1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712221208278_Add_TeacherAllocation_Lucas.cs" />
-    <Compile Include="Migrations\201712221208278_Add_TeacherAllocation_Lucas.Designer.cs">
-      <DependentUpon>201712221208278_Add_TeacherAllocation_Lucas.cs</DependentUpon>
+    <Compile Include="Migrations\201712270836358_Add_StudenAllocation_ExpiryData_Lucas.cs" />
+    <Compile Include="Migrations\201712270836358_Add_StudenAllocation_ExpiryData_Lucas.Designer.cs">
+      <DependentUpon>201712270836358_Add_StudenAllocation_ExpiryData_Lucas.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="BookManagerDataModule.cs" />
@@ -188,14 +185,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201712111146463_brian.resx">
-      <DependentUpon>201712111146463_brian.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201712260710475_Add_StudentAllocation_Lucas.resx">
+      <DependentUpon>201712260710475_Add_StudentAllocation_Lucas.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712111150056_brian1.resx">
-      <DependentUpon>201712111150056_brian1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712221208278_Add_TeacherAllocation_Lucas.resx">
-      <DependentUpon>201712221208278_Add_TeacherAllocation_Lucas.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201712270836358_Add_StudenAllocation_ExpiryData_Lucas.resx">
+      <DependentUpon>201712270836358_Add_StudenAllocation_ExpiryData_Lucas.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

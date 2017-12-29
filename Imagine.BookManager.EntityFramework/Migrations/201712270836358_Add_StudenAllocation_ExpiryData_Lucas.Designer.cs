@@ -7,13 +7,13 @@ namespace Imagine.BookManager.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class brian1 : IMigrationMetadata
+    public sealed partial class Add_StudenAllocation_ExpiryData_Lucas : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(brian1));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Add_StudenAllocation_ExpiryData_Lucas));
         
         string IMigrationMetadata.Id
         {
-            get { return "201712111150056_brian1"; }
+            get { return "201712270836358_Add_StudenAllocation_ExpiryData_Lucas"; }
         }
         
         string IMigrationMetadata.Source

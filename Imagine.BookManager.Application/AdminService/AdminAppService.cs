@@ -4,6 +4,7 @@ using Imagine.BookManager.Common;
 using Imagine.BookManager.Core.Entity;
 using Imagine.BookManager.Dto.Admin;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
@@ -228,6 +229,114 @@ namespace Imagine.BookManager.AdminService
             }
             PaginationDataList<Admin> list = query.ToPagination(pageIndex, singletonPageCount);
             return ObjectMapper.Map<PaginationDataList<AdminDto>>(list);
+        }
+
+        public IRepository<ClassInfo> ClassInfoRepository { get; set; }
+        public IRepository<Student, Int64> StudentRepository { get; set; }
+        public IRepository<StudentAllocation, Int64> StudentAllocationRepository { get; set; }
+        public IRepository<Set> SetRepository { get; set; }
+        public IRepository<TeacherAllocation, Int64> TeacherAllocationRepository { get; set; }
+
+
+        public PaginationDataList<AdminDto> SearchTeacherPaination(int? pageSize, int? pageRows, string teacherName,
+            int? classId, int? setId, int setStatus, Guid userId)
+        {
+            teacherName = Guard.EnsureParam(teacherName);
+            var teacherList = _adminRepository.GetAllIncluding(e => e.Classes, e => e.TeacherAllocations)
+            .Where(e => e.UserName.Contains(teacherName) && e.UserType == UserType.Teacher && e.UserId != userId);
+            if (classId.HasValue && classId.Value != 0)
+                teacherList = FilterTeacherByClassId(teacherList, classId.Value);
+            if (teacherList.Count() == 0)
+                return new PaginationDataList<AdminDto>() { CurrentPage = 0, ListData = new List<AdminDto>(), TotalPages = 0 };
+
+            PaginationDataList<AdminDto> paginaList = new PaginationDataList<AdminDto>
+            {
+                CurrentPage = pageSize ?? 0
+            };
+
+            Fill(setId, setStatus, teacherList, paginaList);
+
+            if (paginaList.ListData.Count == 0)
+                return new PaginationDataList<AdminDto>() { CurrentPage = 0, ListData = new List<AdminDto>(), TotalPages = 0 };
+            paginaList.ListData = paginaList.ListData.Skip((pageSize.Value - 1) * pageRows.Value).Take(pageRows.Value).ToList();
+            paginaList.TotalPages = (int)Math.Ceiling(paginaList.ListData.Count * 1.0 / pageRows.Value);
+
+            return paginaList;
+        }
+
+        private void Fill(int? setId, int setStatus, IQueryable<Admin> teacherList, PaginationDataList<AdminDto> paginaList)
+        {
+            var studentQueryable = teacherList.SelectMany(e => e.Classes.SelectMany(x => x.Students));
+            foreach (var teacher in teacherList)
+            {
+                var dto = ObjectMapper.Map<AdminDto>(teacher);
+                dto.Password = null;
+                teacher.Classes.ForEach(e =>
+                {
+                    dto.StudentCount = dto.StudentCount + studentQueryable.Count(x => x.ClassId == e.Id);
+                    dto.ClassName.Add(e.Name);
+                });
+                if (setId.HasValue && setId.Value != 0)
+                {
+                    if (HasTeacherAllocation(teacher, setId.Value))
+                        continue;
+                }
+                if (setStatus != 0)
+                {
+                    if (isFilteredBySetStatus(teacher, setStatus))
+                        continue;
+                }
+                if (teacher.TeacherAllocations.Count == 0)
+                    dto.SetName.Add(HintInfo.UnAllocated);
+                else
+                {
+                    foreach (var teacherAllocation in teacher.TeacherAllocations)
+                    {
+                        var set = SetRepository.Single(e => e.Id == teacherAllocation.SetId);
+                        var count = StudentAllocationRepository.Count(e => e.TeacherAllocationId == teacherAllocation.Id);
+                        dto.SetName.Add(set.SetName + "----" + count + "/" + teacherAllocation.Credit);
+                    }
+                }
+                paginaList.ListData.Add(dto);
+            }
+        }
+
+        private IQueryable<Admin> FilterTeacherByClassId(IQueryable<Admin> queryable, int classId)
+        {
+            return queryable.Where(e => e.Classes.Select(x => x.Id).Contains(classId));
+        }
+
+        private bool HasTeacherAllocation(Admin admin, int setId)
+        {
+            return admin.TeacherAllocations.Count(e => e.SetId == setId) == 0;
+        }
+
+        public bool isFilteredBySetStatus(Admin admin, int setStatus)
+        {
+            if (setStatus == (int)SetAllotStatus.Allocated)
+            {
+                if (admin.TeacherAllocations.Count == 0)
+                    return true;
+                return false;
+            }
+            else if (setStatus == (int)SetAllotStatus.UnAllocated)
+            {
+                if (admin.TeacherAllocations.Count > 0)
+                    return true;
+                return false;
+            }
+            else if (setStatus == (int)SetAllotStatus.CreditInadequate)
+            {
+                var b = true;
+                foreach (var item in admin.TeacherAllocations)
+                {
+                    var sCount = StudentAllocationRepository.Count(e => e.TeacherAllocationId == item.Id);
+                    if (item.Credit - sCount == 0)
+                        b = false;
+                }
+                return b;
+            }
+            return true;
         }
     }
 }
