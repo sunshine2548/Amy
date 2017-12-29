@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="AliPayInfo.cs" />
     <Compile Include="ConfigHelper.cs" />
+    <Compile Include="Guard.cs" />
     <Compile Include="HintInfo.cs" />
     <Compile Include="Util.cs" />
     <Compile Include="PaginationCommon.cs" />

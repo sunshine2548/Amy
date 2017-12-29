@@ -13,12 +13,6 @@ namespace Imagine.BookManager.EntityFramework
         public StudentAllocationMap()
         {
             ToTable("StudentAllocation");
-            //Property(e => e.TeacherAllocationId)
-            //    .IsRequired();
-            
-
-
-           
         }
     }
 }

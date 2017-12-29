@@ -19,11 +19,6 @@ namespace Imagine.BookManager.EntityFramework
             Property(s => s.Mobile).HasMaxLength(12);
             Property(s => s.Picture).HasMaxLength(50);
             HasIndex(s => s.UserName).IsUnique(true);
-
-            //HasMany(e => e.StudentAllocations)
-            //    .WithOptional()
-            //    .HasForeignKey(e=>e.StudentId)
-            //    .WillCascadeOnDelete(false);
         }
     }
 }

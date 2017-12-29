@@ -241,11 +241,11 @@ namespace Imagine.BookManager.AdminService
         public PaginationDataList<AdminDto> SearchTeacherPaination(int? pageSize, int? pageRows, string teacherName,
             int? classId, int? setId, int setStatus, Guid userId)
         {
-            teacherName = string.IsNullOrWhiteSpace(teacherName) ? string.Empty : teacherName;
+            teacherName = Guard.EnsureParam(teacherName);
             var teacherList = _adminRepository.GetAllIncluding(e => e.Classes, e => e.TeacherAllocations)
             .Where(e => e.UserName.Contains(teacherName) && e.UserType == UserType.Teacher && e.UserId != userId);
             if (classId.HasValue && classId.Value != 0)
-                teacherList = SearchTeacherByClassId(teacherList, classId.Value);
+                teacherList = FilterTeacherByClassId(teacherList, classId.Value);
             if (teacherList.Count() == 0)
                 return new PaginationDataList<AdminDto>() { CurrentPage = 0, ListData = new List<AdminDto>(), TotalPages = 0 };
 
@@ -267,51 +267,51 @@ namespace Imagine.BookManager.AdminService
         private void Fill(int? setId, int setStatus, IQueryable<Admin> teacherList, PaginationDataList<AdminDto> paginaList)
         {
             var studentQueryable = teacherList.SelectMany(e => e.Classes.SelectMany(x => x.Students));
-            foreach (var item in teacherList)
+            foreach (var teacher in teacherList)
             {
-                var dto = ObjectMapper.Map<AdminDto>(item);
+                var dto = ObjectMapper.Map<AdminDto>(teacher);
                 dto.Password = null;
-                item.Classes.ForEach(e =>
+                teacher.Classes.ForEach(e =>
                 {
                     dto.StudentCount = dto.StudentCount + studentQueryable.Count(x => x.ClassId == e.Id);
                     dto.ClassName.Add(e.Name);
                 });
                 if (setId.HasValue && setId.Value != 0)
                 {
-                    if (SearchTeacherBySetId(item, setId.Value))
+                    if (HasTeacherAllocation(teacher, setId.Value))
                         continue;
                 }
                 if (setStatus != 0)
                 {
-                    if (SearchTeacherBySetStatus(item, setStatus))
+                    if (isFilteredBySetStatus(teacher, setStatus))
                         continue;
                 }
-                if (item.TeacherAllocations.Count == 0)
+                if (teacher.TeacherAllocations.Count == 0)
                     dto.SetName.Add("未分配");
                 else
                 {
-                    foreach (var item2 in item.TeacherAllocations)
+                    foreach (var teacherAllocation in teacher.TeacherAllocations)
                     {
-                        var set = SetRepository.Single(e => e.Id == item2.SetId);
-                        var count = StudentAllocationRepository.Count(e => e.TeacherAllocationId == item2.Id);
-                        dto.SetName.Add(set.SetName + "----" + count + "/" + item2.Credit);
+                        var set = SetRepository.Single(e => e.Id == teacherAllocation.SetId);
+                        var count = StudentAllocationRepository.Count(e => e.TeacherAllocationId == teacherAllocation.Id);
+                        dto.SetName.Add(set.SetName + "----" + count + "/" + teacherAllocation.Credit);
                     }
                 }
                 paginaList.ListData.Add(dto);
             }
         }
 
-        private IQueryable<Admin> SearchTeacherByClassId(IQueryable<Admin> queryable, int classId)
+        private IQueryable<Admin> FilterTeacherByClassId(IQueryable<Admin> queryable, int classId)
         {
             return queryable.Where(e => e.Classes.Select(x => x.Id).Contains(classId));
         }
 
-        private bool SearchTeacherBySetId(Admin admin, int setId)
+        private bool HasTeacherAllocation(Admin admin, int setId)
         {
             return admin.TeacherAllocations.Count(e => e.SetId == setId) == 0;
         }
 
-        public bool SearchTeacherBySetStatus(Admin admin, int setStatus)
+        public bool isFilteredBySetStatus(Admin admin, int setStatus)
         {
             if (setStatus == (int)SetAllotStatus.Allocated)
             {

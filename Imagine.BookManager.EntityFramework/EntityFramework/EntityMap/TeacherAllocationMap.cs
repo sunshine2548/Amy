@@ -24,11 +24,6 @@ namespace Imagine.BookManager.EntityFramework
 
             Property(e => e.Credit)
                 .IsRequired();
-
-            //HasMany(e => e.StudentAllocations)
-            //    .WithRequired()
-            //    .HasForeignKey(e=>e.TeacherAllocationId)
-            //    .WillCascadeOnDelete(false);
         }
     }
 }

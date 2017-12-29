@@ -76,23 +76,24 @@ namespace Imagine.BookManager.StudentService
         public PaginationDataList<StudentOut> SearchStudent(int? pageSize, int? pageRows, string name, int? classId,
             int setStatus, int? setId, string mobile, DateTime? startTime, Guid userId)
         {
+            name = Guard.EnsureParam(name);
             var admin = AdminRepository.FirstOrDefault(e => e.UserId == userId);
             if (admin == null)
                 return new PaginationDataList<StudentOut>() { CurrentPage = 0, ListData = new List<StudentOut>(), TotalPages = 0 };
             var classList = ClassRepository.GetAllIncluding(x => x.Students).Where(e => e.InstitutionId == admin.InstitutionId);
 
-            classList = SearchStudentByClassId(classId, classList);
+            classList = FilterStudentByClassId(classId, classList);
 
             var studentList = classList.SelectMany(x => x.Students);
             studentList = studentList.Where(e => e.UserName.Contains(name) && e.Mobile.Contains(mobile));
-            studentList = SearchStudentByStartTime(startTime, studentList);
+            studentList = FilterStudentByStartTime(startTime, studentList);
 
             var studenAllocationList = studentList.SelectMany(e => e.StudentAllocations);
 
             IQueryable<StudentOut> studentOutList = FillData(studentList, studenAllocationList);
 
-            studentOutList = SearchStudentBySetId(studentOutList, setId);
-            studentOutList = SearchStudentBySetStatus(studentOutList, setStatus);
+            studentOutList = FilterStudentBySetId(studentOutList, setId);
+            studentOutList = FilterStudentBySetStatus(studentOutList, setStatus);
 
             return studentOutList.ToPagination(pageSize, pageRows);
         }
@@ -129,28 +130,28 @@ namespace Imagine.BookManager.StudentService
             return studentOutList;
         }
 
-        private IQueryable<Student> SearchStudentByStartTime(DateTime? startTime, IQueryable<Student> studentList)
+        private IQueryable<Student> FilterStudentByStartTime(DateTime? startTime, IQueryable<Student> studentList)
         {
             if (startTime.HasValue)
                 studentList = studentList.Where(e => DbFunctions.DiffDays(e.DateCreated, startTime.Value) == 0).OrderByDescending(e => e.DateCreated);
             return studentList;
         }
 
-        private IQueryable<ClassInfo> SearchStudentByClassId(int? classId, IQueryable<ClassInfo> classList)
+        private IQueryable<ClassInfo> FilterStudentByClassId(int? classId, IQueryable<ClassInfo> classList)
         {
             if (classId.HasValue && classId.Value != 0)
                 classList = classList.Where(e => e.Id == classId.Value);
             return classList;
         }
 
-        private IQueryable<StudentOut> SearchStudentBySetId(IQueryable<StudentOut> studentOutList, int? setId)
+        private IQueryable<StudentOut> FilterStudentBySetId(IQueryable<StudentOut> studentOutList, int? setId)
         {
             if (setId.HasValue && setId.Value != 0)
                 studentOutList = studentOutList.Where(e => e.SetIds.Contains(setId.Value));
             return studentOutList;
         }
 
-        private IQueryable<StudentOut> SearchStudentBySetStatus(IQueryable<StudentOut> studentOutList, int setStatus)
+        private IQueryable<StudentOut> FilterStudentBySetStatus(IQueryable<StudentOut> studentOutList, int setStatus)
         {
             switch (setStatus)
             {
