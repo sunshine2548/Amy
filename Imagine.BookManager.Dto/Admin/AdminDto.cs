@@ -4,6 +4,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using Abp.Runtime.Validation;
 using Abp.UI;
+using System.Collections.Generic;
 
 namespace Imagine.BookManager.Dto.Admin
 {
@@ -22,8 +23,8 @@ namespace Imagine.BookManager.Dto.Admin
         public DateTime DateCreated { get; set; }
         public string Password { get; set; }
         public int StudentCount { get; set; }
-        public string ClassName { get; set; }
-        public string SetName { get; set; }
+        public IList<string> ClassName { get; } = new List<string>();
+        public IList<string> SetName { get; } = new List<string>();
 
         public void AddValidationErrors(CustomValidationContext context)
         {
