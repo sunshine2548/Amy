@@ -20,5 +20,9 @@ namespace Imagine.BookManager.StudentService
 
         [HttpGet]
         bool CheckStudentName(string studentName);
+
+        [HttpGet]
+        PaginationDataList<StudentOut> SearchStudent(int? pageSize, int? pageRows, string name, int? classId,
+            int setStatus, int? setId, string mobile, DateTime? startTime, Guid userId);
     }
 }

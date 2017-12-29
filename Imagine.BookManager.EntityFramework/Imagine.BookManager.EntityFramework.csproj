@@ -165,6 +165,10 @@
     <Compile Include="Migrations\201712260710475_Add_StudentAllocation_Lucas.Designer.cs">
       <DependentUpon>201712260710475_Add_StudentAllocation_Lucas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712270836358_Add_StudenAllocation_ExpiryData_Lucas.cs" />
+    <Compile Include="Migrations\201712270836358_Add_StudenAllocation_ExpiryData_Lucas.Designer.cs">
+      <DependentUpon>201712270836358_Add_StudenAllocation_ExpiryData_Lucas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="BookManagerDataModule.cs" />
     <Compile Include="Migrations\InitDbContext.cs" />
@@ -183,6 +187,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201712260710475_Add_StudentAllocation_Lucas.resx">
       <DependentUpon>201712260710475_Add_StudentAllocation_Lucas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712270836358_Add_StudenAllocation_ExpiryData_Lucas.resx">
+      <DependentUpon>201712270836358_Add_StudenAllocation_ExpiryData_Lucas.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
