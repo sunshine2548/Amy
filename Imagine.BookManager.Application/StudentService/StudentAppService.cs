@@ -129,14 +129,14 @@ namespace Imagine.BookManager.StudentService
             return studentOutList;
         }
 
-        private static IQueryable<Student> SearchStudentByStartTime(DateTime? startTime, IQueryable<Student> studentList)
+        private IQueryable<Student> SearchStudentByStartTime(DateTime? startTime, IQueryable<Student> studentList)
         {
             if (startTime.HasValue)
                 studentList = studentList.Where(e => DbFunctions.DiffDays(e.DateCreated, startTime.Value) == 0).OrderByDescending(e => e.DateCreated);
             return studentList;
         }
 
-        private static IQueryable<ClassInfo> SearchStudentByClassId(int? classId, IQueryable<ClassInfo> classList)
+        private IQueryable<ClassInfo> SearchStudentByClassId(int? classId, IQueryable<ClassInfo> classList)
         {
             if (classId.HasValue && classId.Value != 0)
                 classList = classList.Where(e => e.Id == classId.Value);
