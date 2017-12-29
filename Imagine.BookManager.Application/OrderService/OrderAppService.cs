@@ -24,7 +24,7 @@ namespace Imagine.BookManager.OrderService
             var orderTemp = _orderRepository.FirstOrDefault(o => o.OrderRef == order.OrderRef);
             if (orderTemp != null)
             {
-                throw new UserFriendlyException("The orderRef already exists");
+                throw new UserFriendlyException(ExceptionInfo.OrderRefExists);
             }
             var orderData = ObjectMapper.Map<Order>(order);
             return _orderRepository.InsertAndGetId(orderData) > 0;

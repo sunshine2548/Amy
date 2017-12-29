@@ -104,12 +104,12 @@ namespace Imagine.BookManager.ClassService
             var classInfo = _classRepository.FirstOrDefault(classId);
             if (classInfo == null)
             {
-                throw new UserFriendlyException("The class does not exist");
+                throw new UserFriendlyException(ExceptionInfo.ClassNotExists);
             }
             var student = StudentRepository.FirstOrDefault(x => x.StudentId == studentId);
             if (student == null)
             {
-                throw new UserFriendlyException("The student does not exist");
+                throw new UserFriendlyException(ExceptionInfo.StudentNotExists);
             }
             return StudentRepository.Update(student).Id > 0;
         }

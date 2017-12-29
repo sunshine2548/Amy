@@ -1,5 +1,6 @@
 ﻿using Abp.Domain.Repositories;
 using Abp.UI;
+using Imagine.BookManager.Common;
 using Imagine.BookManager.Core.Entity;
 using Imagine.BookManager.Dto.Set;
 using System.Collections.Generic;
@@ -31,7 +32,7 @@ namespace Imagine.BookManager.SetService
             var tempSet = _setRepostitory.FirstOrDefault(x => x.SetName == set.SetName);
             if (tempSet != null)
             {
-                throw new UserFriendlyException("The name already exists");
+                throw new UserFriendlyException(ExceptionInfo.SetNameExists);
             }
             Set setEntity = ObjectMapper.Map<Set>(set);
             return _setRepostitory.InsertAndGetId(setEntity);

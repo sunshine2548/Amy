@@ -39,14 +39,14 @@ namespace Imagine.BookManager.AdminService
             var tempAdmin = _adminRepository.FirstOrDefault(x => x.UserName == admin.UserName);
             if (tempAdmin != null)
             {
-                throw new UserFriendlyException("The user already exists");
+                throw new UserFriendlyException(ExceptionInfo.UserExists);
             }
             if (admin.InstitutionId.HasValue)
             {
                 var institution = InstitutionRepository.FirstOrDefault(admin.InstitutionId.Value);
                 if (institution == null)
                 {
-                    throw new UserFriendlyException("The institution does not exist");
+                    throw new UserFriendlyException(ExceptionInfo.InstitutionNotExists);
                 }
             }
             var adminDto = ObjectMapper.Map<Admin>(admin);
@@ -58,14 +58,14 @@ namespace Imagine.BookManager.AdminService
             var tempAdmin = _adminRepository.FirstOrDefault(x => x.UserName == admin.UserName);
             if (tempAdmin != null)
             {
-                throw new UserFriendlyException("The user already exists");
+                throw new UserFriendlyException(ExceptionInfo.UserExists);
             }
             if (admin.InstitutionId.HasValue)
             {
                 var institution = InstitutionRepository.FirstOrDefault(admin.InstitutionId.Value);
                 if (institution == null)
                 {
-                    throw new UserFriendlyException("The institution does not exist");
+                    throw new UserFriendlyException(ExceptionInfo.InstitutionNotExists);
                 }
             }
             var adminDto = ObjectMapper.Map<Admin>(admin);
@@ -189,11 +189,11 @@ namespace Imagine.BookManager.AdminService
             var admin = _adminRepository.FirstOrDefault(x => x.UserId == userId);
             if (admin == null)
             {
-                throw new UserFriendlyException("User does not exist");
+                throw new UserFriendlyException(ExceptionInfo.UserNotExists);
             }
             if (String.CompareOrdinal(admin.Password, oldPwd) != 0)
             {
-                throw new UserFriendlyException("pwd error");
+                throw new UserFriendlyException(ExceptionInfo.PwdError);
             }
             admin.Password = newPwd;
             return _adminRepository.Update(admin) != null;
@@ -213,7 +213,7 @@ namespace Imagine.BookManager.AdminService
            string userName,
            int? singletonPageCount = null)
         {
-            userName = string.IsNullOrEmpty(userName) ? "" : userName;
+            userName = Guard.EnsureParam(userName);
             var type = userType ?? 0;
             if (type > 2 || type < 1)
                 type = 0;
