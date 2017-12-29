@@ -287,7 +287,7 @@ namespace Imagine.BookManager.AdminService
                         continue;
                 }
                 if (teacher.TeacherAllocations.Count == 0)
-                    dto.SetName.Add("未分配");
+                    dto.SetName.Add(HintInfo.UnAllocated);
                 else
                 {
                     foreach (var teacherAllocation in teacher.TeacherAllocations)
