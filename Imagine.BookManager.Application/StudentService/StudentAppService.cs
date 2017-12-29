@@ -100,30 +100,30 @@ namespace Imagine.BookManager.StudentService
         private IQueryable<StudentOut> FillData(IQueryable<Student> studentList, IQueryable<StudentAllocation> studenAllocationList)
         {
             IQueryable<StudentOut> studentOutList = ObjectMapper.Map<List<StudentOut>>(studentList).AsQueryable();
-            foreach (var item in studentOutList)
+            foreach (var studentOut in studentOutList)
             {
-                var list = studenAllocationList.Where(e => e.StudentId == item.StudentId);
-                if (list.Count() == 0)
+                var allocationList = studenAllocationList.Where(e => e.StudentId == studentOut.StudentId);
+                if (allocationList.Count() == 0)
                 {
-                    item.SetNames.Add(string.Empty);
-                    item.SetStatus.Add(HintInfo.UnAllocated);
+                    studentOut.SetNames.Add(string.Empty);
+                    studentOut.SetStatus.Add(HintInfo.UnAllocated);
                     continue;
                 }
-                foreach (var item2 in list)
+                foreach (var allocation in allocationList)
                 {
-                    var teacherAllocation = TeacherAllocationRepository.FirstOrDefault(e => e.Id == item2.TeacherAllocationId);
+                    var teacherAllocation = TeacherAllocationRepository.FirstOrDefault(e => e.Id == allocation.TeacherAllocationId);
                     if (teacherAllocation == null)
                         continue;
                     var setInfo = SetRepository.FirstOrDefault(e => e.Id == teacherAllocation.SetId);
                     if (setInfo == null)
                         continue;
 
-                    item.SetNames.Add(setInfo.SetName);
-                    if (DateTime.Now.Date > item2.ExpiryDate.Date)
-                        item.SetStatus.Add(HintInfo.SetExpire);
+                    studentOut.SetNames.Add(setInfo.SetName);
+                    if (DateTime.Now.Date > allocation.ExpiryDate.Date)
+                        studentOut.SetStatus.Add(HintInfo.SetExpire);
                     else
-                        item.SetStatus.Add(HintInfo.Allocated);
-                    item.SetIds.Add(setInfo.Id);
+                        studentOut.SetStatus.Add(HintInfo.Allocated);
+                    studentOut.SetIds.Add(setInfo.Id);
                 }
             }
             return studentOutList;
@@ -152,13 +152,17 @@ namespace Imagine.BookManager.StudentService
 
         private IQueryable<StudentOut> SearchStudentBySetStatus(IQueryable<StudentOut> studentOutList, int setStatus)
         {
-            if (setStatus == 1)
-                studentOutList = studentOutList.Where(e => e.SetStatus.Contains(HintInfo.Allocated));
-            else if (setStatus == 2)
-                studentOutList = studentOutList.Where(e => e.SetStatus.Contains(HintInfo.UnAllocated));
-            else if (setStatus == 3)
-                studentOutList = studentOutList.Where(e => e.SetStatus.Contains(HintInfo.SetExpire));
-            return studentOutList;
+            switch (setStatus)
+            {
+                case 1:
+                    return studentOutList.Where(e => e.SetStatus.Contains(HintInfo.Allocated));
+                case 2:
+                    return studentOutList.Where(e => e.SetStatus.Contains(HintInfo.UnAllocated));
+                case 3:
+                    return studentOutList.Where(e => e.SetStatus.Contains(HintInfo.SetExpire));
+                default:
+                    return studentOutList;
+            }
         }
     }
 }
