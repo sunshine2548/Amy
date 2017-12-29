@@ -10,7 +10,7 @@ namespace Imagine.BookManager.Common
     {
         public static string EnsureParam(string arg)
         {
-            arg = arg.Trim();
+            arg = arg?.Trim();
             return string.IsNullOrWhiteSpace(arg) ? string.Empty : arg;
         }
     }

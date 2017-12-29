@@ -1,6 +1,5 @@
 ﻿using Abp.UI;
 using Imagine.BookManager.AdminService;
-using Imagine.BookManager.Application.Tests.Setup;
 using Imagine.BookManager.Core.Entity;
 using Imagine.BookManager.Dto.Admin;
 using Shouldly;
@@ -19,7 +18,6 @@ namespace Imagine.BookManager.Application.Tests
         public AdminAppServiceTest()
         {
             _iAdminAppSerice = Resolve<IAdminAppService>();
-            _testDataSeeder = Resolve<TestDataSeeder>();
         }
 
         #region CreateAdmin sync
