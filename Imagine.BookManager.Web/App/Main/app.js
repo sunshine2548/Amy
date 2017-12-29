@@ -27,8 +27,8 @@
                     menu: 'Home' //Matches to name of 'Home' menu in BookManagerNavigationProvider
                 })
                 .state('about', {
-                    url: '/about',
-                    templateUrl: '/App/Main/views/about/about.cshtml',
+                    url: '/classmanager',
+                    templateUrl: '/App/Main/views/classmanager/classmanager.cshtml',
                     menu: 'About' //Matches to name of 'About' menu in BookManagerNavigationProvider
                 });
         }
