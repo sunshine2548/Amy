@@ -264,3 +264,7 @@
     line-height: 1.5;
     font-size: 14px;
   }
+
+  .modal-backdrop.in{
+      opacity: .2;
+  }

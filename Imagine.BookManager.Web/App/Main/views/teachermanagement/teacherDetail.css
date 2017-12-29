@@ -1,0 +1,788 @@
+﻿.aside {
+  width: 208px;
+  height: 1000px;
+  padding-left: 20px;
+  padding-right: 10px;
+  border-left: 1px solid #dcdcdc;
+  border-right: 1px solid #dcdcdc;
+  margin-top: -10px;
+}
+.aside .detail {
+  width: 178px;
+  padding-top: 20px;
+  margin-bottom: 18px;
+}
+.aside .detail h4 {
+  font-size: 14px;
+  color: #000;
+  font-family: "微软雅黑";
+  font-weight: 700;
+  margin: 0;
+}
+.aside .detail span {
+  display: inline-block;
+  font-size: 12px;
+  color: #000;
+  margin-left: 4px;
+}
+.aside .settings {
+  position: relative;
+}
+.aside .settings ul {
+  position: absolute;
+  display: none;
+  right: 0;
+  top: 24px;
+  margin: 0;
+  border: 1px solid #dcdcdc;
+  box-shadow: 0px 6px 0px (0, 0, 0, 0.6);
+  background: #fff;
+  z-index: 1000;
+}
+.aside .settings ul a {
+  display: block;
+  width: 80px;
+  height: 30px;
+  line-height: 30px;
+  color: #000;
+  font-size: 12px;
+  padding-left: 8px;
+  text-decoration: none;
+}
+.aside .settings .active a {
+  background-color: #f0f0f0;
+}
+.aside .settings ul a:hover {
+  text-decoration: none;
+}
+.aside .avatar {
+  width: 130px;
+  height: 130px;
+  background-color: #f0f0f0;
+  text-align: center;
+  line-height: 130px;
+}
+.aside .pic {
+  text-align: right;
+  margin: 0;
+  margin-right: 48px;
+}
+.aside a {
+  font-size: 12px;
+  color: #666;
+  text-decoration: underline;
+}
+.aside .info {
+  margin-top: 12px;
+}
+.aside .info h5 {
+  font-size: 12px;
+  font-weight: 700;
+  color: #000;
+  font-family: "微软雅黑";
+}
+.aside .info p {
+  font-size: 12px;
+  color: #000;
+  margin: 20px 0;
+}
+
+/* 内容标题部分 */
+.content {
+  margin-top: -10px;
+}
+.content .title {
+  width: 752px;
+  border-bottom: 1px solid #dcdcdc;
+  border-right: 1px solid #dcdcdc;
+  position: relative;
+  padding: 10px 10px;
+}
+.content .title .nav {
+  height: 30px;
+  background: #fff;
+}
+.content .title li {
+  float: left;
+  position: relative;
+  background: #f0f0f0;
+}
+.content .nav a {
+  display: block;
+  width: 110px;
+  height: 30px;
+  line-height: 30px;
+  padding: 0;
+  color: #666;
+  font-size: 12px;
+  text-decoration: none;
+}
+.content .nav .active a {
+  color: #fff;
+  background: #e00012;
+}
+.content .nav .active::after {
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #e00012;
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
+}
+/* 学生管理的绘本状态 */
+.title .navbar-form {
+  padding: 0;
+}
+.title .form-item {
+  margin-right: 82px;
+}
+.title .form-item input {
+  border: 1px solid #dcdcdc;
+  margin-left: 8px;
+  padding-left: 8px;
+  height: 30px;
+}
+.title .status {
+  margin: 0;
+  margin-top: 6px;
+  height: 68px;
+  display: none;
+}
+.title .checkbox {
+  height: 30px;
+  position: relative;
+  top: 10px;
+}
+.title .checkbox h4 {
+  font-size: 14px;
+  color: #000;
+  font-weight: 700;
+  margin: 0;
+  margin-right: 18px;
+  margin-top: 10px;
+}
+.title .checkbox .status {
+  height: 30px;
+}
+.title .status li {
+  float: left;
+  height: 20px;
+  background-color: #fff;
+}
+.title .status li span {
+  display: inline-block;
+  margin-left: 8px;
+  margin-right: 32px;
+}
+.title .btn {
+  width: 60px;
+  height: 30px;
+  background: #51aef6;
+  font-size: 12px;
+  font-family: "微软雅黑";
+  color: #fff;
+  position: relative;
+  right: 180px;
+  border-radius: 0;
+}
+/* 内容列表部分 */
+.content .list {
+  width: 752px;
+  height: 900px;
+  background-color: #f0f0f0;
+  padding-top: 10px;
+  padding-left: 10px;
+}
+.content .list table {
+  border: 1px solid #c8c8c8;
+}
+.list thead tr {
+  height: 40px;
+  line-height: 40px;
+  background: linear-gradient(#fff, #f0f0f0);
+}
+.list .table-hover > tbody > tr:hover {
+  background: #fff4e8;
+}
+.list tbody tr {
+  height: 130px;
+}
+.list tbody > tr:nth-of-type(odd) {
+  background-color: #fff;
+}
+.list tbody > tr:nth-of-type(even) {
+  background-color: #f7f7f7;
+}
+.list table th,
+.list table td {
+  text-align: center;
+  border: 1px solid #c8c8c8;
+  border-collapse: collapse;
+  font-size: 12px;
+  color: #000;
+  font-family: "微软雅黑";
+}
+.list table th {
+  font-weight: 700;
+  word-break: keep-all;
+}
+.list .table tbody td {
+  height: 130px;
+  padding: 0;
+  vertical-align: middle;
+  /* padding-left: 8px; */
+}
+.list table td a {
+  color: #000;
+}
+.list .operating li {
+  margin-bottom: 10px;
+}
+.picbook {
+  /* display: none; */
+}
+/* 学生列表 */
+.stumanagent {
+  display: none;
+}
+.stumanagent.list tbody tr {
+  height: 80px;
+}
+.stumanagent.list .table tbody td {
+  height: 80px;
+}
+/* 班级列表 */
+.classmanagent {
+  display: none;
+}
+.classmanagent table td .spellstory {
+  width: 148px;
+  padding-left: 8px;
+  text-align: left;
+}
+.classmanagent table td .readstory {
+  text-align: left;
+}
+/* 权限管理 */
+.limits {
+  display: none;
+}
+.limits h5 {
+  font-size: 12px;
+  color: #999;
+  margin: 0;
+  height: 20px;
+  line-height: 20px;
+}
+.limits.list tbody tr {
+  height: 60px;
+}
+.limits.list .table tbody td {
+  height: 60px;
+}
+.limits.list .table tbody a {
+  display: inline-block;
+  text-decoration: underline;
+}
+.limits.list .table a.delete {
+  margin-right: 20px;
+}
+
+/* 重置密码 */
+.modal-content {
+  width: 380px;
+  height: 260px;
+  border-radius: 0;
+  position: fixed;
+  top: 170px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px;
+}
+.modal-content .modal-header {
+  border-bottom: 0;
+  padding: 0;
+  height: 10px;
+  position: relative;
+}
+.modal-header h4 {
+  text-align: center;
+  margin: 0;
+  font-size: 14px;
+  color: #000;
+  font-weight: 700;
+  font-family: "微软雅黑";
+}
+.modal-content .modal-header button {
+  position: absolute;
+  top: -6px;
+  right: -2px;
+}
+.modal-content .modal-body {
+  text-align: center;
+  padding: 0;
+  margin-top: 50px;
+  margin-bottom: 46px;
+}
+.modal-content .modal-body h4 {
+  font-size: 14px;
+  color: #000;
+  font-weight: 700;
+  margin: 0;
+  margin-bottom: 20px;
+}
+.modal-content .modal-body p {
+  font-size: 12px;
+  color: #999;
+}
+.modal-content .modal-footer {
+  border-top: 0;
+  text-align: center;
+  padding: 0;
+  margin-bottom: 50px;
+}
+.modal-content .modal-footer button {
+  width: 80px;
+  height: 30px;
+  border: 0;
+  padding: 0;
+  color: #fff;
+  background: #51aef6;
+  border-radius: 0;
+}
+
+/* 删除该教师 */
+#deleteTeacher .modal-header {
+  margin-top: 10px;
+  margin-bottom: 40px;
+}
+#deleteTeacher .modal-header button {
+  top: -18px;
+}
+#deleteTeacher .modal-body p {
+  font-size: 14px;
+  color: #000;
+  line-height: 20px;
+}
+
+/* 绘本额度管理 */
+#picbookModal .modal-header {
+  margin-top: 10px;
+  margin-bottom: 36px;
+}
+#picbookModal .modal-body {
+  margin-top: 0;
+  margin-bottom: 26px;
+}
+#picbookModal .modal-body .number {
+  margin-bottom: 38px;
+}
+#picbookModal .modal-body input {
+  width: 90px;
+  height: 24px;
+  border: 1px solid #c8c8c8;
+  text-align: center;
+}
+#picbookModal .modal-body button {
+  width: 24px;
+  height: 24px;
+  border-style: none;
+  background-color: #ebebeb;
+  border-radius: 0;
+  border: 1px solid #c8c8c8;
+  position: absolute;
+  top: 0;
+}
+#picbookModal .modal-body button.minus {
+  left: 134px;
+}
+#picbookModal .modal-body button.add {
+  right: 134px;
+}
+#picbookModal .modal-body p {
+  font-size: 12px;
+  color: #999;
+  text-align: left;
+  margin: 0;
+  margin-left: 48px;
+}
+#picbookModal .modal-footer {
+  margin-bottom: 30px;
+}
+
+/* 转移班级 */
+#tranferclass .modal-header {
+  border: none;
+  text-align: center;
+  margin-top: 10px;
+  padding: 0;
+}
+#tranferclass h4.modal-title {
+  font-size: 14px;
+  color: #000;
+  font-weight: 700;
+  font-family: "微软雅黑";
+}
+#tranferclass .modal-header .close {
+  margin-top: -16px;
+}
+
+#tranferclass .modal-content .modal-body {
+  padding: 0px 60px 0;
+  margin-bottom: 18px;
+}
+
+#tranferclass .modal-content .form-group {
+  display: flex;
+  height: 30px;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+}
+
+#tranferclass .modal-content .form-group:nth-child(2) {
+  margin-bottom: 0;
+}
+
+#tranferclass .modal-content input {
+  width: 160px;
+  height: 30px;
+  border: 1px solid #c8c8c8;
+  font-family: "微软雅黑";
+  font-size: 12px;
+  color: #000;
+  margin-left: 8px;
+  padding-left: 8px;
+  border-radius: 0;
+  outline: none;
+}
+
+#tranferclass .modal-content label {
+  line-height: 30px;
+  font-size: 12px;
+  font-family: "微软雅黑";
+  font-weight: 700;
+  color: #000;
+  margin-left: 6px;
+}
+
+#tranferclass .modal-content p {
+  line-height: 30px;
+  font-size: 12px;
+  font-family: "微软雅黑";
+  font-weight: 700;
+  color: #000;
+  margin-left: 22px;
+}
+#tranferclass .modal-content form {
+  position: relative;
+}
+#tranferclass .modal-content p.info {
+  position: absolute;
+  color: #e00012;
+  top: 68px;
+  left: 52px;
+  display: none;
+}
+
+#tranferclass .modal-footer {
+  padding: 0;
+  margin-bottom: 30px;
+  margin-top: 40px;
+}
+
+/* 增加学生 */
+#addstudent .modal-header {
+  margin-top: 10px;
+}
+#addstudent .modal-header .close {
+  margin-top: -16px;
+}
+#addstudent .modal-body {
+  margin-top: 38px;
+  margin-bottom: 27px;
+}
+#addstudent .modal-body .form-group {
+  height: 30px;
+  margin-bottom: 0;
+  display: flex;
+  justify-content: center;
+}
+#addstudent .modal-body #dropdownMenu1 {
+  margin-left: 8px;
+  width: 160px;
+  height: 30px;
+  padding-left: 8px;
+  border-radius: 0;
+  border: 1px solid #c8c8c8;
+}
+#addstudent label {
+  line-height: 30px;
+}
+#addstudent .select .caret {
+  border-top: 6px dashed #000;
+  border-right: 5px solid transparent;
+  border-left: 5px solid transparent;
+  margin-left: 142px;
+  position: absolute;
+  right: 10px;
+  top: 12px;
+}
+
+#addstudent .open > .dropdown-menu {
+  top: 30px;
+  left: 8px;
+  min-width: 160px;
+  padding: 0;
+  margin: 0;
+  font-size: 12px;
+  border: 1px solid #c8c8c8;
+  border-radius: 0;
+  box-shadow: 0 0 0 #fff;
+  font-size: 12px;
+  background-color: #eff6fc;
+  border-top: 0;
+}
+
+#addstudent .open > .dropdown-menu li {
+  width: 156px;
+  height: 28px;
+  line-height: 28px;
+  background: #eff6fc;
+}
+
+#addstudent .open > .dropdown-menu li:hover {
+  background: #ddeefc;
+}
+#addstudent .dropdown-menu > li > a {
+  height: 30px;
+  line-height: 30px;
+  color: #000;
+  font-size: 12px;
+  padding: 0 8px;
+}
+#addstudent .notice {
+  margin-top: 30px;
+  text-align: left;
+  margin-left: 20px;
+}
+#addteacher .modal-footer {
+  margin-bottom: 30px;
+}
+
+/* 转移删除学生操作 */
+#deletestudent .modal-header {
+  /* padding: 0 74px; */
+  border: none;
+  text-align: center;
+  font-size: 14px;
+  color: #000;
+  font-weight: 700;
+  font-family: "微软雅黑";
+  margin: 20px 0 0;
+  padding: 0;
+}
+
+#deletestudent .modal-header .close {
+  margin-top: -16px;
+}
+
+#deletestudent .modal-header .modal-title {
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  padding-bottom: 6px;
+}
+
+#deletestudent .modal-title .deleteStudent {
+  margin-left: 80px;
+}
+#deletestudent .modal-title .active {
+  position: relative;
+}
+#deletestudent .modal-title .active::after {
+  content: "";
+  width: 50px;
+  height: 4px;
+  background: #e00012;
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#deletestudent .modal-body {
+  /* padding: 32px 74px 0; */
+  margin: 30px 70px;
+}
+
+#deletestudent .modal-content .form-group {
+  display: flex;
+  height: 30px;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
+
+#deletestudent .modal-content .form-group:nth-child(2) {
+  margin-bottom: 0;
+}
+
+#deletestudent .modal-content .form-control {
+  width: 160px;
+  height: 30px;
+  border: 1px solid #c8c8c8;
+  font-family: "微软雅黑";
+  font-size: 12px;
+  color: #000;
+  margin-left: 8px;
+  padding-left: 8px;
+  border-radius: 0;
+}
+
+#deletestudent .modal-content .class {
+  margin-left: 22px;
+}
+
+#deletestudent .modal-content label {
+  line-height: 30px;
+  font-size: 12px;
+  font-family: "微软雅黑";
+  font-weight: 700;
+  color: #000;
+}
+
+#deletestudent .modal-content p {
+  line-height: 30px;
+  font-size: 12px;
+  font-family: "微软雅黑";
+  font-weight: 700;
+  color: #000;
+  margin-left: 22px;
+}
+
+#deletestudent .modal-footer {
+  border: 0;
+  padding: 0;
+  text-align: center;
+  margin-bottom: 30px;
+  margin-top: 38px;
+}
+/* 删除成功 */
+#confirm {
+  padding: 0;
+  position: fixed;
+  width: 240px;
+  height: 120px;
+  top: 190px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  background: #fff;
+  text-align: center;
+  line-height: 120px;
+}
+
+#confirm .modal-body {
+  padding: 0;
+}
+
+#confirm img {
+  margin-right: 10px;
+}
+.modal-backdrop.in {
+  opacity: 0;
+}
+
+/* 删除权限 */
+#deleteLimit .modal-header {
+  /* padding: 0 74px; */
+  border: none;
+  text-align: center;
+  font-size: 14px;
+  color: #000;
+  font-weight: 700;
+  font-family: "微软雅黑";
+  margin: 20px 0 0;
+  padding: 0;
+}
+
+#deleteLimit .modal-header .close {
+  margin-top: -30px;
+}
+
+#deleteLimit .modal-header .modal-title {
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  padding-bottom: 6px;
+}
+
+#deleteLimit .modal-title .deleteStudent {
+  margin-left: 80px;
+}
+#deleteLimit .modal-title .active {
+  position: relative;
+}
+#deleteLimit .modal-title .active::after {
+  content: "";
+  width: 50px;
+  height: 4px;
+  background: #e00012;
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#deleteLimit .modal-body {
+  margin: 38px 70px;
+}
+
+#deleteLimit .modal-content .form-group {
+  display: flex;
+  height: 30px;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
+
+#deleteLimit .modal-content .form-group:nth-child(2) {
+  margin-bottom: 0;
+}
+
+#deleteLimit .modal-content .form-control {
+  width: 160px;
+  height: 30px;
+  border: 1px solid #c8c8c8;
+  font-family: "微软雅黑";
+  font-size: 12px;
+  color: #000;
+  margin-left: 8px;
+  padding-left: 8px;
+  border-radius: 0;
+}
+
+#deleteLimit .modal-content .class {
+  margin-left: 22px;
+}
+
+#deleteLimit .modal-content label {
+  line-height: 30px;
+  font-size: 12px;
+  font-family: "微软雅黑";
+  font-weight: 700;
+  color: #000;
+}
+
+#deleteLimit .modal-footer {
+  border: 0;
+  padding: 0;
+  text-align: center;
+  margin-bottom: 30px;
+  margin-top: 82px;
+}

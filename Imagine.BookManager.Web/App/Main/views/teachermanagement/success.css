@@ -1,0 +1,44 @@
+header {
+    height: 64px;
+    display: flex;
+    justify-content: space-between;
+    background: #000;
+    color: #fff;
+    line-height: 64px;
+    font-size: 20px;
+    padding: 0 12px;
+  }
+  header i{
+    font-size: 20px;
+    color: #fff;
+    line-height: 64px;
+  }
+  header i.glyphicon{
+    top: 3px;
+  }
+  .logo {
+    height: 66px;
+    width: 100%;
+    background: url("../../images/teachermanager/Android/img_logo.png") no-repeat;
+    background-size: cover;
+  }
+  /* 主体部分 */
+ section .success{
+     margin-top: 132px;
+     text-align: center;
+ }
+ section .success img{
+     width: 50px;
+     height: 52.5px;
+     margin-bottom: 15px;
+ }
+ section .success span{
+     font-size: 18px;
+     color: #000;
+ }
+ section p.notice{
+     margin-top: 54px;
+     font-size: 12px;
+     color: #999;
+     text-align: center;
+ }
