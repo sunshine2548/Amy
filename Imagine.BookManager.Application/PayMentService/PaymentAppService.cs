@@ -1,6 +1,7 @@
 ﻿using System;
 using Abp.Domain.Repositories;
 using Abp.Domain.Uow;
+using Imagine.BookManager.Common;
 using Imagine.BookManager.Core.Entity;
 using Imagine.BookManager.Dto.PayMent;
 using Imagine.BookManager.PaymentService.AliPay;
@@ -76,7 +77,7 @@ namespace Imagine.BookManager.PayMentService
             var order = _orderRepository.FirstOrDefault(x => x.OrderRef == orderRef);
             if (order == null || order.Paid)
             {
-                throw new Exception("order is null or order is paid");
+                throw new Exception(ExceptionInfo.OrderNotExistsOrIsPaid);
             }
             var payment = new Payment
             {

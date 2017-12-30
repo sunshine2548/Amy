@@ -3222,3 +3222,59 @@ DEBUG 2017-12-11 19:28:51,514 [1    ] Abp.Logging.LogHelper                    -
 DEBUG 2017-12-11 19:28:51,514 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'Imagine.BookManager.ClassService.IClassService' with service name 'app/classService'.
 WARN  2017-12-11 19:28:55,779 [8    ] Abp.Logging.LogHelper                    - ISettingStore is not implemented, using DefaultConfigSettingStore which does not support GetAllListAsync.
 WARN  2017-12-11 19:28:55,824 [8    ] Abp.Logging.LogHelper                    - ISettingStore is not implemented, using DefaultConfigSettingStore which does not support GetAllListAsync.
+DEBUG 2017-12-29 21:05:44,322 [1    ] Abp.Modules.AbpModuleManager             - Loading Abp modules...
+DEBUG 2017-12-29 21:05:44,345 [1    ] Abp.Modules.AbpModuleManager             - Found 14 ABP modules in total.
+DEBUG 2017-12-29 21:05:44,354 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Imagine.BookManager.Web.BookManagerWebModule, Imagine.BookManager.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-29 21:05:44,356 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.Mvc.AbpWebMvcModule, Abp.Web.Mvc, Version=3.2.4.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-29 21:05:44,356 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebModule, Abp.Web, Version=3.2.4.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-29 21:05:44,356 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebCommonModule, Abp.Web.Common, Version=3.2.4.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-29 21:05:44,356 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpKernelModule, Abp, Version=3.2.4.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-29 21:05:44,356 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Imagine.BookManager.BookManagerDataModule, Imagine.BookManager.EntityFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-29 21:05:44,357 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFramework.AbpEntityFrameworkModule, Abp.EntityFramework, Version=3.2.5.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-29 21:05:44,357 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFramework.AbpEntityFrameworkCommonModule, Abp.EntityFramework.Common, Version=3.2.5.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-29 21:05:44,357 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Imagine.BookManager.BookManagerCoreModule, Imagine.BookManager.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-29 21:05:44,357 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Imagine.BookManager.BookManagerApplicationModule, Imagine.BookManager.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-29 21:05:44,357 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Imagine.BookManager.Dto.BookManagerDtoModule, Imagine.BookManager.Dto, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-29 21:05:44,358 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AutoMapper.AbpAutoMapperModule, Abp.AutoMapper, Version=3.2.4.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-29 21:05:44,358 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Imagine.BookManager.BookManagerWebApiModule, Imagine.BookManager.WebApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-29 21:05:44,358 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.WebApi.AbpWebApiModule, Abp.Web.Api, Version=3.2.4.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-29 21:05:44,364 [1    ] Abp.Modules.AbpModuleManager             - 14 modules loaded.
+DEBUG 2017-12-29 21:05:44,817 [1    ] EntityFramework.AbpEntityFrameworkModule - Registering DbContext: Imagine.BookManager.EntityFramework.BookManagerDbContext, Imagine.BookManager.EntityFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-29 21:05:48,151 [1    ] Abp.Localization.LocalizationManager     - Initializing 3 localization sources.
+DEBUG 2017-12-29 21:05:48,180 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: Abp
+DEBUG 2017-12-29 21:05:48,182 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpWeb
+DEBUG 2017-12-29 21:05:48,198 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: BookManager
+DEBUG 2017-12-29 21:05:48,378 [1    ] Abp.BackgroundJobs.BackgroundJobManager  - Start background worker: Abp.BackgroundJobs.BackgroundJobManager
+DEBUG 2017-12-29 21:05:48,454 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - Found 9 classes define auto mapping attributes
+DEBUG 2017-12-29 21:05:48,454 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - Imagine.BookManager.Dto.TeacherAllocation.CreateTeacherAllocationInput
+DEBUG 2017-12-29 21:05:48,458 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - Imagine.BookManager.Dto.TeacherAllocation.UpdateTeacherAllocationInput
+DEBUG 2017-12-29 21:05:48,458 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - Imagine.BookManager.Dto.Student.StudentOut
+DEBUG 2017-12-29 21:05:48,458 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - Imagine.BookManager.Dto.Set.SetDto
+DEBUG 2017-12-29 21:05:48,458 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - Imagine.BookManager.Dto.Order.OrderDto
+DEBUG 2017-12-29 21:05:48,458 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - Imagine.BookManager.Dto.Institution.InstitutionOut
+DEBUG 2017-12-29 21:05:48,458 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - Imagine.BookManager.Dto.Class.ClassInfoIn
+DEBUG 2017-12-29 21:05:48,459 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - Imagine.BookManager.Dto.Class.ClassInfoOut
+DEBUG 2017-12-29 21:05:48,459 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - Imagine.BookManager.Dto.Admin.AdminDto
+DEBUG 2017-12-29 21:05:48,850 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'Imagine.BookManager.TeacherAllocationService.ITeacherAllocationAppService' with service name 'app/teacherAllocation'.
+DEBUG 2017-12-29 21:05:48,852 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'Imagine.BookManager.StudentService.IStudentAppService' with service name 'app/student'.
+DEBUG 2017-12-29 21:05:48,853 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'Imagine.BookManager.ShoppingCartService.IShoppingCartAppService' with service name 'app/shoppingCart'.
+DEBUG 2017-12-29 21:05:48,853 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'Imagine.BookManager.SetService.ISetAppService' with service name 'app/set'.
+DEBUG 2017-12-29 21:05:48,854 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'Imagine.BookManager.OrderService.IOrderAppService' with service name 'app/order'.
+DEBUG 2017-12-29 21:05:48,855 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'Imagine.BookManager.PayMentService.IPaymentAppService' with service name 'app/payment'.
+DEBUG 2017-12-29 21:05:48,856 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'Imagine.BookManager.InstitutionService.IInstitutionAppService' with service name 'app/institution'.
+DEBUG 2017-12-29 21:05:48,856 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'Imagine.BookManager.ClassService.IClassAppService' with service name 'app/class'.
+DEBUG 2017-12-29 21:05:48,857 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'Imagine.BookManager.AdminService.IAdminAppService' with service name 'app/admin'.
+WARN  2017-12-29 21:05:49,207 [5    ] Abp.Logging.LogHelper                    - ISettingStore is not implemented, using DefaultConfigSettingStore which does not support GetAllListAsync.
+WARN  2017-12-29 21:05:49,260 [5    ] Abp.Logging.LogHelper                    - ISettingStore is not implemented, using DefaultConfigSettingStore which does not support GetAllListAsync.
+ERROR 2017-12-29 21:05:49,803 [5    ] okManager.Web.Controllers.HomeController - The view '~/App/Main/views/layout/layout.cshtml' or its master was not found or no view engine supports the searched locations. The following locations were searched:
+~/App/Main/views/layout/layout.cshtml
+System.InvalidOperationException: The view '~/App/Main/views/layout/layout.cshtml' or its master was not found or no view engine supports the searched locations. The following locations were searched:
+~/App/Main/views/layout/layout.cshtml
+   在 System.Web.Mvc.ViewResult.FindView(ControllerContext context)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)

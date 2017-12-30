@@ -109,7 +109,7 @@ namespace Imagine.BookManager.Application.Tests
         }
 
         #region SearchStudent
-        private Guid setSearchStudentData()
+        private Guid SetData()
         {
             var institution = UsingDbContext(e => e.Institution.Add(InitFakeEntity.GetFakeInstitution()));
             var adminDto = InitFakeEntity.GetFakeAdmin();
@@ -194,7 +194,7 @@ namespace Imagine.BookManager.Application.Tests
         [Fact]
         public void SearchStudent_Return_True_If_NoConditions()
         {
-            Guid userId = setSearchStudentData();
+            Guid userId = SetData();
             var list = _studentAppService.SearchStudent(1, 10, "", null, 0, null, "", null, userId);
             list.ListData.Count.ShouldBe(10);
             list.CurrentPage.ShouldBe(1);
@@ -213,7 +213,7 @@ namespace Imagine.BookManager.Application.Tests
         [Fact]
         public void SearchStudent_Return_True_If_ClassId_Exists()
         {
-            var userId = setSearchStudentData();
+            var userId = SetData();
             var list = _studentAppService.SearchStudent(1, 10, "", 3, 0, null, "", null, userId);
             list.ListData.Count.ShouldBe(3);
             list.CurrentPage.ShouldBe(1);
@@ -223,7 +223,7 @@ namespace Imagine.BookManager.Application.Tests
         [Fact]
         public void SearchStudent_Return_True_If_StudentName_Mobile_DateCreated()
         {
-            var userId = setSearchStudentData();
+            var userId = SetData();
             var list = _studentAppService.SearchStudent(1, 10, "2", 0, 0, null, "1234567", DateTime.Now, userId);
             list.ListData.Count.ShouldBe(6);
             list.CurrentPage.ShouldBe(1);
@@ -233,7 +233,7 @@ namespace Imagine.BookManager.Application.Tests
         [Fact]
         public void SearchStudent_Return_True_If_SetId_Exists()
         {
-            var userId = setSearchStudentData();
+            var userId = SetData();
             var list = _studentAppService.SearchStudent(1, 10, "", 0, 0, 3, "", null, userId);
             list.ListData.Count.ShouldBe(3);
             list.CurrentPage.ShouldBe(1);
@@ -243,7 +243,7 @@ namespace Imagine.BookManager.Application.Tests
         [Fact]
         public void SearchStudent_Return_True_If_SetStatus_Allocated()
         {
-            var userId = setSearchStudentData();
+            var userId = SetData();
             var list = _studentAppService.SearchStudent(1, 10, "", 0, 1, null, "", null, userId);
             list.ListData.Count.ShouldBe(9);
             list.CurrentPage.ShouldBe(1);
@@ -253,7 +253,7 @@ namespace Imagine.BookManager.Application.Tests
         [Fact]
         public void SearchStudent_Return_True_If_SetStatus_UnAllocated()
         {
-            var userId = setSearchStudentData();
+            var userId = SetData();
             var list = _studentAppService.SearchStudent(1, 10, "", 0, 2, null, "", null, userId);
             list.ListData.Count.ShouldBe(3);
             list.CurrentPage.ShouldBe(1);
@@ -263,7 +263,7 @@ namespace Imagine.BookManager.Application.Tests
         [Fact]
         public void SearchStudent_Return_True_If_SetStatus_Expire()
         {
-            var userId = setSearchStudentData();
+            var userId = SetData();
             var list = _studentAppService.SearchStudent(1, 10, "", 0, 3, null, "", null, userId);
             list.ListData.Count.ShouldBe(0);
             list.CurrentPage.ShouldBe(0);

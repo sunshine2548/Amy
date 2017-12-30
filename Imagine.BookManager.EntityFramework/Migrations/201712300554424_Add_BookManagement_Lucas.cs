@@ -3,7 +3,7 @@ namespace Imagine.BookManager.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Add_StudentAllocation_Lucas : DbMigration
+    public partial class Add_BookManagement_Lucas : DbMigration
     {
         public override void Up()
         {
@@ -76,6 +76,7 @@ namespace Imagine.BookManager.Migrations
                         TeacherAllocationId = c.Long(nullable: false),
                         StudentId = c.Guid(nullable: false),
                         StartDate = c.DateTime(nullable: false),
+                        ExpiryDate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Student", t => t.StudentId, cascadeDelete: true)

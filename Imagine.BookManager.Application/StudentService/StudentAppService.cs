@@ -33,7 +33,7 @@ namespace Imagine.BookManager.StudentService
             var studentTemp = _studentRepository.FirstOrDefault(x => x.UserName == student.UserName);
             if (studentTemp != null)
             {
-                throw new UserFriendlyException("The student already exists");
+                throw new UserFriendlyException(ExceptionInfo.StudentExists);
             }
             return _studentRepository.InsertAndGetId(student);
         }
@@ -51,7 +51,7 @@ namespace Imagine.BookManager.StudentService
             var studentTemp = _studentRepository.FirstOrDefault(x => x.StudentId == student.StudentId);
             if (studentTemp == null)
             {
-                throw new UserFriendlyException("The student does not exist");
+                throw new UserFriendlyException(ExceptionInfo.StudentNotExists);
             }
             studentTemp.FullName = student.FullName;
             studentTemp.UserName = student.UserName;

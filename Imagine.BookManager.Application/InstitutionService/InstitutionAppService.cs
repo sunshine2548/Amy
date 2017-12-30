@@ -25,7 +25,7 @@ namespace Imagine.BookManager.InstitutionService
             var tempInstitution = _institutionRepository.FirstOrDefault(x => x.Name == institution.Name);
             if (tempInstitution != null)
             {
-                throw new UserFriendlyException("The institution already exists");
+                throw new UserFriendlyException(ExceptionInfo.InstitutionExists);
             }
             return _institutionRepository.InsertAndGetId(institution);
         }
@@ -35,7 +35,7 @@ namespace Imagine.BookManager.InstitutionService
             var tempInstitution = _institutionRepository.FirstOrDefault(x => x.Name == institution.Name);
             if (tempInstitution != null)
             {
-                throw new UserFriendlyException("The institution already exists");
+                throw new UserFriendlyException(ExceptionInfo.InstitutionExists);
             }
             return await _institutionRepository.InsertAndGetIdAsync(institution);
 
@@ -115,7 +115,7 @@ namespace Imagine.BookManager.InstitutionService
             var temp = _institutionRepository.FirstOrDefault(institution.Id);
             if (temp == null)
             {
-                throw new UserFriendlyException("The institution not exsists");
+                throw new UserFriendlyException(ExceptionInfo.InstitutionNotExists);
             }
             ObjectMapper.Map(institution, temp);
             return _institutionRepository.Update(temp) != null;

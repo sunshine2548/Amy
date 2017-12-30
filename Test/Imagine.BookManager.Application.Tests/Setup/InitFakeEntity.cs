@@ -152,5 +152,24 @@ namespace Imagine.BookManager.Application.Tests
                 ReminderInterva = 10
             };
         }
+
+        public static Payment GetFakePayment()
+        {
+            return new Payment()
+            {
+                PaymenGateway = PaymentGateWay.AliPay,
+                DatePaid = DateTime.Now,
+                GatewayRef = "123123",
+                Amount = 1000
+            };
+        }
+
+        public static Book GetFakeBook()
+        {
+            return new Book()
+            {
+                BookName = "Imagine"
+            };
+        }
     }
 }

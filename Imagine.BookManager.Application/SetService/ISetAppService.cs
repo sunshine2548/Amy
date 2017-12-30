@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Abp.Application.Services;
+using Imagine.BookManager.Common;
 using Imagine.BookManager.Dto.Set;
 
 namespace Imagine.BookManager.SetService
@@ -13,5 +15,7 @@ namespace Imagine.BookManager.SetService
         bool CheckSetName(string name);
 
         List<SetDto> GetAllSet();
+
+        PaginationDataList<SetDto> SearchPicBook(int? pageSize, int? pageRows, int setStatus, Guid userId);
     }
 }
