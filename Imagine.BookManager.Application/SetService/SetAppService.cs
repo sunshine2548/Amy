@@ -82,13 +82,9 @@ namespace Imagine.BookManager.SetService
             List<SetDto> setDtoList = new List<SetDto>();
             var orderItems = admin.Orders.SelectMany(e => e.OrderItems);
             var payments = admin.Orders.SelectMany(e => e.Payments);
-            var teacherAllocations = orderItems.SelectMany(e => e.TeacherAllocations);
             foreach (var orderItem in orderItems)
             {
-                var allocatedNum = 0;
-                teacherAllocations
-                    .Where(e => e.OrderItemId == orderItem.Id).ToList()
-                    .ForEach(e => allocatedNum = allocatedNum + e.Credit);
+                var allocatedNum = orderItem.TeacherAllocations.Sum(e => e.Credit);
                 if (FilterSetBySetStatus(setStatus, allocatedNum, orderItem.Quantity))
                     continue;
                 SetDto setDto = new SetDto()
@@ -109,10 +105,9 @@ namespace Imagine.BookManager.SetService
         private PaginationDataList<SetDto> GetPicBooksByTeacher(int? pageSize, int? pageRows, int setStatus, Admin admin)
         {
             List<SetDto> setDtoList = new List<SetDto>();
-            var studentAllocations = admin.TeacherAllocations.SelectMany(e => e.StudentAllocations);
             foreach (var teacherAllocation in admin.TeacherAllocations)
             {
-                int allocatedNum = studentAllocations.Count(e => e.TeacherAllocationId == teacherAllocation.Id);
+                int allocatedNum = teacherAllocation.StudentAllocations.Count;
                 if (FilterSetBySetStatus(setStatus, allocatedNum, teacherAllocation.Credit))
                     continue;
                 var setInfo = _setRepostitory.GetAllIncluding(e => e.Books).FirstOrDefault(e => e.Id == teacherAllocation.SetId);

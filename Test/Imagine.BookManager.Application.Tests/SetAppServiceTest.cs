@@ -197,6 +197,7 @@ namespace Imagine.BookManager.Application.Tests
         }
 
         [Theory]
+        [InlineData(0)]
         [InlineData(1)]
         public void SearchPicBook_Return_If_Teacher_True(int setStatus)
         {
