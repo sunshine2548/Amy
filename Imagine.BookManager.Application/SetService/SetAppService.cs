@@ -131,17 +131,11 @@ namespace Imagine.BookManager.SetService
             switch (setStatus)
             {
                 case 1:
-                    if (allocatedNum == 0)
-                        return true;
-                    return false;
+                    return allocatedNum == 0;
                 case 2:
-                    if (allocatedNum > 0)
-                        return true;
-                    return false;
+                    return allocatedNum > 0;
                 case 3:
-                    if (allocatedNum != quantity)
-                        return true;
-                    return false;
+                    return allocatedNum != quantity;
                 default:
                     return false;
             }
