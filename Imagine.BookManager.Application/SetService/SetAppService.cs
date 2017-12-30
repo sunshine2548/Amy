@@ -13,14 +13,17 @@ namespace Imagine.BookManager.SetService
     {
         private readonly IRepository<Set> _setRepostitory;
 
-        public SetAppService(IRepository<Set> setRepository)
+        private readonly IRepository<Admin> _adminRepostitory;
+
+        private readonly IRepository<Book> _bookRepostitory;
+
+        public SetAppService(IRepository<Set> setRepository, IRepository<Admin> adminRepostitory, IRepository<Book> bookRepostitory)
         {
             _setRepostitory = setRepository;
+            _adminRepostitory = adminRepostitory;
+            _bookRepostitory = bookRepostitory;
         }
 
-        private readonly IRepository<Admin> AdminRepostitory;
-
-        private readonly IRepository<Set> SetRepostitory;
 
         public bool CheckSetName(string name)
         {
@@ -59,7 +62,11 @@ namespace Imagine.BookManager.SetService
 
         public PaginationDataList<SetDto> SearchPicBook(int? pageSize, int? pageRows, int setStatus, Guid userId)
         {
-            var admin = AdminRepostitory.GetAllIncluding(e => e.Orders, e => e.TeacherAllocations).FirstOrDefault(e => e.UserId == userId);
+            var admin = _adminRepostitory.GetAllIncluding(
+                e => e.Orders.Select(or => or.OrderItems.Select(oi => oi.TeacherAllocations)),
+                e => e.Orders.Select(or => or.Payments),
+                e => e.TeacherAllocations.Select(ta => ta.StudentAllocations)
+            ).FirstOrDefault(e => e.UserId == userId);
             if (admin.UserType == UserType.Admin)
             {
                 return GetPicBooksByAdmin(pageSize, pageRows, setStatus, admin);
@@ -75,7 +82,6 @@ namespace Imagine.BookManager.SetService
             List<SetDto> setDtoList = new List<SetDto>();
             var orderItems = admin.Orders.SelectMany(e => e.OrderItems);
             var payments = admin.Orders.SelectMany(e => e.Payments);
-            var books = orderItems.Select(e => e.Set).SelectMany(e => e.Books);
             var teacherAllocations = orderItems.SelectMany(e => e.TeacherAllocations);
             foreach (var orderItem in orderItems)
             {
@@ -91,7 +97,7 @@ namespace Imagine.BookManager.SetService
                     Synopsis = orderItem.Set.Synopsis,
                     SetName = orderItem.Set.SetName,
                     SetType = HintInfo.StandardCourse,
-                    Books = books.Where(e => e.SetId == orderItem.SetId).ToList(),
+                    Books = _bookRepostitory.GetAllList(e => e.SetId == orderItem.SetId),
                     DateCreated = payments.FirstOrDefault(e => e.OrderRef == orderItem.OrderRef)?.DateCreated,
                     SurplusCredit = allocatedNum + "/" + orderItem.Quantity
                 };
@@ -109,7 +115,7 @@ namespace Imagine.BookManager.SetService
                 int allocatedNum = studentAllocations.Count(e => e.TeacherAllocationId == teacherAllocation.Id);
                 if (FilterSetBySetStatus(setStatus, allocatedNum, teacherAllocation.Credit))
                     continue;
-                var setInfo = SetRepostitory.GetAllIncluding(e => e.Books).FirstOrDefault(e => e.Id == teacherAllocation.SetId);
+                var setInfo = _setRepostitory.GetAllIncluding(e => e.Books).FirstOrDefault(e => e.Id == teacherAllocation.SetId);
                 SetDto setDto = new SetDto()
                 {
                     Id = teacherAllocation.SetId,
@@ -125,7 +131,7 @@ namespace Imagine.BookManager.SetService
             return setDtoList.OrderByDescending(e => e.DateCreated).AsQueryable().ToPagination(pageSize, pageRows);
         }
 
-        private bool FilterSetBySetStatus(int setStatus,int allocatedNum, int quantity)
+        private bool FilterSetBySetStatus(int setStatus, int allocatedNum, int quantity)
         {
             switch (setStatus)
             {

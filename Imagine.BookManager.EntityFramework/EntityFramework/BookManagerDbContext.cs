@@ -56,6 +56,7 @@ namespace Imagine.BookManager.EntityFramework
         public virtual IDbSet<CartItem> CarItem { get; set; }
         public virtual IDbSet<OrderItem> OrderItem { get; set; }
         public virtual IDbSet<Set> Sets { get; set; }
+        public virtual IDbSet<Book> Book { get; set; }
         public virtual IDbSet<Payment> Payment { get; set; }
         public virtual IDbSet<Student> Student { get; set; }
         public virtual IDbSet<TeacherAllocation> TeacherAllocation { get; set; }
@@ -75,6 +76,7 @@ namespace Imagine.BookManager.EntityFramework
             modelBuilder.Configurations.Add(new ShoppingCartMap());
             modelBuilder.Configurations.Add(new OrderItemMap());
             modelBuilder.Configurations.Add(new SetMap());
+            modelBuilder.Configurations.Add(new BookMap());
             modelBuilder.Configurations.Add(new PaymentMap());
             modelBuilder.Configurations.Add(new StudentMap());
             modelBuilder.Configurations.Add(new TeacherAllocationMap());
