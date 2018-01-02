@@ -11,8 +11,10 @@ namespace Imagine.BookManager.StudentService
 {
     public interface IStudentAppService : IApplicationService
     {
+        [HttpPost]
         Int64 CreateStudent(Student student);
 
+        [HttpPost]
         void UpdateStudent(Student student);
 
         [HttpGet]

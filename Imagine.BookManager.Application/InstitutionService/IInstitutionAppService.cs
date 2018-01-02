@@ -26,11 +26,13 @@ namespace Imagine.BookManager.InstitutionService
         [HttpGet]
         bool CheckInstitutionName(string name);
 
+        [HttpGet]
         PaginationDataList<StudentOut> GetAllInstitutionIdStudent(
             int institutionId,
             int? pageIndex,
             int? singletonPageCount = null);
 
+        [HttpPost]
         bool Update(InstitutionOut institution);
     }
 }

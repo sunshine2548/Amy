@@ -41,12 +41,14 @@ namespace Imagine.BookManager.AdminService
 
         bool CheckAdminUserName(string userName);
 
+        [HttpGet]
         PaginationDataList<AdminDto> SearchAdminPaination(
             int? pageIndex,
             int? userType,
             string userName,
             int? singletonPageCount=null);
 
+        [HttpGet]
         PaginationDataList<AdminDto> SearchTeacherPaination(int? pageSize, int? pageRows, string teacherName, int? classId, int? setId, int setStatus, Guid userId);
     }
 }
