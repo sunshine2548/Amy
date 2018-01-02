@@ -11,11 +11,13 @@ namespace Imagine.BookManager.ClassService
 {
     public interface IClassAppService : IApplicationService
     {
-        
+        [HttpPost]
         int CreateClassInfo(ClassInfoIn classInfo);
        
+        [HttpGet]
         bool AllocationClassInfoToTeacher(int classId, Guid userId);
 
+        [HttpPost]
         bool DeleteUsersClassInfo(int classId, Guid userId);
         [HttpGet]
         ClassInfoOut GetClassInfoById(int classId);
@@ -24,8 +26,10 @@ namespace Imagine.BookManager.ClassService
             int classId,
             int? pageIndex,
             int? singletonPageCount = null);
+        [HttpGet]
         bool AllocationStudentClass(Guid studentId, int classId);
 
+        [HttpGet]
         PaginationDataList<ClassInfoOut> GetInstitutionAllClasses(
             int institutionId,
             int? pageIndex,
